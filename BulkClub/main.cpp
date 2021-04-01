@@ -1,3 +1,9 @@
+//Project Partners:
+//Joshara Edwards
+//
+//
+//
+
 #include "mainwindow.h"
 
 #include <QApplication>
