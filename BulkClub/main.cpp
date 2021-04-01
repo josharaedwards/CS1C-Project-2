@@ -1,7 +1,7 @@
 //Project Partners:
 //Joshara Edwards
 //Max Kwatcher
-//
+//Johnny Wannamaker
 //
 
 #include "mainwindow.h"
