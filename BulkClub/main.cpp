@@ -2,7 +2,7 @@
 //Joshara Edwards
 //Max Kwatcher
 //Johnny Wannamaker
-//
+//Sean Hostetter
 
 #include "mainwindow.h"
 
