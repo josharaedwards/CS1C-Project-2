@@ -6,6 +6,8 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    // create a QTreeView to display to the UI of the database
 }
 
 MainWindow::~MainWindow()
