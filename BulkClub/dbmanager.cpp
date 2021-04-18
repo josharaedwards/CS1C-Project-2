@@ -31,6 +31,11 @@ QSqlTableModel* DbManager::createMemberTable()
     model->setTable("Members");
     model->select();
 
+    model->setHeaderData(0, Qt::Horizontal, QObject::tr("Name"));
+    model->setHeaderData(1, Qt::Horizontal, QObject::tr("Member ID"));
+    model->setHeaderData(2, Qt::Horizontal, QObject::tr("Membership"));
+    model->setHeaderData(3, Qt::Horizontal, QObject::tr("Date"));
+
     return model;
 }
 
@@ -42,6 +47,12 @@ QSqlTableModel* DbManager::createSalesTable()
     // load in the data from the sales table
     model->setTable("Sales");
     model->select();
+
+    model->setHeaderData(0, Qt::Horizontal, QObject::tr("Date"));
+    model->setHeaderData(1, Qt::Horizontal, QObject::tr("Member ID"));
+    model->setHeaderData(2, Qt::Horizontal, QObject::tr("Product"));
+    model->setHeaderData(3, Qt::Horizontal, QObject::tr("Price"));
+    model->setHeaderData(4, Qt::Horizontal, QObject::tr("Quantity"));
 
     return model;
 }
