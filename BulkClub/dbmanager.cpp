@@ -16,6 +16,7 @@ DbManager::DbManager()
 
 DbManager::~DbManager()
 {
+    /// @brief If the database connection is open, then it is closed
     if (db.isOpen())
     {
         db.close();
@@ -25,12 +26,14 @@ DbManager::~DbManager()
 
 QSqlTableModel* DbManager::createMemberTable()
 {
+    /// @brief Creates a new QSqlTableModel for the Member table
     QSqlTableModel *model = new QSqlTableModel;
 
-    // load in the data from the member table
+    /// @brief Load in the data from the Member table of the database
     model->setTable("Members");
     model->select();
 
+    /// @brief Sets the header data for the Member table
     model->setHeaderData(0, Qt::Horizontal, QObject::tr("Name"));
     model->setHeaderData(1, Qt::Horizontal, QObject::tr("Member ID"));
     model->setHeaderData(2, Qt::Horizontal, QObject::tr("Membership"));
@@ -42,12 +45,14 @@ QSqlTableModel* DbManager::createMemberTable()
 
 QSqlTableModel* DbManager::createSalesTable()
 {
+    /// @brief Creates a new QSqlTableModel for the Sales table
     QSqlTableModel *model = new QSqlTableModel;
 
-    // load in the data from the sales table
+    /// @brief Load in the data from the Sales table of the database
     model->setTable("Sales");
     model->select();
 
+    /// @brief Sets the header data for the Sales table
     model->setHeaderData(0, Qt::Horizontal, QObject::tr("Date"));
     model->setHeaderData(1, Qt::Horizontal, QObject::tr("Member ID"));
     model->setHeaderData(2, Qt::Horizontal, QObject::tr("Product"));
