@@ -8,14 +8,24 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
 
-    // create a QTreeView to display the member table
+    /// @brief Create a QTableView to display the member table
     QTableView *memberView = new QTableView;
     memberView->setModel(connection.createMemberTable());
+
+    /// @brief Allows the user to sort the Member table by column
+    memberView->setSortingEnabled(true);
+    memberView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    memberView->resizeColumnsToContents();
     memberView->show();
 
-    // create a QTreeView to display the sales table
+    /// @brief Create a QTableView to display the sales table
     QTableView *salesView = new QTableView;
     salesView->setModel(connection.createSalesTable());
+
+    /// @brief Allows the user to sort the sales table by column
+    salesView->setSortingEnabled(true);
+    salesView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    salesView->resizeColumnsToContents();
     salesView->show();
 }
 

@@ -1,6 +1,6 @@
 /**
  *  @file dbmanager.h
- *  @brief Contains the definition of the Dbmanager Class
+ *  @brief Contains the definition of the DbManager Class
  */
 
 #ifndef DBMANAGER_H
