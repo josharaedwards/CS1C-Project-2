@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>907</width>
-    <height>638</height>
+    <width>961</width>
+    <height>623</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -26,7 +26,11 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout_2">
         <item row="0" column="0">
-         <widget class="QTableView" name="MemberTableView"/>
+         <widget class="QTableView" name="MemberTableView">
+          <property name="whatsThis">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;table holding member info...&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
@@ -49,7 +53,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>907</width>
+     <width>961</width>
      <height>21</height>
     </rect>
    </property>
