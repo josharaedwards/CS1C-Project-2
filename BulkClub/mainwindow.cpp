@@ -50,5 +50,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_logInPushButton_released()
 {
+    // temporary implementation
     this->ui->stackedWidget->setCurrentIndex(0);
 }
