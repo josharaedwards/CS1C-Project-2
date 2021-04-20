@@ -8,7 +8,7 @@
 DbManager::DbManager()
 {
     db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("C:/Users/johnn/OneDrive/Desktop/BulkClubData/bulk-club.sqlite");
+    db.setDatabaseName("bulk-club.sqlite");
 
     db.open();
 }
