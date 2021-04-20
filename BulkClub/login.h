@@ -1,0 +1,27 @@
+#ifndef LOGIN_H
+#define LOGIN_H
+
+#include <QDialog>
+
+namespace Ui {
+class login;
+}
+
+class login : public QDialog
+{
+    Q_OBJECT
+
+public:
+    explicit login(QWidget *parent = nullptr);
+    ~login();
+private:
+    bool validCredentials = false;
+
+private slots:
+    void on_lineEdit_returnPressed();
+
+private:
+    Ui::login *ui;
+};
+
+#endif // LOGIN_H

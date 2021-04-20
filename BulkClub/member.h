@@ -14,13 +14,11 @@ class Member
     QDate expDate;
 
     int memberNum;
-
     double spentAmnt;
     double dueAmnt;
     double rebateAmnt;
 
     bool bIsExecutive;
-
 
 public:
     //Constructors
