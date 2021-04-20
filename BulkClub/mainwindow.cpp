@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "login.h"
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -6,7 +7,6 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
 
     /// @brief Create a QTableView to display the member table
     QTableView *memberView; //= new QTableView;
