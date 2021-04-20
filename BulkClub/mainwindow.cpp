@@ -38,6 +38,8 @@ MainWindow::MainWindow(QWidget *parent)
     salesView->horizontalHeader()->setSectionResizeMode(2, QHeaderView::Stretch);
     salesView->horizontalHeader()->setSectionResizeMode(3, QHeaderView::Stretch);
     salesView->horizontalHeader()->setSectionResizeMode(4, QHeaderView::Stretch);
+
+    this->setVisible(false);
 }
 
 MainWindow::~MainWindow()
@@ -45,3 +47,8 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+
+void MainWindow::on_logInPushButton_released()
+{
+    this->ui->stackedWidget->setCurrentIndex(0);
+}

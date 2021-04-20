@@ -1,5 +1,6 @@
 #include "login.h"
 #include "ui_login.h"
+#include "mainwindow.h"
 
 login::login(QWidget *parent) :
     QDialog(parent),
@@ -15,5 +16,8 @@ login::~login()
 
 void login::on_lineEdit_returnPressed()
 {
-
+    /*validCredentials = true;
+    this->setVisible(false);
+    */
+    //MainWindow::setVisible(true);
 }

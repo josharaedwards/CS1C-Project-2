@@ -14,6 +14,8 @@ class login : public QDialog
 public:
     explicit login(QWidget *parent = nullptr);
     ~login();
+private:
+    bool validCredentials = false;
 
 private slots:
     void on_lineEdit_returnPressed();
