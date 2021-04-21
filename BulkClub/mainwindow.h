@@ -21,6 +21,10 @@ public:
 private slots:
     void on_logInPushButton_released();
 
+    void on_pushButton_released();
+
+    void on_clearPushButton_released();
+
 private:
     Ui::MainWindow *ui;
     DbManager connection;

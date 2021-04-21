@@ -65,3 +65,15 @@ void MainWindow::on_logInPushButton_released()
             break;
     }
 }
+
+void MainWindow::on_pushButton_released()
+{
+    this->ui->lineEditPassword->setText("");
+    this->ui->stackedWidget->setCurrentIndex(1);
+}
+
+void MainWindow::on_clearPushButton_released()
+{
+    this->ui->lineEditUserID->setText("");
+    this->ui->lineEditPassword->setText("");
+}

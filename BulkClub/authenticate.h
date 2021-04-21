@@ -15,7 +15,7 @@ class Authenticate
     QString username;
     QString password;
     loginStatus state;
-
+    QSqlDatabase login_db;
 public:
     Authenticate();
     ~Authenticate();
