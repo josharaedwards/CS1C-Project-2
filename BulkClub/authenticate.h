@@ -4,7 +4,7 @@
 #include <QString>
 using namespace std;
 
-enum loginStatus { failed, manager, admin };
+enum loginStatus { FAILED, MANAGER, ADMIN };
 
 class Authenticate
 {
@@ -14,9 +14,9 @@ class Authenticate
 
 public:
     Authenticate();
-    ~Authenticate(){}
+    ~Authenticate();
     loginStatus attempt(QString userIn, QString passIn);
-    loginStatus isLogged();
+    loginStatus getState();
 };
 
 #endif // AUTHENTICATE_H

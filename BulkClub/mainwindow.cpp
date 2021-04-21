@@ -55,15 +55,13 @@ void MainWindow::on_logInPushButton_released()
     Authenticate logInput;
     loginStatus state = logInput.attempt(this->ui->lineEditUserID->text(), this->ui->lineEditPassword->text());
     switch(state){
-        case failed:
+        case FAILED:
             break;
-        case manager:
+        case MANAGER:
             this->ui->stackedWidget->setCurrentIndex(0);
             break;
-        case admin:
+        case ADMIN:
             this->ui->stackedWidget->setCurrentIndex(0);
             break;
     }
-
-
 }

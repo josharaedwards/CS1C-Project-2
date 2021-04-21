@@ -4,18 +4,22 @@ Authenticate::Authenticate()
 {
     username = "";
     password = "";
-    state = failed;
+    state = FAILED;
+}
+
+Authenticate::~Authenticate(){
+
 }
 
 loginStatus Authenticate::attempt(QString userIn, QString passIn)
 {
     if(userIn == "username" && passIn == "password"){
-        state = admin;
+        state = ADMIN;
     }
     return state;
 }
 
-loginStatus Authenticate::isLogged()
+loginStatus Authenticate::getState()
 {
     return state;
 }
