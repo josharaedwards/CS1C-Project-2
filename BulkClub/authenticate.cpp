@@ -8,7 +8,7 @@ Authenticate::Authenticate()
 }
 
 Authenticate::~Authenticate(){
-
+    login_db = QSqlDatabase::addDatabase("QSQLITE");
 }
 
 loginStatus Authenticate::attempt(QString userIn, QString passIn)
