@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>543</width>
-    <height>385</height>
+    <width>565</width>
+    <height>403</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -25,11 +25,11 @@
         <item row="0" column="0">
          <widget class="QTabWidget" name="tabWidget">
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
-          <widget class="QWidget" name="tab">
+          <widget class="QWidget" name="membersTab">
            <attribute name="title">
-            <string>Tab 1</string>
+            <string>Members</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_2">
             <item row="0" column="0">
@@ -41,9 +41,9 @@
             </item>
            </layout>
           </widget>
-          <widget class="QWidget" name="tab_2">
+          <widget class="QWidget" name="salesTab">
            <attribute name="title">
-            <string>Tab 2</string>
+            <string>Sales</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_3">
             <item row="0" column="0">
@@ -163,7 +163,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>543</width>
+     <width>565</width>
      <height>21</height>
     </rect>
    </property>
