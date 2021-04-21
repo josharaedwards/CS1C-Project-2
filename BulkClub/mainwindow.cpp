@@ -1,5 +1,6 @@
 #include "mainwindow.h"
-#include "login.h"
+//#include "login.h"
+#include "authenticate.h"
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -51,5 +52,16 @@ MainWindow::~MainWindow()
 void MainWindow::on_logInPushButton_released()
 {
     // temporary implementation
-    this->ui->stackedWidget->setCurrentIndex(0);
+    Authenticate logInput;
+    loginStatus state = logInput.attempt(this->ui->lineEditUserID->text(), this->ui->lineEditPassword->text());
+    switch(state){
+        case FAILED:
+            break;
+        case MANAGER:
+            this->ui->stackedWidget->setCurrentIndex(0);
+            break;
+        case ADMIN:
+            this->ui->stackedWidget->setCurrentIndex(0);
+            break;
+    }
 }
