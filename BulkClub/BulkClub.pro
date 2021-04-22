@@ -11,6 +11,7 @@ CONFIG += c++11
 SOURCES += \
     authenticate.cpp \
     dbmanager.cpp \
+    helperLib.cpp \
     main.cpp \
     mainwindow.cpp \
     member.cpp
@@ -18,6 +19,7 @@ SOURCES += \
 HEADERS += \
     authenticate.h \
     dbmanager.h \
+    helperLib.h \
     mainwindow.h \
     member.h
 
