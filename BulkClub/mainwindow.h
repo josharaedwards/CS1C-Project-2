@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include "dbmanager.h"
+#include "authenticate.h"
 
 #include <QMainWindow>
 #include <QTableView>
@@ -27,6 +28,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    DbManager connection;
+    DbManager connection;  /// @var connection DbManager object
+    Authenticate logInput; /// @var logInput Authenticate object to keep track of user's login status
 };
 #endif // MAINWINDOW_H

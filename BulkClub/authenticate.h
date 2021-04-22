@@ -21,6 +21,7 @@ public:
     ~Authenticate();
     loginStatus attempt(QString userIn, QString passIn);
     loginStatus getState();
+    void logout();
 };
 
 #endif // AUTHENTICATE_H

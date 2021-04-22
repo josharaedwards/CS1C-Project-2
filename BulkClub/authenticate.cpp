@@ -22,10 +22,16 @@ Authenticate::~Authenticate(){
 /// @brief returns login status using sqlite UserPass database file
 loginStatus Authenticate::attempt(QString userIn, QString passIn)
 {
-    QSqlQuery queryUser("SELECT username, password FROM UserInfo", login_db);
-    while(queryUser.next()){
-        if(userIn == queryUser.value(0).toString() && passIn == queryUser.value(1).toString()){
+    QSqlQuery queryDev("SELECT username, password FROM developers", login_db);
+    QSqlQuery queryMan("SELECT username, password FROM managers", login_db);
+    while(queryDev.next()){
+        if(userIn == queryDev.value(0).toString() && passIn == queryDev.value(1).toString()){
             state = ADMIN;
+        }
+    }
+    while(queryMan.next()){
+        if(userIn == queryMan.value(0).toString() && passIn == queryMan.value(1).toString()) {
+            state = MANAGER;
         }
     }
 
@@ -35,4 +41,8 @@ loginStatus Authenticate::attempt(QString userIn, QString passIn)
 loginStatus Authenticate::getState()
 {
     return state;
+}
+
+void Authenticate::logout(){
+    state = FAILED;
 }
