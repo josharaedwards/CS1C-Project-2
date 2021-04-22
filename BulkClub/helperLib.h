@@ -17,14 +17,18 @@ vector<Member> searchMult(vector<Member> members, QDate expDateIn);
 
 //Sort Functions
 
-vector<Member> sortBy(vector<Member> members, SortType sort);
+vector<Member> sort(vector<Member> members, SortType sortBy);
 
-void byName(vector<Member>& members);
-void byExp(vector<Member>& members);
-void byNum(vector<Member>& members);
-void bySpentAmnt(vector<Member>& members);
-void byRebateAmnt(vector<Member>& members);
-void byExec(vector<Member>& members);
+void sortByName(vector<Member>& members);
+void sortByExp(vector<Member>& members);
+void sortByNum(vector<Member>& members);
+void sortBySpentAmnt(vector<Member>& members);
+void sortByRebateAmnt(vector<Member>& members);
+void sortByExec(vector<Member>& members);
+
+//Filter Functions
+
+vector<Member> filterBy(vector<Member> members, SortType sort, bool isInclusive = false);
 
 //Comparison Functions
 

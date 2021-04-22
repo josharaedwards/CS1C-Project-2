@@ -74,39 +74,39 @@ vector<Member> searchMult(vector<Member> members, QDate expDateIn)
     return memsOut;
 }
 
-vector<Member> sortBy(vector<Member> members, SortType sort)
+vector<Member> sort(vector<Member> members, SortType sortBy)
 {
     vector<Member> memsOut = members;
 
-    switch(sort)
+    switch(sortBy)
     {
     case NAME:
-        byName(memsOut);
+        sortByName(memsOut);
         break;
     case EXP:
-        byExp(memsOut);
+        sortByExp(memsOut);
         break;
     case NUM:
-        byNum(memsOut);
+        sortByNum(memsOut);
         break;
     case SPENT_AMNT:
-        bySpentAmnt(memsOut);
+        sortBySpentAmnt(memsOut);
         break;
     case REBATE_AMNT:
-        byRebateAmnt(memsOut);
+        sortByRebateAmnt(memsOut);
         break;
     case EXEC:
-        byExec(memsOut);
+        sortByExec(memsOut);
         break;
     default:
-        byName(memsOut);
+        sortByName(memsOut);
         break;
     }
 
     return memsOut;
 }
 
-void byName(vector<Member>& members)
+void sortByName(vector<Member>& members)
 {
     int numOfEntries = members.size();
 
@@ -127,7 +127,7 @@ void byName(vector<Member>& members)
     }
 }
 
-void byExp(vector<Member>& members)
+void sortByExp(vector<Member>& members)
 {
     int numOfEntries = members.size();
 
@@ -148,7 +148,7 @@ void byExp(vector<Member>& members)
     }
 }
 
-void byNum(vector<Member>& members)
+void sortByNum(vector<Member>& members)
 {
     int numOfEntries = members.size();
 
@@ -169,7 +169,7 @@ void byNum(vector<Member>& members)
     }
 }
 
-void bySpentAmnt(vector<Member>& members)
+void sortBySpentAmnt(vector<Member>& members)
 {
     int numOfEntries = members.size();
 
@@ -190,7 +190,7 @@ void bySpentAmnt(vector<Member>& members)
     }
 }
 
-void byRebateAmnt(vector<Member>& members)
+void sortByRebateAmnt(vector<Member>& members)
 {
     int numOfEntries = members.size();
 
