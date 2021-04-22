@@ -18,14 +18,14 @@
     <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="page">
        <layout class="QGridLayout" name="gridLayout_4">
         <item row="0" column="1">
          <widget class="QPushButton" name="pushButton">
           <property name="text">
-           <string>logout</string>
+           <string>Logout</string>
           </property>
          </widget>
         </item>
@@ -52,10 +52,120 @@
             <string>Members</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_2">
-            <item row="0" column="0">
+            <item row="2" column="0" colspan="4">
              <widget class="QTableView" name="MemberTableView">
               <property name="whatsThis">
                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;table holding member info...&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="3">
+             <widget class="QComboBox" name="monthComboBox">
+              <item>
+               <property name="text">
+                <string>January</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>February</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>March</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>April</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>May</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>June</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>July</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>August</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>September</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>October</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>November</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>December</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="1" column="0" colspan="2">
+             <spacer name="horizontalSpacer_6">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="0" column="3">
+             <widget class="QLabel" name="labelExpiration">
+              <property name="text">
+               <string>Expiration Month</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QComboBox" name="comboBox">
+              <item>
+               <property name="text">
+                <string>Executive</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Regular</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Any</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Membership Type</string>
               </property>
              </widget>
             </item>
@@ -213,7 +323,7 @@
               </font>
              </property>
              <property name="text">
-              <string>clear</string>
+              <string>Clear</string>
              </property>
             </widget>
            </item>
@@ -245,7 +355,7 @@
               </font>
              </property>
              <property name="text">
-              <string>log in</string>
+              <string>Log In</string>
              </property>
             </widget>
            </item>
@@ -264,7 +374,7 @@
               </font>
              </property>
              <property name="text">
-              <string>UserID</string>
+              <string>Username</string>
              </property>
             </widget>
            </item>

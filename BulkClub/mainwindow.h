@@ -26,6 +26,10 @@ private slots:
 
     void on_clearPushButton_released();
 
+    void on_monthComboBox_currentIndexChanged(const QString &arg1);
+
+    void on_comboBox_currentIndexChanged(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
     DbManager connection;  /// @var connection DbManager object

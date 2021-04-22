@@ -9,13 +9,15 @@ MainWindow::MainWindow(QWidget *parent)
 
     /// @brief Create a QTableView to display the member table
     QTableView *memberView; //= new QTableView;
+
     memberView = this->ui->MemberTableView;
     memberView->setModel(connection.createMemberTable());
 
     /// @brief Allows the user to sort the Member table by column
     memberView->setSortingEnabled(true);
     memberView->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    //memberView->resizeColumnsToContents();
+    memberView->setSelectionBehavior(QAbstractItemView::SelectRows);
+    memberView->setSelectionMode(QAbstractItemView::SingleSelection);
 
     memberView->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Stretch);
     memberView->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
@@ -30,7 +32,7 @@ MainWindow::MainWindow(QWidget *parent)
     /// @brief Allows the user to sort the sales table by column
     salesView->setSortingEnabled(true);
     salesView->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    //salesView->resizeColumnsToContents();
+    salesView->setSelectionMode(QAbstractItemView::NoSelection);
 
     salesView->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Stretch);
     salesView->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
@@ -76,4 +78,16 @@ void MainWindow::on_clearPushButton_released()
 {
     this->ui->lineEditUserID->setText("");
     this->ui->lineEditPassword->setText("");
+}
+
+/// @brief Filter by month of membership expiration Combo box index changed
+void MainWindow::on_monthComboBox_currentIndexChanged(const QString &arg1)
+{
+
+}
+
+/// @brief Filter by membership type Combo box index changed
+void MainWindow::on_comboBox_currentIndexChanged(const QString &arg1)
+{
+
 }
