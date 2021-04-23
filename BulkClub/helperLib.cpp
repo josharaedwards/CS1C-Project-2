@@ -95,9 +95,6 @@ vector<Member> sort(vector<Member> members, SortType sortBy)
     case REBATE_AMNT:
         sortByRebateAmnt(memsOut);
         break;
-    case EXEC:
-        sortByExec(memsOut);
-        break;
     default:
         sortByName(memsOut);
         break;
