@@ -5,7 +5,7 @@
 #include "member.h"
 using namespace std;
 
-enum SortType{NAME, EXP, NUM, SPENT_AMNT, REBATE_AMNT, EXEC};
+enum SortType{NAME, EXP, NUM, SPENT_AMNT, REBATE_AMNT};
 
 //Search Functions
 
