@@ -7,38 +7,31 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    /// @brief Create a QTableView to display the member table
-    QTableView *memberView; //= new QTableView;
+    // memberView = this->ui->MemberTableView;
+    // memberView->setModel(connection.createMemberTable());
 
+    memberModel = connection.createMemberTable();
     memberView = this->ui->MemberTableView;
-    memberView->setModel(connection.createMemberTable());
+    memberProxyModel = new QSortFilterProxyModel(this);
+    memberProxyModel->setSourceModel(memberModel);
+    memberView->setModel(memberProxyModel);
 
     /// @brief Allows the user to sort the Member table by column
     memberView->setSortingEnabled(true);
     memberView->setEditTriggers(QAbstractItemView::NoEditTriggers);
     memberView->setSelectionBehavior(QAbstractItemView::SelectRows);
     memberView->setSelectionMode(QAbstractItemView::SingleSelection);
+    memberView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
-    memberView->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Stretch);
-    memberView->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
-    memberView->horizontalHeader()->setSectionResizeMode(2, QHeaderView::Stretch);
-    memberView->horizontalHeader()->setSectionResizeMode(3, QHeaderView::Stretch);
-
-    /// @brief Create a QTableView to display the sales table
-    QTableView *salesView;
     salesView = this->ui->salesTableView;
     salesView->setModel(connection.createSalesTable());
 
     /// @brief Allows the user to sort the sales table by column
     salesView->setSortingEnabled(true);
     salesView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    salesView->setSelectionBehavior(QAbstractItemView::SelectRows);
     salesView->setSelectionMode(QAbstractItemView::NoSelection);
-
-    salesView->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Stretch);
-    salesView->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
-    salesView->horizontalHeader()->setSectionResizeMode(2, QHeaderView::Stretch);
-    salesView->horizontalHeader()->setSectionResizeMode(3, QHeaderView::Stretch);
-    salesView->horizontalHeader()->setSectionResizeMode(4, QHeaderView::Stretch);
+    salesView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     this->setVisible(false);
 }
@@ -80,14 +73,10 @@ void MainWindow::on_clearPushButton_released()
     this->ui->lineEditPassword->setText("");
 }
 
-/// @brief Filter by month of membership expiration Combo box index changed
-void MainWindow::on_monthComboBox_currentIndexChanged(const QString &arg1)
-{
-
-}
-
 /// @brief Filter by membership type Combo box index changed
 void MainWindow::on_comboBox_currentIndexChanged(const QString &arg1)
 {
-
+    this->memberProxyModel->setFilterKeyColumn(2);
+    this->memberProxyModel->setFilterRegularExpression(arg1);
+    this->memberView->setModel(memberProxyModel);
 }

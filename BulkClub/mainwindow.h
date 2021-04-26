@@ -26,12 +26,20 @@ private slots:
 
     void on_clearPushButton_released();
 
-    void on_monthComboBox_currentIndexChanged(const QString &arg1);
-
     void on_comboBox_currentIndexChanged(const QString &arg1);
 
 private:
     Ui::MainWindow *ui;
+
+    QAbstractItemModel *memberModel;
+    QAbstractItemModel *salesModel;
+
+    QTableView *memberView;
+    QTableView *salesView;
+
+    QSortFilterProxyModel *memberProxyModel;
+    QSortFilterProxyModel *salesProxyModel;
+
     DbManager connection;  /// @var connection DbManager object
     Authenticate logInput; /// @var logInput Authenticate object to keep track of user's login status
 };
