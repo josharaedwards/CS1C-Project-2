@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include "dbmanager.h"
+#include "authenticate.h"
 
 #include <QMainWindow>
 #include <QTableView>
@@ -21,8 +22,17 @@ public:
 private slots:
     void on_logInPushButton_released();
 
+    void on_pushButton_released();
+
+    void on_clearPushButton_released();
+
+    void on_monthComboBox_currentIndexChanged(const QString &arg1);
+
+    void on_comboBox_currentIndexChanged(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
-    DbManager connection;
+    DbManager connection;  /// @var connection DbManager object
+    Authenticate logInput; /// @var logInput Authenticate object to keep track of user's login status
 };
 #endif // MAINWINDOW_H

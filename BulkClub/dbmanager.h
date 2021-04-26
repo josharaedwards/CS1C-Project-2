@@ -40,7 +40,7 @@ public:
      * @brief createMemberTable
      *
      * Creates a table for the member data if not already created
-     * @return
+     * @return Pointer to the member table model
      */
     QSqlTableModel* createMemberTable();
 
@@ -48,7 +48,7 @@ public:
      * @brief createSalesTable
      *
      * Creates a table for the sales information if not already created
-     * @return
+     * @return Pointer to the sales table model
      */
     QSqlTableModel* createSalesTable();
 
@@ -79,6 +79,20 @@ public:
      * Removes a sale from the sales table of the database
      */
     void removeSale();
+
+    /**
+     * @brief addInventory
+     *
+     * Adds an item to the inventory table
+     */
+    void addInventory();
+
+    /**
+     * @brief removeInventory
+     *
+     * Removes an item from the inventory table
+     */
+    void removeInventory();
 
 private:
     /**

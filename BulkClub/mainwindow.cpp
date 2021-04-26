@@ -1,5 +1,4 @@
 #include "mainwindow.h"
-#include "login.h"
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -10,13 +9,15 @@ MainWindow::MainWindow(QWidget *parent)
 
     /// @brief Create a QTableView to display the member table
     QTableView *memberView; //= new QTableView;
+
     memberView = this->ui->MemberTableView;
     memberView->setModel(connection.createMemberTable());
 
     /// @brief Allows the user to sort the Member table by column
     memberView->setSortingEnabled(true);
     memberView->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    //memberView->resizeColumnsToContents();
+    memberView->setSelectionBehavior(QAbstractItemView::SelectRows);
+    memberView->setSelectionMode(QAbstractItemView::SingleSelection);
 
     memberView->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Stretch);
     memberView->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
@@ -31,7 +32,7 @@ MainWindow::MainWindow(QWidget *parent)
     /// @brief Allows the user to sort the sales table by column
     salesView->setSortingEnabled(true);
     salesView->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    //salesView->resizeColumnsToContents();
+    salesView->setSelectionMode(QAbstractItemView::NoSelection);
 
     salesView->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Stretch);
     salesView->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
@@ -51,5 +52,42 @@ MainWindow::~MainWindow()
 void MainWindow::on_logInPushButton_released()
 {
     // temporary implementation
-    this->ui->stackedWidget->setCurrentIndex(0);
+    loginStatus state = logInput.attempt(this->ui->lineEditUserID->text(), this->ui->lineEditPassword->text());
+    switch(state){
+        case FAILED:
+            break;
+        case MANAGER:
+            this->ui->stackedWidget->setCurrentIndex(0);
+            break;
+        case ADMIN:
+            this->ui->stackedWidget->setCurrentIndex(0);
+            break;
+    }
+}
+
+/// @brief logout button pushed
+void MainWindow::on_pushButton_released()
+{
+    logInput.logout();
+    this->ui->lineEditPassword->setText("");
+    this->ui->stackedWidget->setCurrentIndex(1);
+}
+
+/// @brief clear login input
+void MainWindow::on_clearPushButton_released()
+{
+    this->ui->lineEditUserID->setText("");
+    this->ui->lineEditPassword->setText("");
+}
+
+/// @brief Filter by month of membership expiration Combo box index changed
+void MainWindow::on_monthComboBox_currentIndexChanged(const QString &arg1)
+{
+
+}
+
+/// @brief Filter by membership type Combo box index changed
+void MainWindow::on_comboBox_currentIndexChanged(const QString &arg1)
+{
+
 }

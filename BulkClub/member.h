@@ -69,12 +69,4 @@ public:
     bool IsExec();  
 };
 
-
-//Generic Helper Functions
-Member search(vector<Member> members, int memNumIn, bool& bSucceed);
-Member search(vector<Member> members, QString nameIn, bool& bSucceed);
-
-vector<Member> searchMult(vector<Member> members, bool execIn);
-vector<Member> searchMult(vector<Member> members, QDate expDateIn);
-
 #endif // MEMBER_H
