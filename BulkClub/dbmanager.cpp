@@ -61,8 +61,6 @@ QSqlTableModel* DbManager::createSalesTable()
     return model;
 }
 
-<<<<<<< Updated upstream
-=======
 QSqlTableModel* DbManager::createInventoryTable()
 {
     /// @brief Creates a new QSqlTableModel for the Inventory table
@@ -80,7 +78,6 @@ QSqlTableModel* DbManager::createInventoryTable()
     return model;
 }
 
->>>>>>> Stashed changes
 void DbManager::addMember(Member newMember)
 {
 

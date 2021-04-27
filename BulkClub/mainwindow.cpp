@@ -29,6 +29,15 @@ MainWindow::MainWindow(QWidget *parent)
     /// @brief Formats the column sizes by allowing them to stretch
     salesView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
+    inventoryModel = connection.createInventoryTable();
+    inventoryProxyModel = new QSortFilterProxyModel(this);
+    inventoryProxyModel->setSourceModel(inventoryModel);
+    inventoryView = this->ui->inventoryTableView;
+    inventoryView->setModel(inventoryProxyModel);
+
+    /// @brief Formats the column sizes by allowing them to stretch
+    inventoryView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
     this->setVisible(false);
 }
 
