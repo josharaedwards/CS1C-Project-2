@@ -26,21 +26,27 @@ private slots:
 
     void on_clearPushButton_released();
 
-    void on_comboBox_currentIndexChanged(const QString &arg1);
+    void on_memTypeComboBox_currentTextChanged(const QString &arg1);
+
+    void on_expDateEdit_dateChanged(const QDate &date);
+
+    void on_resetMemFilterButton_released();
+
+    void on_resetSaleFilterButton_released();
+
+    void on_saleDateEdit_userDateChanged(const QDate &date);
 
 private:
     Ui::MainWindow *ui;
 
-    QAbstractItemModel *memberModel;
-    QAbstractItemModel *salesModel;
+    QAbstractItemModel *memberModel; /// @var memberModel the source model for the member table
+    QAbstractItemModel *salesModel;  /// @var salesModel the source model for the sales table
+    QSortFilterProxyModel *memberProxyModel; /// @var memberProxyModel a proxy model for sorting/filtering members
+    QSortFilterProxyModel *salesProxyModel;  /// @var salesProxyModel a proxy model for sorting/filtering sales
+    QTableView *memberView; /// @var memberView the table view where memberProxyModel is shown
+    QTableView *salesView;  /// @var salesView the table view where salesProxyModel is shown
 
-    QTableView *memberView;
-    QTableView *salesView;
-
-    QSortFilterProxyModel *memberProxyModel;
-    QSortFilterProxyModel *salesProxyModel;
-
-    DbManager connection;  /// @var connection DbManager object
+    DbManager connection;  /// @var connection DbManager object to retreive data from the database
     Authenticate logInput; /// @var logInput Authenticate object to keep track of user's login status
 };
 #endif // MAINWINDOW_H

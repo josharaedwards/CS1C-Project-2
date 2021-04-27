@@ -1,36 +1,31 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include <iostream>
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
 
-    // memberView = this->ui->MemberTableView;
-    // memberView->setModel(connection.createMemberTable());
-
     memberModel = connection.createMemberTable();
-    memberView = this->ui->MemberTableView;
+
     memberProxyModel = new QSortFilterProxyModel(this);
     memberProxyModel->setSourceModel(memberModel);
+    memberView = this->ui->MemberTableView;
     memberView->setModel(memberProxyModel);
 
-    /// @brief Allows the user to sort the Member table by column
-    memberView->setSortingEnabled(true);
-    memberView->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    memberView->setSelectionBehavior(QAbstractItemView::SelectRows);
-    memberView->setSelectionMode(QAbstractItemView::SingleSelection);
+    /// @brief Formats the column sizes by allowing them to stretch
     memberView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
+    salesModel = connection.createSalesTable();
+    salesProxyModel = new QSortFilterProxyModel(this);
+    salesProxyModel->setSourceModel(salesModel);
     salesView = this->ui->salesTableView;
-    salesView->setModel(connection.createSalesTable());
+    salesView->setModel(salesProxyModel);
 
-    /// @brief Allows the user to sort the sales table by column
-    salesView->setSortingEnabled(true);
-    salesView->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    salesView->setSelectionBehavior(QAbstractItemView::SelectRows);
-    salesView->setSelectionMode(QAbstractItemView::NoSelection);
+    /// @brief Formats the column sizes by allowing them to stretch
     salesView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     this->setVisible(false);
@@ -40,7 +35,6 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
-
 
 void MainWindow::on_logInPushButton_released()
 {
@@ -73,10 +67,42 @@ void MainWindow::on_clearPushButton_released()
     this->ui->lineEditPassword->setText("");
 }
 
-/// @brief Filter by membership type Combo box index changed
-void MainWindow::on_comboBox_currentIndexChanged(const QString &arg1)
+/// @brief Filter by membership type
+void MainWindow::on_memTypeComboBox_currentTextChanged(const QString &arg1)
 {
     this->memberProxyModel->setFilterKeyColumn(2);
-    this->memberProxyModel->setFilterRegularExpression(arg1);
-    this->memberView->setModel(memberProxyModel);
+
+    if (arg1 != "Any")
+    {
+        this->memberProxyModel->setFilterRegularExpression(arg1);
+    }
+    else
+    {
+        this->memberProxyModel->setFilterRegularExpression("");
+    }
+}
+
+/// @brief Filter by membership date of expiration
+void MainWindow::on_expDateEdit_dateChanged(const QDate &date)
+{
+    this->memberProxyModel->setFilterKeyColumn(3);
+    this->memberProxyModel->setFilterRegularExpression(date.toString("MM/dd/yyyy"));
+}
+
+/// @brief Reset the filters present on the member table
+void MainWindow::on_resetMemFilterButton_released()
+{
+    this->memberProxyModel->setFilterRegularExpression("");
+}
+
+/// @brief Reset the filters present on the sales table
+void MainWindow::on_resetSaleFilterButton_released()
+{
+    this->salesProxyModel->setFilterRegularExpression("");
+}
+
+/// @brief Filter sales by date of sale
+void MainWindow::on_saleDateEdit_userDateChanged(const QDate &date)
+{
+    this->salesProxyModel->setFilterRegularExpression(date.toString("M/d/yyyy"));
 }
