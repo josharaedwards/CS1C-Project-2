@@ -51,7 +51,6 @@ public:
      * @return Pointer to the sales table model
      */
     QSqlTableModel* createSalesTable();
-
     /**
      * @brief addMember
      *
