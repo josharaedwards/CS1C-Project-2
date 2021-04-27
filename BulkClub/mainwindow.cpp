@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+
 #include <iostream>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -105,4 +106,22 @@ void MainWindow::on_resetSaleFilterButton_released()
 void MainWindow::on_saleDateEdit_userDateChanged(const QDate &date)
 {
     this->salesProxyModel->setFilterRegularExpression(date.toString("M/d/yyyy"));
+}
+
+///@brief double clicking any member should create a popup containing their purchases
+void MainWindow::on_MemberTableView_doubleClicked(const QModelIndex &index)
+{
+
+    QModelIndex indexID = index.model()->index(index.row(), 1, QModelIndex());
+    QString stringID = index.model()->data(indexID, Qt::DisplayRole).toString();
+
+    //-opening-popup--------------------------------------
+    memberPopup openMember(stringID);
+    openMember.setModal(true);
+    openMember.exec();
+    //----------------------------------------------------
+}
+
+DbManager MainWindow::getConnection(){
+    return connection;
 }

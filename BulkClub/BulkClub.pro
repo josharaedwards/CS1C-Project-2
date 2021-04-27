@@ -14,17 +14,20 @@ SOURCES += \
     helperLib.cpp \
     main.cpp \
     mainwindow.cpp \
-    member.cpp
+    member.cpp \
+    memberpopup.cpp
 
 HEADERS += \
     authenticate.h \
     dbmanager.h \
     helperLib.h \
     mainwindow.h \
-    member.h
+    member.h \
+    memberpopup.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    memberpopup.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
