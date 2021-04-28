@@ -3,11 +3,20 @@
 
 #include <iostream>
 
+//global member variable
+vector<Member> members;
+vector<Sale> sales;
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    sales = connection.popSaleVec();    //populate sales vector
+    members = connection.popMemVec();   //populate members vector
+    salesToMembers(members, sales);     //assign sales to each member by ID
+
 
     this->setWindowTitle("Not Logged In");
 

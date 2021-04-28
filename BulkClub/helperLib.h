@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "member.h"
+#include "dbmanager.h"
 using namespace std;
 
 enum SortType{NAME, EXP, NUM, SPENT_AMNT, REBATE_AMNT};
@@ -41,5 +42,7 @@ bool isGreaterThan(int first, int second);
 
 void saleToMembers(vector<Member>& members, Sale sale);
 void salesToMembers(vector<Member>& members, vector<Sale> sales);
+
+
 
 #endif // HELPERLIB_H
