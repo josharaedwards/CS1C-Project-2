@@ -52,25 +52,6 @@
             <string>Members</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_2">
-            <item row="1" column="2">
-             <widget class="QComboBox" name="memTypeComboBox">
-              <item>
-               <property name="text">
-                <string>Any</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Executive</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Regular</string>
-               </property>
-              </item>
-             </widget>
-            </item>
             <item row="2" column="0" colspan="4">
              <widget class="QTableView" name="MemberTableView">
               <property name="whatsThis">
@@ -109,6 +90,39 @@
               <attribute name="verticalHeaderHighlightSections">
                <bool>false</bool>
               </attribute>
+             </widget>
+            </item>
+            <item row="0" column="3">
+             <widget class="QLabel" name="labelExpiration">
+              <property name="text">
+               <string>Exp. Date</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QPushButton" name="resetMemFilterButton">
+              <property name="text">
+               <string>Reset Filter</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QComboBox" name="memTypeComboBox">
+              <item>
+               <property name="text">
+                <string>Any</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Executive</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Regular</string>
+               </property>
+              </item>
              </widget>
             </item>
             <item row="1" column="3">
@@ -186,27 +200,6 @@
               </property>
              </widget>
             </item>
-            <item row="0" column="3">
-             <widget class="QLabel" name="labelExpiration">
-              <property name="text">
-               <string>Exp. Date</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="2">
-             <widget class="QLabel" name="label">
-              <property name="text">
-               <string>Membership</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="0">
-             <widget class="QPushButton" name="resetMemFilterButton">
-              <property name="text">
-               <string>Reset Filter</string>
-              </property>
-             </widget>
-            </item>
             <item row="1" column="1">
              <spacer name="horizontalSpacer_7">
               <property name="orientation">
@@ -222,6 +215,27 @@
                </size>
               </property>
              </spacer>
+            </item>
+            <item row="0" column="2">
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Membership</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QPushButton" name="addMemButton">
+              <property name="text">
+               <string>Add Member</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="3">
+             <widget class="QPushButton" name="deleteMemButton">
+              <property name="text">
+               <string>Delete Member</string>
+              </property>
+             </widget>
             </item>
            </layout>
           </widget>

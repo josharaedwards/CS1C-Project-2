@@ -7,6 +7,7 @@ memberPopup::memberPopup(QString memberID, QWidget *parent) :
 {
     ui->setupUi(this);
 
+    // Add customer name to the label maybe?
     this->ui->memberIDLabel->setText(memberID);
 
     //fix connection
@@ -16,6 +17,7 @@ memberPopup::memberPopup(QString memberID, QWidget *parent) :
     memberView = this->ui->memberInfoTable;
     memberView->setModel(memberProxyModel);
     this->memberProxyModel->setFilterRegularExpression(memberID);
+
     /// @brief Formats the column sizes by allowing them to stretch
     memberView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 

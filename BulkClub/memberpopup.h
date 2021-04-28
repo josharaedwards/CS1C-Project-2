@@ -3,7 +3,6 @@
 
 #include "dbmanager.h"
 #include "authenticate.h"
-#include "memberpopup.h"
 
 #include <QDialog>
 

@@ -1,7 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-
 #include <iostream>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -10,8 +9,9 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    memberModel = connection.createMemberTable();
+    this->setWindowTitle("Not Logged In");
 
+    memberModel = connection.createMemberTable();
     memberProxyModel = new QSortFilterProxyModel(this);
     memberProxyModel->setSourceModel(memberModel);
     memberView = this->ui->MemberTableView;
@@ -39,16 +39,20 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_logInPushButton_released()
 {
-    // temporary implementation
-    loginStatus state = logInput.attempt(this->ui->lineEditUserID->text(), this->ui->lineEditPassword->text());
-    switch(state){
+    logInput.attempt(this->ui->lineEditUserID->text(), this->ui->lineEditPassword->text());
+    switch(logInput.getState())
+    {
         case FAILED:
             break;
         case MANAGER:
             this->ui->stackedWidget->setCurrentIndex(0);
+            this->ui->addMemButton->setHidden(true);
+            this->ui->deleteMemButton->setHidden(true);
+            this->setWindowTitle("Manager");
             break;
         case ADMIN:
             this->ui->stackedWidget->setCurrentIndex(0);
+            this->setWindowTitle("Administrator");
             break;
     }
 }
@@ -59,6 +63,7 @@ void MainWindow::on_pushButton_released()
     logInput.logout();
     this->ui->lineEditPassword->setText("");
     this->ui->stackedWidget->setCurrentIndex(1);
+    this->setWindowTitle("Not Logged In");
 }
 
 /// @brief clear login input
@@ -111,7 +116,6 @@ void MainWindow::on_saleDateEdit_userDateChanged(const QDate &date)
 ///@brief double clicking any member should create a popup containing their purchases
 void MainWindow::on_MemberTableView_doubleClicked(const QModelIndex &index)
 {
-
     QModelIndex indexID = index.model()->index(index.row(), 1, QModelIndex());
     QString stringID = index.model()->data(indexID, Qt::DisplayRole).toString();
 
