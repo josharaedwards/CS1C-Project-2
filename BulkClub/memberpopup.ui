@@ -35,7 +35,14 @@
     </widget>
    </item>
    <item row="2" column="0" colspan="2">
-    <widget class="QTableView" name="purchaseInfoTable"/>
+    <widget class="QTableView" name="purchaseInfoTable">
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Plain</enum>
+     </property>
+    </widget>
    </item>
    <item row="0" column="1">
     <widget class="QLabel" name="memberIDLabel">
@@ -62,6 +69,12 @@
        <width>16777215</width>
        <height>50</height>
       </size>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Plain</enum>
      </property>
     </widget>
    </item>

@@ -45,12 +45,17 @@ private slots:
 
     DbManager getConnection();
 
+    void on_addMemButton_released();
+
+    void on_deleteMemButton_released();
+
 private:
     Ui::MainWindow *ui;
 
     QAbstractItemModel *memberModel; /// @var memberModel the source model for the member table
     QAbstractItemModel *salesModel;  /// @var salesModel the source model for the sales table
     QSortFilterProxyModel *memberProxyModel; /// @var memberProxyModel a proxy model for sorting/filtering members
+    QSortFilterProxyModel *stackedMemberFilter; /// @var stackedMemberFilter a proxy model for stacking filters on members
     QSortFilterProxyModel *salesProxyModel;  /// @var salesProxyModel a proxy model for sorting/filtering sales
     QTableView *memberView; /// @var memberView the table view where memberProxyModel is shown
     QTableView *salesView;  /// @var salesView the table view where salesProxyModel is shown

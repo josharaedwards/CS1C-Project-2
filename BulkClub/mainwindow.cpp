@@ -14,8 +14,10 @@ MainWindow::MainWindow(QWidget *parent)
     memberModel = connection.createMemberTable();
     memberProxyModel = new QSortFilterProxyModel(this);
     memberProxyModel->setSourceModel(memberModel);
+    stackedMemberFilter = new QSortFilterProxyModel(this);
+    stackedMemberFilter->setSourceModel(memberProxyModel);
     memberView = this->ui->MemberTableView;
-    memberView->setModel(memberProxyModel);
+    memberView->setModel(stackedMemberFilter);
 
     /// @brief Formats the column sizes by allowing them to stretch
     memberView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
@@ -76,15 +78,15 @@ void MainWindow::on_clearPushButton_released()
 /// @brief Filter by membership type
 void MainWindow::on_memTypeComboBox_currentTextChanged(const QString &arg1)
 {
-    this->memberProxyModel->setFilterKeyColumn(2);
+    this->stackedMemberFilter->setFilterKeyColumn(2);
 
     if (arg1 != "Any")
     {
-        this->memberProxyModel->setFilterRegularExpression(arg1);
+        this->stackedMemberFilter->setFilterRegularExpression(arg1);
     }
     else
     {
-        this->memberProxyModel->setFilterRegularExpression("");
+        this->stackedMemberFilter->setFilterRegularExpression("");
     }
 }
 
@@ -92,7 +94,7 @@ void MainWindow::on_memTypeComboBox_currentTextChanged(const QString &arg1)
 void MainWindow::on_expDateEdit_dateChanged(const QDate &date)
 {
     this->memberProxyModel->setFilterKeyColumn(3);
-    this->memberProxyModel->setFilterRegularExpression(date.toString("MM/dd/yyyy"));
+    this->memberProxyModel->setFilterWildcard(date.toString("MM/*/yyyy"));
 }
 
 /// @brief Reset the filters present on the member table
@@ -128,4 +130,16 @@ void MainWindow::on_MemberTableView_doubleClicked(const QModelIndex &index)
 
 DbManager MainWindow::getConnection(){
     return connection;
+}
+
+/// @brief Admin button to add a new member
+void MainWindow::on_addMemButton_released()
+{
+
+}
+
+/// @brief Admin button to delete a member
+void MainWindow::on_deleteMemButton_released()
+{
+
 }
