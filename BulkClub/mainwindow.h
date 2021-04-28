@@ -3,6 +3,7 @@
 
 #include "dbmanager.h"
 #include "authenticate.h"
+#include "helperLib.h"
 #include "member.h"
 #include "sale.h"
 #include "inventory.h"
