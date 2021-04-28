@@ -16,8 +16,8 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     member.cpp \
-    sale.cpp \
-    memberpopup.cpp
+    memberpopup.cpp \
+    sale.cpp
 
 HEADERS += \
     authenticate.h \
@@ -26,8 +26,8 @@ HEADERS += \
     inventory.h \
     mainwindow.h \
     member.h \
-    sale.h \
-    memberpopup.h
+    memberpopup.h \
+    sale.cpp \
 
 FORMS += \
     mainwindow.ui \
