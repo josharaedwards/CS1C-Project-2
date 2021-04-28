@@ -8,6 +8,12 @@
 #include "inventory.h"
 #include "memberpopup.h"
 
+
+
+
+
+#include "memberpopup.h"
+
 #include <QMainWindow>
 #include <QTableView>
 

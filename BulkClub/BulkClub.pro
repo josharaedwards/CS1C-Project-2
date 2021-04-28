@@ -12,22 +12,18 @@ SOURCES += \
     authenticate.cpp \
     dbmanager.cpp \
     helperLib.cpp \
-    inventory.cpp \
     main.cpp \
     mainwindow.cpp \
     member.cpp \
-    memberpopup.cpp \
-    sale.cpp
+    memberpopup.cpp
 
 HEADERS += \
     authenticate.h \
     dbmanager.h \
     helperLib.h \
-    inventory.h \
     mainwindow.h \
     member.h \
-    memberpopup.h \
-    sale.cpp \
+    memberpopup.h
 
 FORMS += \
     mainwindow.ui \
