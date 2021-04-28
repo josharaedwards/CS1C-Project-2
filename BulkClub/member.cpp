@@ -1,6 +1,5 @@
 #include "member.h"
 
-
 Member::Member()
 {
     name = "Jay Doe";
@@ -42,14 +41,11 @@ void Member::copy(Member other)
 
 }
 
-Member::Member(QString nameIn, QDate expDateIn, int memNumIn, double spentAmntIn, double rebateAmntIn, bool execIn)
+Member::Member(QString nameIn, QDate expDateIn, int memNumIn, bool execIn)
 {
     name = nameIn;
     expDate = expDateIn;
     memberNum = memNumIn;
-
-    spentAmnt = spentAmntIn;
-    rebateAmnt = rebateAmntIn;
 
     bIsExecutive = execIn;
 
@@ -61,12 +57,37 @@ Member::Member(QString nameIn, QDate expDateIn, int memNumIn, double spentAmntIn
     {
         dueAmnt = REG_ANNUAL_DUE;
     }
+
+    spentAmnt = 00.00;
+    rebateAmnt = 00.00;
+}
+
+Member::Member(QString nameIn, QDate expDateIn, int memNumIn, bool execIn, vector<Sale> salesIn)
+{
+    name = nameIn;
+    expDate = expDateIn;
+    memberNum = memNumIn;
+
+    bIsExecutive = execIn;
+
+    if(bIsExecutive)
+    {
+        dueAmnt = EXEC_ANNUAL_DUE;
+    }
+    else
+    {
+        dueAmnt = REG_ANNUAL_DUE;
+    }
+
+    sales = salesIn;
+
+    refreshSpentAmnt();
 }
 
 Member::~Member()
 {
     //Joshara (4/15/21)
-    //For when we need to deallocate
+    //For when/if we need to deallocate
 }
 
 void Member::setName(QString nameIn)
@@ -84,19 +105,9 @@ void Member::setMemNum(int memNumIn)
     memberNum = memNumIn;
 }
 
-void Member::setSpentAmnt(double spentAmntIn)
-{
-    spentAmnt = spentAmntIn;
-}
-
 void Member::setDueAmnt(double dueAmntIn)
 {
     dueAmnt = dueAmntIn;
-}
-
-void Member::setRebateAmnt(double rebateAmntIn)
-{
-    rebateAmnt = rebateAmntIn;
 }
 
 void Member::setExec(bool execIn)
@@ -137,4 +148,41 @@ double Member::getRebateAmnt()
 bool Member::IsExec()
 {
     return bIsExecutive;
+}
+
+void Member::refreshSpentAmnt()
+{
+    int size = sales.size();
+
+    for(int i = 0; i < size; ++i)
+    {
+        spentAmnt += sales[i].getPrice() * sales[i].getQuantity();
+    }
+
+    refreshRebateAmnt();
+}
+
+void Member::refreshRebateAmnt()
+{
+    rebateAmnt = spentAmnt * 0.02;
+}
+
+void Member::addSale(Sale sale)
+{
+    sales.push_back(sale);
+}
+
+void Member::addSales(vector<Sale> salesIn)
+{
+    int size = salesIn.size();
+
+    for(int i = 0; i < size; ++i)
+    {
+        sales.push_back(salesIn[i]);
+    }
+}
+
+vector<Sale> Member::getSales()
+{
+    return sales;
 }
