@@ -63,6 +63,8 @@ void MainWindow::on_logInPushButton_released()
             break;
         case ADMIN:
             this->ui->stackedWidget->setCurrentIndex(0);
+            this->ui->addMemButton->setHidden(false);
+            this->ui->deleteMemButton->setHidden(false);
             this->setWindowTitle("Administrator");
             break;
     }
