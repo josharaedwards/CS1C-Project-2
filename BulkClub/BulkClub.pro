@@ -17,6 +17,8 @@ SOURCES += \
     mainwindow.cpp \
     member.cpp \
     sale.cpp
+    sale.cpp \
+    memberpopup.cpp
 
 HEADERS += \
     authenticate.h \
@@ -25,10 +27,12 @@ HEADERS += \
     inventory.h \
     mainwindow.h \
     member.h \
-    sale.h
+    sale.h \
+    memberpopup.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    memberpopup.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

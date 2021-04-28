@@ -23,7 +23,6 @@ DbManager::~DbManager()
     }
 }
 
-
 QSqlTableModel* DbManager::createMemberTable()
 {
     /// @brief Creates a new QSqlTableModel for the Member table
@@ -61,7 +60,6 @@ QSqlTableModel* DbManager::createSalesTable()
 
     return model;
 }
-
 
 void DbManager::addMember(Member newMember)
 {

@@ -7,6 +7,12 @@
 #include "sale.h"
 #include "inventory.h"
 
+
+
+
+
+#include "memberpopup.h"
+
 #include <QMainWindow>
 #include <QTableView>
 
@@ -38,6 +44,10 @@ private slots:
     void on_resetSaleFilterButton_released();
 
     void on_saleDateEdit_userDateChanged(const QDate &date);
+
+    void on_MemberTableView_doubleClicked(const QModelIndex &index);
+
+    DbManager getConnection();
 
 private:
     Ui::MainWindow *ui;
