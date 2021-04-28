@@ -52,6 +52,13 @@ public:
      */
     QSqlTableModel* createSalesTable();
     /**
+     * @brief createInventoryTable
+     *
+     * Creates a table for the inventory information if not already created
+     * @return Pointer to the inventory table model
+     */
+    QSqlTableModel* createInventoryTable();
+    /**
      * @brief addMember
      *
      * Adds a member to the member table of the database
