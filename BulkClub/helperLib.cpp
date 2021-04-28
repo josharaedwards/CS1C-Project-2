@@ -258,3 +258,27 @@ bool isGreaterThan(int first, int second)
         return false;
     }
 }
+
+void saleToMembers(vector<Member>& members, Sale sale)
+{
+    int ID = sale.getMemNum();
+    int size = members.size();
+
+    for(int i = 0; i < size; ++i)
+    {
+        if(members[i].getMemNum() == ID)
+        {
+            members[i].addSale(sale);
+        }
+    }
+}
+
+void salesToMembers(vector<Member>& members, vector<Sale> sales)
+{
+    int size = sales.size();
+
+    for(int i = 0; i < size; ++i)
+    {
+        saleToMembers(members, sales[i]);
+    }
+}
