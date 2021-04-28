@@ -16,7 +16,6 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     member.cpp \
-    sale.cpp
     sale.cpp \
     memberpopup.cpp
 
