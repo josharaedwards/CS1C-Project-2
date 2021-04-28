@@ -1,8 +1,8 @@
 #include "memberpopup.h"
 #include "ui_memberpopup.h"
 
-extern vector<Member> memVec;
-extern vector<Sale> saleVec;
+extern vector<Member> members;
+extern vector<Sale> sales;
 
 memberPopup::memberPopup(QString memberID, QWidget *parent) :
     QDialog(parent),
@@ -12,9 +12,9 @@ memberPopup::memberPopup(QString memberID, QWidget *parent) :
 
     // Add customer name to the label maybe?
     int index = 0;
-    for(int i = 0; i <= memVec.size(); i++){
-        if(memberID == QString::number(memVec[i].getMemNum())){
-            this->ui->memberIDLabel->setText(memVec[i].getName());
+    for(int i = 0; i <= members.size(); i++){
+        if(memberID == QString::number(members[i].getMemNum())){
+            this->ui->memberIDLabel->setText(members[i].getName());
             index = i;
             break;
         }
@@ -48,15 +48,15 @@ void memberPopup::createMemTable(int index){
     for(int j = 0; j < memT->columnCount(); j++){
         memItem = new QTableWidgetItem;
         switch(j){
-            case 0: memItem->setText(memVec[index].getName());                          break;
-            case 1: memItem->setText(QString::number(memVec[index].getMemNum()));       break;
-            case 2: if(memVec[index].IsExec()){
+            case 0: memItem->setText(members[index].getName());                          break;
+            case 1: memItem->setText(QString::number(members[index].getMemNum()));       break;
+            case 2: if(members[index].IsExec()){
                         memItem->setText("Executive");
                     } else {
                         memItem->setText("Regular");
                     }
                                                                                         break;
-            case 3: memItem->setText(memVec[index].getExpDate().toString("MM/dd/yyyy"));break;
+            case 3: memItem->setText(members[index].getExpDate().toString("MM/dd/yyyy"));break;
         }
         memT->setItem(0, j, memItem);
     }
@@ -70,7 +70,7 @@ void memberPopup::createSaleTable(int index){
     QTableWidgetItem* saleItem;
     QTableWidget* saleT;
 
-    vector<Sale> memSales = memVec[index].getSales();
+    vector<Sale> memSales = members[index].getSales();
 
 
     saleT = this->ui->saleTable;
