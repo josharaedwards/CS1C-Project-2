@@ -12,6 +12,7 @@ SOURCES += \
     authenticate.cpp \
     dbmanager.cpp \
     helperLib.cpp \
+    inventory.cpp \
     main.cpp \
     mainwindow.cpp \
     member.cpp \
@@ -21,6 +22,7 @@ HEADERS += \
     authenticate.h \
     dbmanager.h \
     helperLib.h \
+    inventory.h \
     mainwindow.h \
     member.h \
     sale.h

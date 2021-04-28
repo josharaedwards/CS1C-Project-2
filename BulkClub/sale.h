@@ -25,7 +25,7 @@ public:
     Sale(const Sale& other);
     void copy(Sale other);
 
-    //Setters & Getters
+    //Helper Functions
     void setName(QString nameIn);
     void setDate(QDate dateIn);
     void setMemNum(int memNumIn);
