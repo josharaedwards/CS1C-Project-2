@@ -7,6 +7,7 @@ memberPopup::memberPopup(QString memberID, QWidget *parent) :
 {
     ui->setupUi(this);
 
+    // Add customer name to the label maybe?
     this->ui->memberIDLabel->setText(memberID);
 
     //fix connection

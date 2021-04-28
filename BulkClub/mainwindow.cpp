@@ -1,7 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-
 #include <iostream>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -13,7 +12,6 @@ MainWindow::MainWindow(QWidget *parent)
     this->setWindowTitle("Not Logged In");
 
     memberModel = connection.createMemberTable();
-
     memberProxyModel = new QSortFilterProxyModel(this);
     memberProxyModel->setSourceModel(memberModel);
     memberView = this->ui->MemberTableView;
@@ -48,6 +46,8 @@ void MainWindow::on_logInPushButton_released()
             break;
         case MANAGER:
             this->ui->stackedWidget->setCurrentIndex(0);
+            this->ui->addMemButton->setHidden(true);
+            this->ui->deleteMemButton->setHidden(true);
             this->setWindowTitle("Manager");
             break;
         case ADMIN:
