@@ -37,4 +37,9 @@ bool isGreaterThan(QDate first, QDate second);
 bool isGreaterThan(double first, double second);
 bool isGreaterThan(int first, int second);
 
+//Relational Functions
+
+void saleToMembers(vector<Member>& members, Sale sale);
+void salesToMembers(vector<Member>& members, vector<Sale> sales);
+
 #endif // HELPERLIB_H
