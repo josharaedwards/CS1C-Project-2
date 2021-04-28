@@ -3,6 +3,15 @@
 
 #include "dbmanager.h"
 #include "authenticate.h"
+#include "member.h"
+#include "sale.h"
+#include "inventory.h"
+#include "memberpopup.h"
+
+
+
+
+
 #include "memberpopup.h"
 
 #include <QMainWindow>
