@@ -6,11 +6,6 @@
 #include "member.h"
 #include "sale.h"
 #include "inventory.h"
-
-
-
-
-
 #include "memberpopup.h"
 
 #include <QMainWindow>
