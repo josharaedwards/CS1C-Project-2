@@ -3,11 +3,20 @@
 
 #include <iostream>
 
+//global member variable
+vector<Member> memVec;
+vector<Sale> saleVec;
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    saleVec = connection.popSaleVec();
+    memVec = connection.popMemVec();
+    salesToMembers(memVec, saleVec);
+
 
     this->setWindowTitle("Not Logged In");
 
@@ -112,7 +121,7 @@ void MainWindow::on_resetSaleFilterButton_released()
 /// @brief Filter sales by date of sale
 void MainWindow::on_saleDateEdit_userDateChanged(const QDate &date)
 {
-    this->salesProxyModel->setFilterRegularExpression(date.toString("M/d/yyyy"));
+    this->salesProxyModel->setFilterRegularExpression(date.toString("MM/dd/yyyy"));
 }
 
 ///@brief double clicking any member should create a popup containing their purchases
