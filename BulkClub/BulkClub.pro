@@ -14,14 +14,16 @@ SOURCES += \
     helperLib.cpp \
     main.cpp \
     mainwindow.cpp \
-    member.cpp
+    member.cpp \
+    sale.cpp
 
 HEADERS += \
     authenticate.h \
     dbmanager.h \
     helperLib.h \
     mainwindow.h \
-    member.h
+    member.h \
+    sale.h
 
 FORMS += \
     mainwindow.ui

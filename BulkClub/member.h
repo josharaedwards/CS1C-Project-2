@@ -3,6 +3,8 @@
 
 #include <QString>
 #include <QDate>
+#include <vector>
+#include "sale.h"
 using namespace std;
 
 const double REG_ANNUAL_DUE = 65.00;
@@ -19,6 +21,8 @@ class Member
     double rebateAmnt;
 
     bool bIsExecutive;
+
+    vector<Sale> sales;
 
 public:
     //Constructors
@@ -60,6 +64,9 @@ public:
     void setRebateAmnt(double rebateAmntIn);
     void setExec(bool execIn);
 
+    void addSale(Sale sale);
+    void addSales(vector<Sale> salesIn);
+
     QString getName();
     QDate getExpDate();
     int getMemNum();
@@ -67,6 +74,8 @@ public:
     double getDueAmnt();
     double getRebateAmnt();
     bool IsExec();  
+
+    vector<Sale> getSales();
 };
 
 #endif // MEMBER_H

@@ -66,7 +66,7 @@ Member::Member(QString nameIn, QDate expDateIn, int memNumIn, double spentAmntIn
 Member::~Member()
 {
     //Joshara (4/15/21)
-    //For when we need to deallocate
+    //For when/if we need to deallocate
 }
 
 void Member::setName(QString nameIn)
@@ -137,4 +137,24 @@ double Member::getRebateAmnt()
 bool Member::IsExec()
 {
     return bIsExecutive;
+}
+
+void Member::addSale(Sale sale)
+{
+    sales.push_back(sale);
+}
+
+void Member::addSales(vector<Sale> salesIn)
+{
+    int size = salesIn.size();
+
+    for(int i = 0; i < size; ++i)
+    {
+        sales.push_back(salesIn[i]);
+    }
+}
+
+vector<Sale> Member::getSales()
+{
+    return sales;
 }
