@@ -49,6 +49,7 @@ MainWindow::MainWindow(QWidget *parent)
     inventoryModel = connection.createInventoryTable();
     inventoryProxyModel = new QSortFilterProxyModel(this);
     inventoryProxyModel->setSourceModel(inventoryModel);
+    inventoryProxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
     inventoryView = this->ui->inventoryTableView;
     inventoryView->setModel(inventoryProxyModel);
 
@@ -169,4 +170,17 @@ void MainWindow::on_addMemButton_released()
 void MainWindow::on_deleteMemButton_released()
 {
 
+}
+
+/// @brief button to reset filter for searching inventory table
+void MainWindow::on_resetInvFilterButton_released()
+{
+    this->inventoryProxyModel->setFilterRegularExpression("");
+    this->ui->invSearchLineEdit->setText("");
+}
+
+/// @brief lineEdit to search inventory by product name
+void MainWindow::on_invSearchLineEdit_textChanged(const QString &arg1)
+{
+    this->inventoryProxyModel->setFilterRegularExpression(arg1);
 }

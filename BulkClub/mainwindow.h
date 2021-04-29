@@ -49,6 +49,10 @@ private slots:
 
     void on_deleteMemButton_released();
 
+    void on_resetInvFilterButton_released();
+
+    void on_invSearchLineEdit_textChanged(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
 

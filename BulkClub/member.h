@@ -73,6 +73,7 @@ public:
     QDate getExpDate();
     int getMemNum();
     double getSpentAmnt();
+    double getTaxAmnt();
     double getDueAmnt();
     double getRebateAmnt();
     bool IsExec();  
