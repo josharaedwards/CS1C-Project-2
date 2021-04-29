@@ -61,6 +61,23 @@ QSqlTableModel* DbManager::createSalesTable()
     return model;
 }
 
+QSqlTableModel* DbManager::createInventoryTable()
+{
+    /// @brief Creates a new QSqlTableModel for the Inventory table
+    QSqlTableModel *model = new QSqlTableModel;
+
+    /// @brief Load in the data from the Inventory table of the database
+    model->setTable("Inventory");
+    model->select();
+
+    /// @brief Sets the header data for the Inventory table
+    model->setHeaderData(0, Qt::Horizontal, QObject::tr("Product"));
+    model->setHeaderData(1, Qt::Horizontal, QObject::tr("Price"));
+    model->setHeaderData(2, Qt::Horizontal, QObject::tr("Quantity"));
+
+    return model;
+}
+
 void DbManager::addMember(Member newMember)
 {
 

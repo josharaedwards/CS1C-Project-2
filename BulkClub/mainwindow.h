@@ -49,16 +49,23 @@ private slots:
 
     void on_deleteMemButton_released();
 
+    void on_resetInvFilterButton_released();
+
+    void on_invSearchLineEdit_textChanged(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
 
     QAbstractItemModel *memberModel; /// @var memberModel the source model for the member table
     QAbstractItemModel *salesModel;  /// @var salesModel the source model for the sales table
+    QAbstractItemModel *inventoryModel;  /// @var inventoryModel the source model for the inventory table
     QSortFilterProxyModel *memberProxyModel; /// @var memberProxyModel a proxy model for sorting/filtering members
     QSortFilterProxyModel *stackedMemberFilter; /// @var stackedMemberFilter a proxy model for stacking filters on members
     QSortFilterProxyModel *salesProxyModel;  /// @var salesProxyModel a proxy model for sorting/filtering sales
+    QSortFilterProxyModel *inventoryProxyModel;  /// @var inventoryProxyModel a proxy model for sorting/filtering inventory
     QTableView *memberView; /// @var memberView the table view where memberProxyModel is shown
     QTableView *salesView;  /// @var salesView the table view where salesProxyModel is shown
+    QTableView *inventoryView;  /// @var inventoryView the table view where inventoryProxyModel is shown
 
     DbManager connection;  /// @var connection DbManager object to retreive data from the database
     Authenticate logInput; /// @var logInput Authenticate object to keep track of user's login status
