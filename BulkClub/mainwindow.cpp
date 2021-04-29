@@ -139,6 +139,13 @@ void MainWindow::on_MemberTableView_doubleClicked(const QModelIndex &index)
     //----------------------------------------------------
 }
 
+void MainWindow::on_salesTableView_doubleClicked(const QModelIndex &index)
+{
+    SalesPopup openMember;
+    openMember.setModal(true);
+    openMember.exec();
+}
+
 DbManager MainWindow::getConnection(){
     return connection;
 }
@@ -154,3 +161,5 @@ void MainWindow::on_deleteMemButton_released()
 {
 
 }
+
+

@@ -8,6 +8,7 @@
 #include "sale.h"
 #include "inventory.h"
 #include "memberpopup.h"
+#include "salespopup.h"
 
 #include <QMainWindow>
 #include <QTableView>
@@ -42,6 +43,8 @@ private slots:
     void on_saleDateEdit_userDateChanged(const QDate &date);
 
     void on_MemberTableView_doubleClicked(const QModelIndex &index);
+
+    void on_salesTableView_doubleClicked(const QModelIndex &index);
 
     DbManager getConnection();
 
