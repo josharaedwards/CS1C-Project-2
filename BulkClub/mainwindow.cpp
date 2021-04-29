@@ -23,8 +23,12 @@ MainWindow::MainWindow(QWidget *parent)
     memberModel = connection.createMemberTable();
     memberProxyModel = new QSortFilterProxyModel(this);
     memberProxyModel->setSourceModel(memberModel);
+    memberProxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
+    memberProxyModel->setSortCaseSensitivity(Qt::CaseInsensitive);
     stackedMemberFilter = new QSortFilterProxyModel(this);
     stackedMemberFilter->setSourceModel(memberProxyModel);
+    stackedMemberFilter->setFilterCaseSensitivity(Qt::CaseInsensitive);
+    stackedMemberFilter->setSortCaseSensitivity(Qt::CaseInsensitive);
     memberView = this->ui->MemberTableView;
     memberView->setModel(stackedMemberFilter);
 
@@ -34,6 +38,8 @@ MainWindow::MainWindow(QWidget *parent)
     salesModel = connection.createSalesTable();
     salesProxyModel = new QSortFilterProxyModel(this);
     salesProxyModel->setSourceModel(salesModel);
+    salesProxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
+    salesProxyModel->setSortCaseSensitivity(Qt::CaseInsensitive);
     salesView = this->ui->salesTableView;
     salesView->setModel(salesProxyModel);
 
@@ -148,7 +154,8 @@ void MainWindow::on_MemberTableView_doubleClicked(const QModelIndex &index)
     //----------------------------------------------------
 }
 
-DbManager MainWindow::getConnection(){
+DbManager MainWindow::getConnection()
+{
     return connection;
 }
 
