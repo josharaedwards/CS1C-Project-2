@@ -99,7 +99,9 @@ public:
      * Removes an item from the inventory table
      */
     void removeInventory();
-
+    //populates member vector
+    vector<Member> popMemVec();
+    vector<Sale> popSaleVec();
 private:
     /**
      * @brief db

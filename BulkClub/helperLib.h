@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "member.h"
+#include "dbmanager.h"
 using namespace std;
 
 enum SortType{NAME, EXP, NUM, SPENT_AMNT, REBATE_AMNT};
@@ -36,5 +37,12 @@ bool isGreaterThan(QString first, QString second);
 bool isGreaterThan(QDate first, QDate second);
 bool isGreaterThan(double first, double second);
 bool isGreaterThan(int first, int second);
+
+//Relational Functions
+
+void saleToMembers(vector<Member>& members, Sale sale);
+void salesToMembers(vector<Member>& members, vector<Sale> sales);
+
+
 
 #endif // HELPERLIB_H

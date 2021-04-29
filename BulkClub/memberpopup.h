@@ -3,7 +3,6 @@
 
 #include "dbmanager.h"
 #include "authenticate.h"
-#include "memberpopup.h"
 
 #include <QDialog>
 
@@ -24,19 +23,12 @@ class memberPopup : public QDialog
 
 public:
     explicit memberPopup(QString memberID, QWidget *parent = nullptr);
+    void createMemTable(int index);
+    void createSaleTable(int index);
     ~memberPopup();
 
 private:
     Ui::memberPopup *ui;
-
-    QAbstractItemModel *memberModel; /// @var memberModel the source model for the member table
-    QAbstractItemModel *salesModel;  /// @var salesModel the source model for the sales table
-    QSortFilterProxyModel *memberProxyModel; /// @var memberProxyModel a proxy model for sorting/filtering members
-    QSortFilterProxyModel *salesProxyModel;  /// @var salesProxyModel a proxy model for sorting/filtering sales
-    QTableView *memberView; /// @var memberView the table view where memberProxyModel is shown
-    QTableView *salesView;  /// @var salesView the table view where salesProxyModel is shown
-
-    DbManager connection;  /// @var connection DbManager object to retreive data from the database
 };
 
 #endif // MEMBERPOPUP_H

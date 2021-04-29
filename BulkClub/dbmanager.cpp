@@ -100,3 +100,48 @@ void DbManager::removeSale()
 {
 
 }
+
+vector<Member> DbManager::popMemVec(){
+    Member newMem;
+    vector<Member> memsOut;
+    QSqlQuery queryMem("SELECT * FROM Members", db);
+
+    while(queryMem.next()){
+
+        //set newMem member values
+        newMem.setName(queryMem.value(0).toString());
+        newMem.setMemNum(queryMem.value(1).toInt());
+        if(queryMem.value(2).toString() == "Executive")
+            newMem.setExec(true);
+        else
+            newMem.setExec(false);
+        newMem.setExpDate(QDate::fromString(queryMem.value(3).toString(), "M/d/yyyy"));
+
+        //assign newMem to next vector element
+        memsOut.push_back(newMem);
+
+    }
+    return memsOut;
+}
+
+vector<Sale> DbManager::popSaleVec(){
+    Sale newSale;
+    vector<Sale> salesOut;
+
+    QSqlQuery querySale("SELECT * FROM Sales", db);
+
+    while(querySale.next()){
+
+        //set newMem member values
+        newSale.setDate(QDate::fromString(querySale.value(0).toString(), "M/d/yyyy"));
+        newSale.setMemNum(querySale.value(1).toInt());
+        newSale.setName(querySale.value(2).toString());
+        newSale.setPrice(querySale.value(3).toFloat());
+        newSale.setQuantity(querySale.value(4).toInt());
+
+        //assign newMem to next vector element
+        salesOut.push_back(newSale);
+
+    }
+    return salesOut;
+}

@@ -3,6 +3,10 @@
 
 #include "dbmanager.h"
 #include "authenticate.h"
+#include "helperLib.h"
+#include "member.h"
+#include "sale.h"
+#include "inventory.h"
 #include "memberpopup.h"
 
 #include <QMainWindow>
@@ -41,6 +45,10 @@ private slots:
 
     DbManager getConnection();
 
+    void on_addMemButton_released();
+
+    void on_deleteMemButton_released();
+
 private:
     Ui::MainWindow *ui;
 
@@ -48,6 +56,7 @@ private:
     QAbstractItemModel *salesModel;  /// @var salesModel the source model for the sales table
     QAbstractItemModel *inventoryModel;  /// @var inventoryModel the source model for the inventory table
     QSortFilterProxyModel *memberProxyModel; /// @var memberProxyModel a proxy model for sorting/filtering members
+    QSortFilterProxyModel *stackedMemberFilter; /// @var stackedMemberFilter a proxy model for stacking filters on members
     QSortFilterProxyModel *salesProxyModel;  /// @var salesProxyModel a proxy model for sorting/filtering sales
     QSortFilterProxyModel *inventoryProxyModel;  /// @var inventoryProxyModel a proxy model for sorting/filtering inventory
     QTableView *memberView; /// @var memberView the table view where memberProxyModel is shown

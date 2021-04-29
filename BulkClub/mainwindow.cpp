@@ -1,8 +1,11 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-
 #include <iostream>
+
+//global member variable
+vector<Member> members;
+vector<Sale> sales;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -10,12 +13,20 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    memberModel = connection.createMemberTable();
+    sales = connection.popSaleVec();    //populate sales vector
+    members = connection.popMemVec();   //populate members vector
+    salesToMembers(members, sales);     //assign sales to each member by ID
 
+
+    this->setWindowTitle("Not Logged In");
+
+    memberModel = connection.createMemberTable();
     memberProxyModel = new QSortFilterProxyModel(this);
     memberProxyModel->setSourceModel(memberModel);
+    stackedMemberFilter = new QSortFilterProxyModel(this);
+    stackedMemberFilter->setSourceModel(memberProxyModel);
     memberView = this->ui->MemberTableView;
-    memberView->setModel(memberProxyModel);
+    memberView->setModel(stackedMemberFilter);
 
     /// @brief Formats the column sizes by allowing them to stretch
     memberView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
@@ -48,16 +59,22 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_logInPushButton_released()
 {
-    // temporary implementation
-    loginStatus state = logInput.attempt(this->ui->lineEditUserID->text(), this->ui->lineEditPassword->text());
-    switch(state){
+    logInput.attempt(this->ui->lineEditUserID->text(), this->ui->lineEditPassword->text());
+    switch(logInput.getState())
+    {
         case FAILED:
             break;
         case MANAGER:
             this->ui->stackedWidget->setCurrentIndex(0);
+            this->ui->addMemButton->setHidden(true);
+            this->ui->deleteMemButton->setHidden(true);
+            this->setWindowTitle("Manager");
             break;
         case ADMIN:
             this->ui->stackedWidget->setCurrentIndex(0);
+            this->ui->addMemButton->setHidden(false);
+            this->ui->deleteMemButton->setHidden(false);
+            this->setWindowTitle("Administrator");
             break;
     }
 }
@@ -68,6 +85,7 @@ void MainWindow::on_pushButton_released()
     logInput.logout();
     this->ui->lineEditPassword->setText("");
     this->ui->stackedWidget->setCurrentIndex(1);
+    this->setWindowTitle("Not Logged In");
 }
 
 /// @brief clear login input
@@ -80,15 +98,15 @@ void MainWindow::on_clearPushButton_released()
 /// @brief Filter by membership type
 void MainWindow::on_memTypeComboBox_currentTextChanged(const QString &arg1)
 {
-    this->memberProxyModel->setFilterKeyColumn(2);
+    this->stackedMemberFilter->setFilterKeyColumn(2);
 
     if (arg1 != "Any")
     {
-        this->memberProxyModel->setFilterRegularExpression(arg1);
+        this->stackedMemberFilter->setFilterRegularExpression(arg1);
     }
     else
     {
-        this->memberProxyModel->setFilterRegularExpression("");
+        this->stackedMemberFilter->setFilterRegularExpression("");
     }
 }
 
@@ -96,7 +114,7 @@ void MainWindow::on_memTypeComboBox_currentTextChanged(const QString &arg1)
 void MainWindow::on_expDateEdit_dateChanged(const QDate &date)
 {
     this->memberProxyModel->setFilterKeyColumn(3);
-    this->memberProxyModel->setFilterRegularExpression(date.toString("MM/dd/yyyy"));
+    this->memberProxyModel->setFilterWildcard(date.toString("MM/*/yyyy"));
 }
 
 /// @brief Reset the filters present on the member table
@@ -120,7 +138,6 @@ void MainWindow::on_saleDateEdit_userDateChanged(const QDate &date)
 ///@brief double clicking any member should create a popup containing their purchases
 void MainWindow::on_MemberTableView_doubleClicked(const QModelIndex &index)
 {
-
     QModelIndex indexID = index.model()->index(index.row(), 1, QModelIndex());
     QString stringID = index.model()->data(indexID, Qt::DisplayRole).toString();
 
@@ -133,4 +150,16 @@ void MainWindow::on_MemberTableView_doubleClicked(const QModelIndex &index)
 
 DbManager MainWindow::getConnection(){
     return connection;
+}
+
+/// @brief Admin button to add a new member
+void MainWindow::on_addMemButton_released()
+{
+
+}
+
+/// @brief Admin button to delete a member
+void MainWindow::on_deleteMemButton_released()
+{
+
 }
