@@ -163,3 +163,15 @@ void MainWindow::on_deleteMemButton_released()
 {
 
 }
+
+/// @brief button to reset filter for searching inventory table
+void MainWindow::on_resetInvFilterButton_released()
+{
+    this->inventoryProxyModel->setFilterRegularExpression("");
+    this->ui->invSearchLineEdit->setText("");
+}
+
+void MainWindow::on_invSearchLineEdit_textChanged(const QString &arg1)
+{
+    this->inventoryProxyModel->setFilterRegularExpression(arg1);
+}
