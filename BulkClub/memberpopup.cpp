@@ -13,7 +13,8 @@ memberPopup::memberPopup(QString memberID, QWidget *parent) :
 
     // Add customer name to the label maybe?
     int index = 0;
-    for(int i = 0; i <= members.size(); i++){
+    int size = members.size();
+    for(int i = 0; i <= size; i++){
         if(memberID == QString::number(members[i].getMemNum())){
             this->ui->memberIDLabel->setText(members[i].getName());
             index = i;
