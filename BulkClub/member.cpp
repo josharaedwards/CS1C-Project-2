@@ -186,3 +186,19 @@ vector<Sale> Member::getSales()
 {
     return sales;
 }
+
+bool Member::hasSale(Sale saleIn)
+{
+    bool isHere = false;
+    int size = sales.size();
+
+    for(int i = 0; i < size; ++i)
+    {
+        if(sales[i] == saleIn)
+        {
+            isHere = true;
+        }
+    }
+
+    return isHere;
+}

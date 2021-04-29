@@ -25,6 +25,21 @@ public:
     Sale(const Sale& other);
     void copy(Sale other);
 
+    //Overloaded Operators
+    bool operator==(Sale other)
+    {
+        if(name == other.name &&
+                date == other.date &&
+                memberNum == other.memberNum &&
+                price == other.price &&
+                quantity == other.quantity)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     //Helper Functions
     void setName(QString nameIn);
     void setDate(QDate dateIn);

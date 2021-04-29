@@ -78,6 +78,7 @@ public:
     bool IsExec();  
 
     vector<Sale> getSales();
+    bool hasSale(Sale saleIn);
 };
 
 #endif // MEMBER_H
