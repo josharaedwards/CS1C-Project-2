@@ -132,7 +132,12 @@ int Member::getMemNum()
 
 double Member::getSpentAmnt()
 {
+    refreshSpentAmnt();
     return spentAmnt;
+}
+
+double Member::getTaxAmnt(){
+    return spentAmnt*0.0775;
 }
 
 double Member::getDueAmnt()
@@ -154,9 +159,12 @@ void Member::refreshSpentAmnt()
 {
     int size = sales.size();
 
+    spentAmnt = 00.00;
+    if(sales.size() > 0){
     for(int i = 0; i < size; ++i)
-    {
-        spentAmnt += sales[i].getPrice() * sales[i].getQuantity();
+        {
+            spentAmnt += sales[i].getPrice() * sales[i].getQuantity();
+        }
     }
 
     refreshRebateAmnt();

@@ -9,6 +9,7 @@ memberPopup::memberPopup(QString memberID, QWidget *parent) :
     ui(new Ui::memberPopup)
 {
     ui->setupUi(this);
+    this->setWindowTitle("Customer Profile");
 
     // Add customer name to the label maybe?
     int index = 0;
@@ -19,6 +20,10 @@ memberPopup::memberPopup(QString memberID, QWidget *parent) :
             break;
         }
     }
+    this->ui->subtotalLabel->setText("$" + QString::number(members[index].getSpentAmnt(), 'f', 2));
+    this->ui->taxLabel->setText("$" + QString::number(members[index].getTaxAmnt(), 'f', 2));
+    this->ui->totalLabel->setText("$" + QString::number(members[index].getSpentAmnt() + members[index].getTaxAmnt(), 'f', 2));
+    this->ui->rebateLabel->setText("$" + QString::number(members[index].getRebateAmnt(), 'f', 2));
 
     createMemTable(index);
     createSaleTable(index);
@@ -55,7 +60,7 @@ void memberPopup::createMemTable(int index){
                     } else {
                         memItem->setText("Regular");
                     }
-                                                                                        break;
+                                                                                         break;
             case 3: memItem->setText(members[index].getExpDate().toString("MM/dd/yyyy"));break;
         }
         memT->setItem(0, j, memItem);
@@ -88,15 +93,25 @@ void memberPopup::createSaleTable(int index){
         for(int j = 0; j < saleT->columnCount(); j++){
             saleItem = new QTableWidgetItem;
             switch(j){
-                case 0: saleItem->setText(memSales[i].getDate().toString("MM/dd/yyyy"));     break;
-                case 1: saleItem->setText(QString::number(memSales[i].getMemNum())); break;
-                case 2: saleItem->setText(memSales[i].getName());    break;
-                case 3: saleItem->setText(QString::number(memSales[i].getPrice())); break;
-                case 4: saleItem->setText(QString::number(memSales[i].getQuantity())); break;
+                case 0: saleItem->setText(memSales[i].getDate().toString("MM/dd/yyyy"));break;
+                case 1: saleItem->setText(QString::number(memSales[i].getMemNum()));    break;
+                case 2: saleItem->setText(memSales[i].getName());                       break;
+                case 3: saleItem->setText(QString::number(memSales[i].getPrice()));     break;
+                case 4: saleItem->setText(QString::number(memSales[i].getQuantity()));  break;
             }
             saleT->setItem(i, j, saleItem);
         }
     }
+
+    if(members[index].getSpentAmnt() == 0.0){             //if there are no sales, print "no info" in table
+        saleT->setRowCount(1);
+        for(int j = 0; j < 5; j++){
+            saleItem = new QTableWidgetItem;
+            saleItem->setText("no info...");
+            saleT->setItem(0, j, saleItem);
+        }
+    }
+
     saleT->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Stretch);
     saleT->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
     saleT->horizontalHeader()->setSectionResizeMode(2, QHeaderView::Stretch);
