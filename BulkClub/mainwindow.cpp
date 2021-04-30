@@ -1,3 +1,8 @@
+/**
+  *
+  *
+  */
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -23,8 +28,12 @@ MainWindow::MainWindow(QWidget *parent)
     memberModel = connection.createMemberTable();
     memberProxyModel = new QSortFilterProxyModel(this);
     memberProxyModel->setSourceModel(memberModel);
+    memberProxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
+    memberProxyModel->setSortCaseSensitivity(Qt::CaseInsensitive);
     stackedMemberFilter = new QSortFilterProxyModel(this);
     stackedMemberFilter->setSourceModel(memberProxyModel);
+    stackedMemberFilter->setFilterCaseSensitivity(Qt::CaseInsensitive);
+    stackedMemberFilter->setSortCaseSensitivity(Qt::CaseInsensitive);
     memberView = this->ui->MemberTableView;
     memberView->setModel(stackedMemberFilter);
 
@@ -34,6 +43,8 @@ MainWindow::MainWindow(QWidget *parent)
     salesModel = connection.createSalesTable();
     salesProxyModel = new QSortFilterProxyModel(this);
     salesProxyModel->setSourceModel(salesModel);
+    salesProxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
+    salesProxyModel->setSortCaseSensitivity(Qt::CaseInsensitive);
     salesView = this->ui->salesTableView;
     salesView->setModel(salesProxyModel);
 
@@ -85,7 +96,7 @@ void MainWindow::on_pushButton_released()
 {
     logInput.logout();
     this->ui->lineEditPassword->setText("");
-    this->ui->stackedWidget->setCurrentIndex(1);
+    this->ui->stackedWidget->setCurrentIndex(2);
     this->setWindowTitle("Not Logged In");
 }
 
@@ -149,14 +160,22 @@ void MainWindow::on_MemberTableView_doubleClicked(const QModelIndex &index)
     //----------------------------------------------------
 }
 
-DbManager MainWindow::getConnection(){
+/// @brief Returns the database connection
+DbManager MainWindow::getConnection()
+{
     return connection;
 }
 
 /// @brief Admin button to add a new member
 void MainWindow::on_addMemButton_released()
 {
+    /// @brief First add the member retreived from a form to the member vector
+    this->ui->stackedWidget->setCurrentIndex(1);
 
+    /// @brief Next add the optional sale to the sale vector
+
+
+    /// @brief Then refresh the inventory according to the optional added sale(s)
 }
 
 /// @brief Admin button to delete a member
@@ -176,4 +195,23 @@ void MainWindow::on_resetInvFilterButton_released()
 void MainWindow::on_invSearchLineEdit_textChanged(const QString &arg1)
 {
     this->inventoryProxyModel->setFilterRegularExpression(arg1);
+}
+
+/// @brief Cancel button to add a member, returns to
+void MainWindow::on_cancelAddMemButton_released()
+{
+    /// @brief returns the user to the main view of the app
+    this->ui->stackedWidget->setCurrentIndex(0);
+
+    /// @brief Clear all the fields
+    this->ui->firstNameLineEdit->setText("");
+    this->ui->expDateEdit->setDate(QDate(2020, 1, 1));
+    this->ui->lastNameLineEdit->setText("");
+    this->ui->memberIDLineEdit->setText("");
+}
+
+/// @brief Confirm button to add a member
+void MainWindow::on_confirmAddMemButton_released()
+{
+
 }
