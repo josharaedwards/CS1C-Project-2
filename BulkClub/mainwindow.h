@@ -1,3 +1,8 @@
+/**
+ *  @file mainwindow.h
+ *  @brief Contains the definition of the MainWindow Class
+ */
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
@@ -16,6 +21,11 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
+/**
+ * @class MainWindow
+ *
+ * @brief The MainWindow class
+ */
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -52,6 +62,10 @@ private slots:
     void on_resetInvFilterButton_released();
 
     void on_invSearchLineEdit_textChanged(const QString &arg1);
+
+    void on_cancelAddMemButton_released();
+
+    void on_confirmAddMemButton_released();
 
 private:
     Ui::MainWindow *ui;
