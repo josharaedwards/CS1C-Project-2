@@ -155,6 +155,12 @@ void MainWindow::on_deleteMemButton_released()
 
 }
 
+
+
+
+
+
+
 void MainWindow::on_salesTableView_doubleClicked(const QModelIndex &index)
 {
     QModelIndex indexID = index.model()->index(index.row(), 0, QModelIndex());

@@ -44,13 +44,15 @@ private slots:
 
     void on_MemberTableView_doubleClicked(const QModelIndex &index);
 
-    void on_salesTableView_doubleClicked(const QModelIndex &index);
-
     DbManager getConnection();
 
     void on_addMemButton_released();
 
     void on_deleteMemButton_released();
+
+
+
+    void on_salesTableView_doubleClicked(const QModelIndex &index);
 
 private:
     Ui::MainWindow *ui;
