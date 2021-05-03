@@ -43,6 +43,7 @@ loginStatus Authenticate::getState()
     return state;
 }
 
-void Authenticate::logout(){
+void Authenticate::logout()
+{
     state = FAILED;
 }

@@ -51,6 +51,15 @@ public:
      * @return Pointer to the sales table model
      */
     QSqlTableModel* createSalesTable();
+
+    /**
+     * @brief createInventoryTable
+     *
+     * Creates a table for the inventory information if not already created
+     * @return Pointer to the inventory table model
+     */
+    QSqlTableModel* createInventoryTable();
+
     /**
      * @brief addMember
      *
@@ -92,9 +101,23 @@ public:
      * Removes an item from the inventory table
      */
     void removeInventory();
-    //populates member vector
+
+    /**
+     * @brief popMemVec
+     *
+     * Populates a vector of Members from the database
+     * @return A vector of Members
+     */
     vector<Member> popMemVec();
+
+    /**
+     * @brief popSaleVec
+     *
+     * Populates a vector of Sales from the database
+     * @return A vector of Sales
+     */
     vector<Sale> popSaleVec();
+
 private:
     /**
      * @brief db
