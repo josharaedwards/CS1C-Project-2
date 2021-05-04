@@ -197,7 +197,7 @@ void MainWindow::on_invSearchLineEdit_textChanged(const QString &arg1)
     this->inventoryProxyModel->setFilterRegularExpression(arg1);
 }
 
-/// @brief Cancel button to add a member, returns to
+/// @brief Cancel button to add a member, returns to tab view
 void MainWindow::on_cancelAddMemButton_released()
 {
     /// @brief returns the user to the main view of the app
@@ -205,7 +205,7 @@ void MainWindow::on_cancelAddMemButton_released()
 
     /// @brief Clear all the fields
     this->ui->firstNameLineEdit->setText("");
-    this->ui->expDateEdit->setDate(QDate(2020, 1, 1));
+    this->ui->startMemDateEdit->setDate(QDate(2020, 1, 1));
     this->ui->lastNameLineEdit->setText("");
     this->ui->memberIDLineEdit->setText("");
 }
