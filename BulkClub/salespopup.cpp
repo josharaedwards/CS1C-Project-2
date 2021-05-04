@@ -57,7 +57,12 @@ vector<Member> SalesPopup::getSaleMembers(Sale key)
         {
             if(members[j].hasSale(curSale))
             {
-                saleMembers.push_back(members[j]);
+                vector<Sale> tempSale;
+                tempSale.push_back(curSale);
+
+                Member tempMember(members[j].getName(), members[j].getExpDate(), members[j].getMemNum(), members[j].IsExec(), tempSale);
+
+                saleMembers.push_back(tempMember);
             }
         }
     }
@@ -79,7 +84,7 @@ void SalesPopup::populateSaleCells(vector<Member> saleMembers)
         for(int j = 0; j < 5; ++j)
         {
             item = new QTableWidgetItem;
-            QString itemText = "None"; //add functionality to convert i and j into text
+            QString itemText = indexToText(saleMembers[i], j);
             item->setText(itemText);
 
             this->ui->salesMemberInfo->setItem(i, j, item);
@@ -90,4 +95,40 @@ void SalesPopup::populateSaleCells(vector<Member> saleMembers)
 void SalesPopup::populateSummaryCells(vector<Member> saleMembers)
 {
 
+}
+
+QString SalesPopup::indexToText(Member curMember, int columnIndex)
+{
+    QString outTxt = "None";
+    Sale tempSale = curMember.getSale(0);
+
+    switch(columnIndex)
+    {
+    case 0: //Name
+        outTxt = curMember.getName();
+        break;
+    case 1: //MemberType
+        if(curMember.IsExec())
+        {
+            outTxt = "Executive";
+        }
+        else
+        {
+            outTxt = "Regular";
+        }
+        break;
+    case 2: //Sale Item
+        outTxt = tempSale.getName();
+        break;
+    case 3: //Sale Quantity
+        outTxt = QString::number(tempSale.getQuantity());
+        break;
+    case 4: //Sale Total
+        outTxt = QString{"$%1"}.arg(curMember.getSpentAmnt(), 4, 'f', 2, '0');
+        break;
+    default:
+        outTxt = "ERROR";
+    }
+
+    return outTxt;
 }
