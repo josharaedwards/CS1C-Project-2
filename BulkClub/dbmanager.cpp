@@ -61,33 +61,36 @@ QSqlTableModel* DbManager::createSalesTable()
     return model;
 }
 
-
-QSqlTableModel* DbManager::createInventoryTable()
+void DbManager::addMember(Member newMember)
 {
-    /// @brief Creates a new QSqlTableModel for the Inventory table
-    QSqlTableModel *model = new QSqlTableModel;
 
-    /// @brief Load in the data from the Inventory table of the database
-    model->setTable("Inventory");
-    model->select();
-
-    /// @brief Sets the header data for the Inventory table
-    model->setHeaderData(0, Qt::Horizontal, QObject::tr("Product"));
-    model->setHeaderData(1, Qt::Horizontal, QObject::tr("Price"));
-    model->setHeaderData(2, Qt::Horizontal, QObject::tr("Quantity"));
-
-    return model;
 }
 
 
-vector<Member> DbManager::popMemVec()
+void DbManager::removeMember()
 {
+
+}
+
+
+void DbManager::addSale()
+{
+
+}
+
+
+void DbManager::removeSale()
+{
+
+}
+
+vector<Member> DbManager::popMemVec(){
     Member newMem;
     vector<Member> memsOut;
     QSqlQuery queryMem("SELECT * FROM Members", db);
 
-    while(queryMem.next())
-    {
+    while(queryMem.next()){
+
         //set newMem member values
         newMem.setName(queryMem.value(0).toString());
         newMem.setMemNum(queryMem.value(1).toInt());
@@ -104,16 +107,14 @@ vector<Member> DbManager::popMemVec()
     return memsOut;
 }
 
-
-vector<Sale> DbManager::popSaleVec()
-{
+vector<Sale> DbManager::popSaleVec(){
     Sale newSale;
     vector<Sale> salesOut;
 
     QSqlQuery querySale("SELECT * FROM Sales", db);
 
-    while(querySale.next())
-    {
+    while(querySale.next()){
+
         //set newMem member values
         newSale.setDate(QDate::fromString(querySale.value(0).toString(), "M/d/yyyy"));
         newSale.setMemNum(querySale.value(1).toInt());

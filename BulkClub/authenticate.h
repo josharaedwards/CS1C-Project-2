@@ -1,8 +1,3 @@
-/**
- *  @file authenticate.h
- *  @brief Contains the definition of the Authenticate Class
- */
-
 #ifndef AUTHENTICATE_H
 #define AUTHENTICATE_H
 

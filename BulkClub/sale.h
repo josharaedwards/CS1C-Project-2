@@ -1,8 +1,3 @@
-/**
- *  @file sale.h
- *  @brief Contains the definition of the Sale Class
- */
-
 #ifndef SALE_H
 #define SALE_H
 

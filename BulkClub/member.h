@@ -1,8 +1,3 @@
-/**
- *  @file member.h
- *  @brief Contains the definition of the Member Class
- */
-
 #ifndef MEMBER_H
 #define MEMBER_H
 
