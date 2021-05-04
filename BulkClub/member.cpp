@@ -27,6 +27,8 @@ Member::Member(const Member& other)
     bIsExecutive = other.bIsExecutive;
 
     sales = other.sales;
+
+    refreshSpentAmnt();
 }
 
 void Member::copy(Member other)
@@ -41,6 +43,7 @@ void Member::copy(Member other)
 
     bIsExecutive = other.bIsExecutive;
 
+    refreshSpentAmnt();
 }
 
 Member::Member(QString nameIn, QDate expDateIn, int memNumIn, bool execIn)
@@ -60,8 +63,7 @@ Member::Member(QString nameIn, QDate expDateIn, int memNumIn, bool execIn)
         dueAmnt = REG_ANNUAL_DUE;
     }
 
-    spentAmnt = 00.00;
-    rebateAmnt = 00.00;
+    refreshSpentAmnt();
 }
 
 Member::Member(QString nameIn, QDate expDateIn, int memNumIn, bool execIn, vector<Sale> salesIn)
@@ -149,6 +151,7 @@ double Member::getDueAmnt()
 
 double Member::getRebateAmnt()
 {
+    refreshRebateAmnt();
     return rebateAmnt;
 }
 
