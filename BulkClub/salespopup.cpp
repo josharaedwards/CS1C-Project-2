@@ -94,7 +94,42 @@ void SalesPopup::populateSaleCells(vector<Member> saleMembers)
 
 void SalesPopup::populateSummaryCells(vector<Member> saleMembers)
 {
+    int numOfEntries = saleMembers.size();
+    int numfOfExecs = 0;
+    int numOfReg = 0;
+    double total = 0.00;
 
+    for(int i = 0; i < numOfEntries; ++i)
+    {
+        total += saleMembers[i].getSpentAmnt();
+
+        if(saleMembers[i].IsExec())
+        {
+            numfOfExecs++;
+        }
+        else
+        {
+            numOfReg++;
+        }
+    }
+
+    QTableWidgetItem *item;
+    QString itemText;
+
+    item = new QTableWidgetItem;
+    itemText = QString{"$%1"}.arg(total, 4, 'f', 2, '0');
+    item->setText(itemText);
+    this->ui->salesTotalInfo->setItem(0, 0, item);
+
+    item = new QTableWidgetItem;
+    itemText = QString::number(numfOfExecs);
+    item->setText(itemText);
+    this->ui->salesTotalInfo->setItem(0, 1, item);
+
+    item = new QTableWidgetItem;
+    itemText = QString::number(numOfReg);
+    item->setText(itemText);
+    this->ui->salesTotalInfo->setItem(0, 2, item);
 }
 
 QString SalesPopup::indexToText(Member curMember, int columnIndex)
