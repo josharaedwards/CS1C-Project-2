@@ -24,6 +24,8 @@ public:
     void populateSaleCells(vector<Member> saleMembers);
     void populateSummaryCells(vector<Member> saleMembers);
 
+    QString indexToText(Member curMember, int columnIndex);
+
 private:
     Ui::SalesPopup *ui;
 };

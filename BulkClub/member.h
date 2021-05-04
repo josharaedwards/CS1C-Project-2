@@ -83,6 +83,7 @@ public:
     double getRebateAmnt();
     bool IsExec();  
 
+    Sale getSale(int index);
     vector<Sale> getSales();
     bool hasSale(Sale saleIn);
 };

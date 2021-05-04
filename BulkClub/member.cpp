@@ -25,6 +25,8 @@ Member::Member(const Member& other)
     rebateAmnt = other.rebateAmnt;
 
     bIsExecutive = other.bIsExecutive;
+
+    sales = other.sales;
 }
 
 void Member::copy(Member other)
@@ -188,6 +190,11 @@ void Member::addSales(vector<Sale> salesIn)
     {
         sales.push_back(salesIn[i]);
     }
+}
+
+Sale Member::getSale(int index)
+{
+    return sales[index];
 }
 
 vector<Sale> Member::getSales()
