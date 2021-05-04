@@ -4,6 +4,10 @@
 extern vector<Member> members;
 extern vector<Sale> sales;
 
+vector<Member> saleMembers;
+vector<Member> saleMembersExec;
+vector<Member> saleMembersReg;
+
 SalesPopup::SalesPopup(QString dateIndex, int idIndex, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::SalesPopup)
@@ -17,7 +21,10 @@ SalesPopup::SalesPopup(QString dateIndex, int idIndex, QWidget *parent) :
     Sale key;
     key.setDate(saleDate);
     key.setMemNum(idIndex);
-    vector<Member> saleMembers = getSaleMembers(key);
+    saleMembers = getSaleMembers(key);
+
+    saleMembersExec = searchMult(saleMembers, true);
+    saleMembersReg = searchMult(saleMembers, false);
 
     //Populate Info Table
     populateSaleCells(saleMembers);
@@ -166,4 +173,45 @@ QString SalesPopup::indexToText(Member curMember, int columnIndex)
     }
 
     return outTxt;
+}
+
+void SalesPopup::updateTotal(vector<Member> saleMembers)
+{
+    int numOfEntries = saleMembers.size();
+    double total = 0.00;
+
+    for(int i = 0; i < numOfEntries; ++i)
+    {
+        total += saleMembers[i].getSpentAmnt();
+    }
+
+    QTableWidgetItem *item;
+    QString itemText;
+
+    item = new QTableWidgetItem;
+    itemText = QString{"$%1"}.arg(total, 4, 'f', 2, '0');
+    item->setText(itemText);
+    this->ui->salesTotalInfo->setItem(0, 0, item);
+}
+
+void SalesPopup::on_memTypeCombo_currentIndexChanged(int index)
+{
+    switch(index)
+    {
+    case 0:
+        populateSaleCells(saleMembers);
+        updateTotal(saleMembers);
+        break;
+    case 1:
+        populateSaleCells(saleMembersExec);
+        updateTotal(saleMembersExec);
+        break;
+    case 2:
+        populateSaleCells(saleMembersReg);
+        updateTotal(saleMembersReg);
+        break;
+    default:
+        populateSaleCells(saleMembers);
+        updateTotal(saleMembers);
+    }
 }
