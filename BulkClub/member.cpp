@@ -25,6 +25,8 @@ Member::Member(const Member& other)
     rebateAmnt = other.rebateAmnt;
 
     bIsExecutive = other.bIsExecutive;
+
+    sales = other.sales;
 }
 
 void Member::copy(Member other)
@@ -190,7 +192,29 @@ void Member::addSales(vector<Sale> salesIn)
     }
 }
 
+Sale Member::getSale(int index)
+{
+    return sales[index];
+}
+
 vector<Sale> Member::getSales()
 {
     return sales;
 }
+
+bool Member::hasSale(Sale saleIn)
+{
+   bool isHere = false;
+   int size = sales.size();
+
+   for(int i = 0; i < size; ++i)
+   {
+       if(sales[i] == saleIn)
+       {
+           isHere = true;
+       }
+   }
+
+   return isHere;
+}
+
