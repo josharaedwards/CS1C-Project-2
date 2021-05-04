@@ -160,22 +160,6 @@ void MainWindow::on_MemberTableView_doubleClicked(const QModelIndex &index)
     //----------------------------------------------------
 }
 
-void MainWindow::on_salesTableView_doubleClicked(const QModelIndex &index)
-{
-    QModelIndex indexID = index.model()->index(index.row(), 0, QModelIndex());
-    QString stringID = index.model()->data(indexID, Qt::DisplayRole).toString();
-
-    indexID = index.model()->index(index.row(), 1, QModelIndex());
-    int intID = index.model()->data(indexID, Qt::DisplayRole).toInt();
-
-    //-opening-popup--------------------------------------
-    SalesPopup openMember(stringID, intID);
-    openMember.setModal(true);
-    openMember.exec();
-    //----------------------------------------------------
-}
-
-
 /// @brief Returns the database connection
 DbManager MainWindow::getConnection()
 {
