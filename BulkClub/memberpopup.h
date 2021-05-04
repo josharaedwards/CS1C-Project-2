@@ -1,3 +1,8 @@
+/**
+ *  @file memberpopup.h
+ *  @brief Contains the definition of the memberPopup Class
+ */
+
 #ifndef MEMBERPOPUP_H
 #define MEMBERPOPUP_H
 

@@ -1,3 +1,8 @@
+/**
+ *  @file sale.h
+ *  @brief Contains the definition of the Sale Class
+ */
+
 #ifndef SALE_H
 #define SALE_H
 
@@ -20,6 +25,22 @@ public:
 
     //Destructors
     ~Sale();
+
+   //Overloaded Operators
+   bool operator==(Sale other)
+   {
+       if(name == other.name &&
+               date == other.date &&
+               memberNum == other.memberNum &&
+               price == other.price &&
+               quantity == other.quantity)
+       {
+           return true;
+       }
+
+       return false;
+   }
+
 
     //Shallow & Deep Copy
     Sale(const Sale& other);

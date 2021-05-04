@@ -43,6 +43,4 @@ bool isGreaterThan(int first, int second);
 void saleToMembers(vector<Member>& members, Sale sale);
 void salesToMembers(vector<Member>& members, vector<Sale> sales);
 
-
-
 #endif // HELPERLIB_H

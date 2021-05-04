@@ -1,3 +1,8 @@
+/**
+ *  @file member.h
+ *  @brief Contains the definition of the Member Class
+ */
+
 #ifndef MEMBER_H
 #define MEMBER_H
 
@@ -79,6 +84,7 @@ public:
     bool IsExec();  
 
     vector<Sale> getSales();
+    bool hasSale(Sale saleIn);
 };
 
 #endif // MEMBER_H
