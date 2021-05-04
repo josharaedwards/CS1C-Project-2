@@ -25,6 +25,10 @@ public:
     void populateSummaryCells(vector<Member> saleMembers);
 
     QString indexToText(Member curMember, int columnIndex);
+    void updateTotal(vector<Member> saleMembers);
+
+private slots:
+    void on_memTypeCombo_currentIndexChanged(int index);
 
 private:
     Ui::SalesPopup *ui;
