@@ -13,6 +13,7 @@
 #include "sale.h"
 #include "inventory.h"
 #include "memberpopup.h"
+#include "salespopup.h"
 
 #include <QMainWindow>
 #include <QTableView>
@@ -66,6 +67,8 @@ private slots:
     void on_cancelAddMemButton_released();
 
     void on_confirmAddMemButton_released();
+
+    void on_salesTableView_doubleClicked(const QModelIndex &index);
 
 private:
     Ui::MainWindow *ui;
