@@ -169,19 +169,17 @@ DbManager MainWindow::getConnection()
 /// @brief Admin button to add a new member
 void MainWindow::on_addMemButton_released()
 {
-    /// @brief First add the member retreived from a form to the member vector
+    /// @brief Takes the user to the add member page
     this->ui->stackedWidget->setCurrentIndex(1);
-
-    /// @brief Next add the optional sale to the sale vector
-
-
-    /// @brief Then refresh the inventory according to the optional added sale(s)
 }
 
 /// @brief Admin button to delete a member
 void MainWindow::on_deleteMemButton_released()
 {
+    // remove the selected index from the model/view
+    QModelIndex index = this->ui->MemberTableView->currentIndex();
 
+    memberModel->removeRow(index.row());
 }
 
 /// @brief button to reset filter for searching inventory table
@@ -210,10 +208,16 @@ void MainWindow::on_cancelAddMemButton_released()
     this->ui->memberIDLineEdit->setText("");
 }
 
-/// @brief Confirm button to add a member
+/// @brief Confirm button to add a member to the table
 void MainWindow::on_confirmAddMemButton_released()
 {
+    /// @brief First add the member retreived from a form to the member vector
 
+
+    /// @brief Next add the optional sale to the sale vector
+
+
+    /// @brief Then refresh the inventory according to the optional added sale(s)
 }
 
 void MainWindow::on_salesTableView_doubleClicked(const QModelIndex &index)
