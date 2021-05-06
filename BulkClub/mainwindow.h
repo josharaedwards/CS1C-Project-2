@@ -17,6 +17,7 @@
 
 #include <QMainWindow>
 #include <QTableView>
+#include <QMessageBox>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -69,6 +70,9 @@ private slots:
     void on_confirmAddMemButton_released();
 
     void on_salesTableView_doubleClicked(const QModelIndex &index);
+
+
+    void on_clearAddMemFormButton_released();
 
 private:
     Ui::MainWindow *ui;
