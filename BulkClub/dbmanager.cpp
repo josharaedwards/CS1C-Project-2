@@ -78,6 +78,10 @@ QSqlTableModel* DbManager::createInventoryTable()
     model->setHeaderData(0, Qt::Horizontal, QObject::tr("Product"));
     model->setHeaderData(1, Qt::Horizontal, QObject::tr("Price"));
     model->setHeaderData(2, Qt::Horizontal, QObject::tr("Quantity"));
+    model->setHeaderData(3, Qt::Horizontal, QObject::tr("Total Revenue"));
+
+    /// @brief adds remaining data to inventory model
+    ///
 
     return model;
 }
@@ -131,9 +135,10 @@ vector<Sale> DbManager::popSaleVec()
     return salesOut;
 }
 
-void DbManager::popInvVec()
+vector<Inventory> DbManager::popInvVec()
 {
     int saleSize = sales.size();
+    vector<Inventory> inventoryOut;
 
     for(int i = 0; i < saleSize; i++)
     {
@@ -141,8 +146,8 @@ void DbManager::popInvVec()
         int quantityIndex = findInvIndex(sales[i].getName());
         if(isInInventory(sales[i].getName()) && quantityIndex != -1)
         {
-            int tempQuantity = inventory[quantityIndex].getQuantity() + sales[i].getQuantity();
-            inventory[quantityIndex].setQuantity(tempQuantity);
+            int tempQuantity = inventoryOut[quantityIndex].getQuantity() + sales[i].getQuantity();
+            inventoryOut[quantityIndex].setQuantity(tempQuantity);
         }
         else // adds first instance of sale to inventory vec
         {
@@ -151,9 +156,10 @@ void DbManager::popInvVec()
             temp_item.setName(sales[i].getName());
             temp_item.setPrice(sales[i].getPrice());
             temp_item.setQuantity((sales[i].getQuantity()));
-            inventory.push_back(temp_item);
+            inventoryOut.push_back(temp_item);
         }
     }
+    return inventoryOut;
 }
 
 bool DbManager::isInInventory(QString searchName)

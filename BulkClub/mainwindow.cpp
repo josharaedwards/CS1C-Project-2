@@ -22,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent)
     sales = connection.popSaleVec();    //populate sales vector
     members = connection.popMemVec();   //populate members vector
     salesToMembers(members, sales);     //assign sales to each member by ID
+    inventory = connection.popInvVec();
 
 
     this->setWindowTitle("Not Logged In");
