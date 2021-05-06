@@ -66,7 +66,7 @@ QSqlTableModel* DbManager::createSalesTable()
 
 
 QSqlTableModel* DbManager::createInventoryTable()
-{
+{ // update this to take information from Inventory vector
     /// @brief Creates a new QSqlTableModel for the Inventory table
     QSqlTableModel *model = new QSqlTableModel;
 
@@ -137,13 +137,14 @@ void DbManager::popInvVec()
 
     for(int i = 0; i < saleSize; i++)
     {
-        if(isInInventory(sales[i].getName()))
+        // if current sale.name is in inventory vec, sum existing quantity with sale quantity
+        int quantityIndex = findInvIndex(sales[i].getName());
+        if(isInInventory(sales[i].getName()) && quantityIndex != -1)
         {
-            int quantityIndex = findInvIndex(sales[i].getName());
             int tempQuantity = inventory[quantityIndex].getQuantity() + sales[i].getQuantity();
             inventory[quantityIndex].setQuantity(tempQuantity);
         }
-        else
+        else // adds first instance of sale to inventory vec
         {
             Inventory temp_item;
 
