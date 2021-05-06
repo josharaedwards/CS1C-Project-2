@@ -133,6 +133,7 @@ void MainWindow::on_expDateEdit_dateChanged(const QDate &date)
 void MainWindow::on_resetMemFilterButton_released()
 {
     this->memberProxyModel->setFilterRegularExpression("");
+    this->stackedMemberFilter->setFilterRegularExpression("");
 }
 
 /// @brief Reset the filters present on the sales table
@@ -176,10 +177,10 @@ void MainWindow::on_addMemButton_released()
 /// @brief Admin button to delete a member
 void MainWindow::on_deleteMemButton_released()
 {
-    // remove the selected index from the model/view
+    // create a popup that has the member information and warns irreversible action
     QModelIndex index = this->ui->MemberTableView->currentIndex();
-
     memberModel->removeRow(index.row());
+
 }
 
 /// @brief button to reset filter for searching inventory table
@@ -211,11 +212,36 @@ void MainWindow::on_cancelAddMemButton_released()
 /// @brief Confirm button to add a member to the table
 void MainWindow::on_confirmAddMemButton_released()
 {
-    /// @brief First add the member retreived from a form to the member vector
+    /// @brief Check if all fields have info entered
 
+
+
+    Member newMember;
+
+    /// @brief Determines from the combo box if the member is Executive
+    if (ui->memberTypeComboBox->currentIndex() == 0)
+    {
+        newMember = Member(ui->firstNameLineEdit->text() + " " + ui->lastNameLineEdit->text(),
+                           ui->startMemDateEdit->date().addYears(1),
+                           ui->memberIDLineEdit->text().toInt(),
+                           false);
+    }
+    else
+    {
+        newMember = Member(ui->firstNameLineEdit->text() + " " + ui->lastNameLineEdit->text(),
+                           ui->startMemDateEdit->date().addYears(1),
+                           ui->memberIDLineEdit->text().toInt(),
+                           true);
+    }
+
+    /// @brief Add the member retreived from the form to the member vector
+    members.push_back(newMember);
 
     /// @brief Next add the optional sale to the sale vector
-
+    if (ui->addSaleRadioButton->isChecked())
+    {
+        std::cout << "Add a sale" << std::endl;
+    }
 
     /// @brief Then refresh the inventory according to the optional added sale(s)
 }
