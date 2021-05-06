@@ -15,6 +15,8 @@ using namespace std;
 const double REG_ANNUAL_DUE = 65.00;
 const double EXEC_ANNUAL_DUE = 120.00;
 
+enum MemberStatus {NEUTRAL, PROMOTED, DEMOTED};
+
 class Member
 {
     QString name;
@@ -86,6 +88,8 @@ public:
     Sale getSale(int index);
     vector<Sale> getSales();
     bool hasSale(Sale saleIn);
+
+    MemberStatus checkMemberStatus();
 };
 
 #endif // MEMBER_H
