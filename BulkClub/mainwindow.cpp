@@ -22,7 +22,15 @@ MainWindow::MainWindow(QWidget *parent)
     sales = connection.popSaleVec();    //populate sales vector
     members = connection.popMemVec();   //populate members vector
     salesToMembers(members, sales);     //assign sales to each member by ID
-    inventory = connection.popInvVec();
+    connection.popInvVec();
+
+    // for testing purposes
+    int vecSize = inventory.size();
+    for(int i = 0; i < vecSize; i++)
+    {
+        cout << "inventory[" << i << "]: " << inventory[i].getName().toStdString() << " " << inventory[i].getPrice()
+             << " " << inventory[i].getQuantity() << " " << inventory[i].getTotal() << endl;
+    }
 
 
     this->setWindowTitle("Not Logged In");

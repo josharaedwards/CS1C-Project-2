@@ -138,7 +138,7 @@ public:
      * Populates the global vector of Inventory items from the sales vector
      *
      */
-    vector<Inventory> popInvVec();
+    void popInvVec();
 
 private:
     /**
