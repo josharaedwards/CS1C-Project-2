@@ -5,6 +5,9 @@
 
 #include "dbmanager.h"
 
+extern vector<Sale> sales;
+extern vector<Inventory> inventory;
+
 DbManager::DbManager()
 {
     db = QSqlDatabase::addDatabase("QSQLITE");
@@ -126,4 +129,64 @@ vector<Sale> DbManager::popSaleVec()
 
     }
     return salesOut;
+}
+
+void DbManager::popInvVec()
+{
+    int saleSize = sales.size();
+
+    for(int i = 0; i < saleSize; i++)
+    {
+        if(isInInventory(sales[i].getName()))
+        {
+            int quantityIndex = findInvIndex(sales[i].getName());
+            int tempQuantity = inventory[quantityIndex].getQuantity() + sales[i].getQuantity();
+            inventory[quantityIndex].setQuantity(tempQuantity);
+        }
+        else
+        {
+            Inventory temp_item;
+
+            temp_item.setName(sales[i].getName());
+            temp_item.setPrice(sales[i].getPrice());
+            temp_item.setQuantity((sales[i].getQuantity()));
+            inventory.push_back(temp_item);
+        }
+    }
+}
+
+bool DbManager::isInInventory(QString searchName)
+{
+    bool found = false;
+    int vecSize = inventory.size();
+
+    for(int i = 0; i < vecSize; i++)
+    {
+        if(inventory[i].getName() == searchName)
+        {
+            found = true;
+            return found;
+        }
+    }
+    return found;
+}
+
+int DbManager::findInvIndex(QString itemName)
+{
+    int foundIndex;
+    int vecSize = inventory.size();
+
+    for(int i = 0; i < vecSize; i++)
+    {
+        if(inventory[i].getName() == itemName)
+        {
+            foundIndex = i;
+            return foundIndex;
+        }
+        else
+        {
+            foundIndex = -1;
+        }
+    }
+    return foundIndex;
 }

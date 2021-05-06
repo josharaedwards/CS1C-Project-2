@@ -12,6 +12,7 @@
 #include <QSqlQuery>
 
 #include "member.h"
+#include "inventory.h"
 
 /**
  * @class DbManager
@@ -103,6 +104,19 @@ public:
     void removeInventory();
 
     /**
+     * @brief isInInventory
+     *
+     * returns true if passed QString is in inventory vec
+     */
+    bool isInInventory(QString);
+    /**
+     * @brief findInvIndex
+     *
+     * returns index in inventory vec based on passed string
+     */
+    int findInvIndex(QString);
+
+    /**
      * @brief popMemVec
      *
      * Populates a vector of Members from the database
@@ -117,6 +131,14 @@ public:
      * @return A vector of Sales
      */
     vector<Sale> popSaleVec();
+
+    /**
+     * @brief popInvVec
+     *
+     * Populates the global vector of Inventory items from the sales vector
+     *
+     */
+    void popInvVec();
 
 private:
     /**

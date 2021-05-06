@@ -11,6 +11,7 @@
 //global member variable
 vector<Member> members;
 vector<Sale> sales;
+vector<Inventory> inventory;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
