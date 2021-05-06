@@ -495,7 +495,7 @@
          </spacer>
         </item>
         <item row="5" column="4">
-         <widget class="QPushButton" name="pushButton_2">
+         <widget class="QPushButton" name="clearAddMemFormButton">
           <property name="text">
            <string>Clear</string>
           </property>
