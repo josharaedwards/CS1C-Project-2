@@ -221,3 +221,17 @@ bool Member::hasSale(Sale saleIn)
    return isHere;
 }
 
+MemberStatus Member::checkMemberStatus()
+{
+    if(IsExec() && rebateAmnt < dueAmnt)
+    {
+        return DEMOTED;
+    }
+    else if(!IsExec() && rebateAmnt > dueAmnt)
+    {
+        return PROMOTED;
+    }
+
+    return NEUTRAL;
+}
+
