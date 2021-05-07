@@ -128,7 +128,7 @@ void MainWindow::on_memTypeComboBox_currentTextChanged(const QString &arg1)
 void MainWindow::on_expDateEdit_dateChanged(const QDate &date)
 {
     this->memberProxyModel->setFilterKeyColumn(3);
-    this->memberProxyModel->setFilterWildcard(date.toString("MM/*/yyyy"));
+    this->memberProxyModel->setFilterWildcard(date.toString("M/*/yyyy"));
 }
 
 /// @brief Reset the filters present on the member table
@@ -179,10 +179,22 @@ void MainWindow::on_addMemButton_released()
 /// @brief Admin button to delete a member
 void MainWindow::on_deleteMemButton_released()
 {
-    // create a popup that has the member information and warns irreversible action
-    QModelIndex index = this->ui->MemberTableView->currentIndex();
-    memberModel->removeRow(index.row());
+    QModelIndex index = ui->MemberTableView->currentIndex();
+    QModelIndex indexID = index.model()->index(index.row(), 1, QModelIndex());
+    int memNumIn = index.model()->data(indexID, Qt::DisplayRole).toInt();
 
+    bool found = false;
+    vector<Member> deleteMem;
+    deleteMem.push_back(search(members, memNumIn, found));
+
+    /// @brief Opening the popup to confirm member to delete
+    DeleteMemberPopup deleteMember(deleteMem);
+    deleteMember.exec();
+
+    if (deleteMember.getConfirmDelete())
+    {
+        memberModel->removeRow(index.row());
+    }
 }
 
 /// @brief button to reset filter for searching inventory table
@@ -235,14 +247,25 @@ void MainWindow::on_confirmAddMemButton_released()
                                true);
         }
 
+        // Make this popup more robust, transfer the question to add a sale to this popup
+        // include a table with the information entered, ask if everything is correct
+        QMessageBox success;
+        success.setWindowTitle("Success");
+        success.setWindowModality(Qt::ApplicationModal);
+        success.setText("You have successfully registered a new member with the Bulk Club");
+        success.exec();
+        on_clearAddMemFormButton_released();
+
         /// @brief Add the member retreived from the form to the member vector
-        members.push_back(newMember);
+        addMember(memberModel, newMember);
 
         /// @brief Next add the optional sale to the sale vector
         if (ui->addSaleRadioButton->isChecked())
         {
-            std::cout << "Add a sale" << std::endl;
+
         }
+
+        ui->stackedWidget->setCurrentIndex(0);
 
         /// @brief Then refresh the inventory according to the optional added sale(s)
      }

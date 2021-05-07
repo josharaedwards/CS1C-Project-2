@@ -50,4 +50,4 @@ void addMember(QAbstractItemModel* model, Member memIn);
 QAbstractItemModel* createSalesModel(QWidget* parent, vector<Sale> sales);
 void addSale(QAbstractItemModel* model, Sale saleIn);
 
-#endif
+#endif // HELPERLIB_H
