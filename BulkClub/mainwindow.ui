@@ -27,7 +27,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="mainPage">
        <layout class="QGridLayout" name="gridLayout_4">
@@ -54,7 +54,7 @@
         <item row="1" column="0" colspan="2">
          <widget class="QTabWidget" name="tabWidget">
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="membersTab">
            <attribute name="title">
@@ -419,7 +419,14 @@
       </widget>
       <widget class="QWidget" name="addMemberPage">
        <layout class="QGridLayout" name="gridLayout_9">
-        <item row="5" column="1">
+        <item row="5" column="6">
+         <widget class="QPushButton" name="confirmAddMemButton">
+          <property name="text">
+           <string>Confirm</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
          <spacer name="verticalSpacer_5">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
@@ -430,13 +437,13 @@
           <property name="sizeHint" stdset="0">
            <size>
             <width>20</width>
-            <height>80</height>
+            <height>150</height>
            </size>
           </property>
          </spacer>
         </item>
-        <item row="2" column="0" rowspan="2">
-         <spacer name="horizontalSpacer_11">
+        <item row="1" column="0">
+         <spacer name="horizontalSpacer_10">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
@@ -445,13 +452,36 @@
           </property>
           <property name="sizeHint" stdset="0">
            <size>
-            <width>250</width>
+            <width>280</width>
             <height>20</height>
            </size>
           </property>
          </spacer>
         </item>
-        <item row="7" column="0" colspan="2">
+        <item row="5" column="7">
+         <widget class="QPushButton" name="cancelAddMemButton">
+          <property name="text">
+           <string>Cancel</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <spacer name="verticalSpacer_6">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>120</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="5" column="0" colspan="2">
          <spacer name="horizontalSpacer_9">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -464,7 +494,14 @@
           </property>
          </spacer>
         </item>
-        <item row="2" column="1" rowspan="2">
+        <item row="5" column="4">
+         <widget class="QPushButton" name="clearAddMemFormButton">
+          <property name="text">
+           <string>Clear</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
          <widget class="QGroupBox" name="groupBox_2">
           <property name="font">
            <font>
@@ -488,194 +525,123 @@
            <bool>false</bool>
           </property>
           <layout class="QGridLayout" name="gridLayout_11">
-           <item row="4" column="0" colspan="5">
-            <widget class="QGroupBox" name="groupBox_3">
-             <property name="title">
-              <string/>
+           <item row="6" column="0">
+            <widget class="QLabel" name="label_10">
+             <property name="text">
+              <string>Effective Date</string>
              </property>
-             <layout class="QGridLayout" name="gridLayout_12">
-              <item row="3" column="3">
-               <widget class="QComboBox" name="memberTypeComboBox">
-                <item>
-                 <property name="text">
-                  <string>Regular</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Executive</string>
-                 </property>
-                </item>
-               </widget>
-              </item>
-              <item row="3" column="2">
-               <widget class="QLabel" name="label_6">
-                <property name="text">
-                 <string>Membership Type</string>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="0">
-               <widget class="QLabel" name="label_10">
-                <property name="text">
-                 <string>Effective Date</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="0">
-               <widget class="QLabel" name="label_7">
-                <property name="text">
-                 <string>Member ID</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="1" colspan="3">
-               <widget class="QLineEdit" name="memberIDLineEdit"/>
-              </item>
-              <item row="3" column="1">
-               <widget class="QDateEdit" name="startMemDateEdit">
-                <property name="maximumDate">
-                 <date>
-                  <year>2021</year>
-                  <month>5</month>
-                  <day>17</day>
-                 </date>
-                </property>
-                <property name="minimumDate">
-                 <date>
-                  <year>2020</year>
-                  <month>1</month>
-                  <day>1</day>
-                 </date>
-                </property>
-                <property name="calendarPopup">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="0">
-               <widget class="QLabel" name="label_4">
-                <property name="text">
-                 <string>Name</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="1">
-               <widget class="QLineEdit" name="firstNameLineEdit">
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="placeholderText">
-                 <string>First</string>
-                </property>
-                <property name="cursorMoveStyle">
-                 <enum>Qt::VisualMoveStyle</enum>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="2" colspan="2">
-               <widget class="QLineEdit" name="lastNameLineEdit">
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="placeholderText">
-                 <string>Last</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
             </widget>
            </item>
-           <item row="6" column="0" colspan="5">
-            <widget class="QGroupBox" name="groupBox_4">
-             <property name="font">
-              <font>
-               <family>MS Shell Dlg 2</family>
-               <pointsize>9</pointsize>
-               <kerning>false</kerning>
-              </font>
+           <item row="6" column="1" colspan="4">
+            <widget class="QDateEdit" name="startMemDateEdit">
+             <property name="maximumDate">
+              <date>
+               <year>2021</year>
+               <month>5</month>
+               <day>17</day>
+              </date>
              </property>
-             <property name="title">
-              <string/>
+             <property name="minimumDate">
+              <date>
+               <year>2020</year>
+               <month>1</month>
+               <day>1</day>
+              </date>
              </property>
-             <layout class="QGridLayout" name="gridLayout_10">
-              <item row="2" column="1">
-               <widget class="QRadioButton" name="addSaleRadioButton">
-                <property name="text">
-                 <string>Yes</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="0" colspan="2">
-               <widget class="QLabel" name="label_9">
-                <property name="text">
-                 <string>Would you like to add any purchases for this member?</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
+             <property name="calendarPopup">
+              <bool>true</bool>
+             </property>
             </widget>
            </item>
-           <item row="5" column="1">
-            <spacer name="verticalSpacer_7">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
+           <item row="5" column="1" colspan="4">
+            <widget class="QLineEdit" name="memberIDLineEdit">
+             <property name="inputMask">
+              <string>99999</string>
              </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>40</height>
-              </size>
+             <property name="clearButtonEnabled">
+              <bool>true</bool>
              </property>
-            </spacer>
+            </widget>
+           </item>
+           <item row="7" column="1" colspan="4">
+            <widget class="QComboBox" name="memberTypeComboBox">
+             <item>
+              <property name="text">
+               <string>Regular</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Executive</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="7" column="0">
+            <widget class="QLabel" name="label_6">
+             <property name="text">
+              <string>Membership Type</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="0">
+            <widget class="QLabel" name="label_7">
+             <property name="text">
+              <string>Member ID</string>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="4">
+            <widget class="QRadioButton" name="addSaleRadioButton">
+             <property name="text">
+              <string>Yes</string>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="0" colspan="4">
+            <widget class="QLabel" name="label_9">
+             <property name="text">
+              <string>Would you like to add any purchases for this member?</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1" colspan="4">
+            <widget class="QLineEdit" name="firstNameLineEdit">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="placeholderText">
+              <string>First</string>
+             </property>
+             <property name="cursorMoveStyle">
+              <enum>Qt::VisualMoveStyle</enum>
+             </property>
+             <property name="clearButtonEnabled">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1" colspan="4">
+            <widget class="QLineEdit" name="lastNameLineEdit">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="placeholderText">
+              <string>Last</string>
+             </property>
+             <property name="clearButtonEnabled">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_4">
+             <property name="text">
+              <string>Name</string>
+             </property>
+            </widget>
            </item>
           </layout>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <spacer name="verticalSpacer_6">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Fixed</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>100</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="2" column="2" rowspan="2" colspan="2">
-         <spacer name="horizontalSpacer_10">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Fixed</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>250</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="7" column="2">
-         <widget class="QPushButton" name="confirmAddMemButton">
-          <property name="text">
-           <string>Confirm</string>
-          </property>
-         </widget>
-        </item>
-        <item row="7" column="3">
-         <widget class="QPushButton" name="cancelAddMemButton">
-          <property name="text">
-           <string>Cancel</string>
-          </property>
          </widget>
         </item>
        </layout>
