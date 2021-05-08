@@ -15,11 +15,13 @@
 #include "memberpopup.h"
 #include "salespopup.h"
 #include "deletememberpopup.h"
+#include "addmemberpopup.h"
 
 #include <QMainWindow>
 #include <QTableView>
 #include <QMessageBox>
 #include <QCompleter>
+#include <QIntValidator>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -37,6 +39,7 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void refreshProductCompleter();
 
 private slots:
     void on_logInPushButton_released();

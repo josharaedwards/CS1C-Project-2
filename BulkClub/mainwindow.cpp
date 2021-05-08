@@ -62,17 +62,20 @@ MainWindow::MainWindow(QWidget *parent)
     /// @brief Formats the column sizes by allowing them to stretch
     inventoryView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
-    /// @brief Creating an auto completer for the items in the inventory
-    QStringList products;
-    for (int row = 0; row < inventoryModel->rowCount(); row++)
-    {
-        products << inventoryModel->data(inventoryModel->index(row, 0)).value<QString>();
-    }
+    // setting up page to add a sale
+    refreshProductCompleter(); // creating a product completer for adding a new sale
+    ui->quantityLineEdit->setValidator(new QIntValidator(0, 100, parentWidget()));
 
-    QCompleter *productCompleter = new QCompleter(products, this);
-    productCompleter->setCaseSensitivity(Qt::CaseInsensitive);
-    productCompleter->setCompletionMode(QCompleter::InlineCompletion);
-    ui->productLineEdit->setCompleter(productCompleter);
+    // function to refresh the subtotal, tax, and total from the product name
+    // if all input is valid, initialize a new sale object, add to the global sale vector,
+    // and repopulate the sale models and view from the global sale vector
+    //  called anytime the text of product or quantity are changed
+
+    // if the user enters a product name found in the auto completer list of QStrings
+    // (case insensitive match), then priceLineEdit,  is read only. must be refreshed when
+    // text of productLineEdit or quantityLineEdit , but if the
+    // user does not enter a name found on the list, then the
+    // then the pr
 
     this->setVisible(false);
 }
@@ -80,6 +83,22 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::refreshProductCompleter()
+{
+    /// @brief Creating a list of all products listed in the inventory vector
+    QStringList products;
+    for (int row = 0; row < inventoryModel->rowCount(); row++)
+    {
+        products << inventoryModel->data(inventoryModel->index(row, 0)).value<QString>();
+    }
+
+    /// @brief Using the list of all products as an auto completer for adding a sale
+    QCompleter *productCompleter = new QCompleter(products, this);
+    productCompleter->setCaseSensitivity(Qt::CaseInsensitive);
+    productCompleter->setCompletionMode(QCompleter::InlineCompletion);
+    ui->productLineEdit->setCompleter(productCompleter);
 }
 
 void MainWindow::on_logInPushButton_released()
@@ -109,7 +128,7 @@ void MainWindow::on_pushButton_released()
 {
     logInput.logout();
     this->ui->lineEditPassword->setText("");
-    this->ui->stackedWidget->setCurrentIndex(2);
+    this->ui->stackedWidget->setCurrentIndex(3);
     this->setWindowTitle("Not Logged In");
 }
 
@@ -247,7 +266,7 @@ void MainWindow::on_confirmAddMemButton_released()
     {
         Member newMember;
 
-        /// @brief Determines from the combo box if the member is Executive
+        /// @brief Determines from the combo box if the member to add is Executive
         if (ui->memberTypeComboBox->currentIndex() == 0)
         {
             newMember = Member(ui->firstNameLineEdit->text() + " " + ui->lastNameLineEdit->text(),
@@ -263,37 +282,47 @@ void MainWindow::on_confirmAddMemButton_released()
                                true);
         }
 
-        // Make this popup more robust, transfer the question to add a sale to this popup
-        // include a table with the information entered, ask if everything is correct
-        QMessageBox success;
-        success.setWindowTitle("Success");
-        success.setWindowModality(Qt::ApplicationModal);
-        success.setText("You have successfully registered a new member with the Bulk Club");
-        success.exec();
+        vector<Member> addMem;          // adding member to a vector
+        addMem.push_back(newMember);
+
+        /// @brief Creating a confirmation popup, retreiving whether to add sale or not
+        AddMemberPopup addWindow = AddMemberPopup(addMem);  // passing vector to createMemberModel()
+        addWindow.exec();
         on_clearAddMemFormButton_released();
 
-        /// @brief Add the member retreived from the form to the member vector
-        members.push_back(newMember);
-        memberModel = createMemberModel(parentWidget(), members);
-        memberProxyModel->setSourceModel(memberModel);
-        stackedMemberFilter->setSourceModel(memberProxyModel);
-        ui->MemberTableView->setModel(stackedMemberFilter);
+        if (addWindow.getConfirmAdd()) // if user presses "confirm" button (do not add sale)
+        {
+            /// @brief Add the member retreived from the user form to the global member vector
+            members.push_back(newMember);
 
+            // reload the models and view from the updated global member vector
+            memberModel = createMemberModel(parentWidget(), members);
+            memberProxyModel->setSourceModel(memberModel);
+            stackedMemberFilter->setSourceModel(memberProxyModel);
+            ui->MemberTableView->setModel(stackedMemberFilter);
 
+            // either confirmAdd and addSale are both true or only confirmAdd is true
+            /// @brief Next add the optional sale to the sale vector
+            if (addWindow.getAddSale())  // if user preses "add sale" button
+            {
+                // switch to the form to add a sale page of stackedWidget
+                ui->stackedWidget->setCurrentIndex(2);
+            }
+        }
+
+        // return to the main page of the application
+        ui->stackedWidget->setCurrentIndex(0);
 
         /// @brief Next add the optional sale to the sale vector
-        if (true) // would you like to add a sale for this member? popup
+        if (addWindow.getAddSale())  // if user preses "add sale" button
         {
-
-        }
-        else
-        {
-            ui->stackedWidget->setCurrentIndex(0);
+            ui->stackedWidget->setCurrentIndex(2);
         }
 
         /// @brief Then refresh the inventory according to the optional added sale(s)
+
     }
-    else
+    else  // the user did not fill in all fields of the add member page with valid input
     {
         QMessageBox error;
         error.setWindowTitle("Error");
@@ -339,5 +368,7 @@ void MainWindow::on_cancelAddSaleButton_released()
 /// @brief Clear all fields of the add sale page
 void MainWindow::on_clearSaleButton_released()
 {
-
+    ui->dateOfPurchaseDateEdit->setDate(QDate(4, 1, 2021));
+    ui->productLineEdit->setText("");
+    ui->quantityLineEdit->setText("");
 }
