@@ -138,7 +138,6 @@ vector<Sale> DbManager::popSaleVec()
 void DbManager::popInvVec()
 {
     int saleSize = sales.size();
-    //vector<Inventory> inventoryOut;
 
     for(int i = 0; i < saleSize; i++)
     {
@@ -159,7 +158,6 @@ void DbManager::popInvVec()
             inventory.push_back(temp_item);
         }
     }
-    //return inventoryOut;
 }
 
 bool DbManager::isInInventory(QString searchName)
