@@ -128,7 +128,7 @@ void MainWindow::on_memTypeComboBox_currentTextChanged(const QString &arg1)
 void MainWindow::on_expDateEdit_dateChanged(const QDate &date)
 {
     this->memberProxyModel->setFilterKeyColumn(3);
-    this->memberProxyModel->setFilterWildcard(date.toString("M/*/yyyy"));
+    this->memberProxyModel->setFilterWildcard(date.toString("MM/*/yyyy"));
 }
 
 /// @brief Reset the filters present on the member table
@@ -147,7 +147,7 @@ void MainWindow::on_resetSaleFilterButton_released()
 /// @brief Filter sales by date of sale
 void MainWindow::on_saleDateEdit_userDateChanged(const QDate &date)
 {
-    this->salesProxyModel->setFilterRegularExpression(date.toString("M/d/yyyy"));
+    this->salesProxyModel->setFilterRegularExpression(date.toString("MM/dd/yyyy"));
 }
 
 ///@brief double clicking any member should create a popup containing their purchases
@@ -179,21 +179,28 @@ void MainWindow::on_addMemButton_released()
 /// @brief Admin button to delete a member
 void MainWindow::on_deleteMemButton_released()
 {
+    /// @brief Getting the memberID of the selected member
     QModelIndex index = ui->MemberTableView->currentIndex();
     QModelIndex indexID = index.model()->index(index.row(), 1, QModelIndex());
     int memNumIn = index.model()->data(indexID, Qt::DisplayRole).toInt();
 
+    /// @brief Finding the member to delete from their memberID
     bool found = false;
     vector<Member> deleteMem;
     deleteMem.push_back(search(members, memNumIn, found));
 
     /// @brief Opening the popup to confirm member to delete
-    DeleteMemberPopup deleteMember(deleteMem);
-    deleteMember.exec();
+    DeleteMemberPopup confirmWindow(deleteMem);
+    confirmWindow.exec();
 
-    if (deleteMember.getConfirmDelete())
+    /// @brief Checking if the user wants to delete the member
+    if (confirmWindow.getConfirmDelete())
     {
-        memberModel->removeRow(index.row());
+        deleteMember(members, memNumIn);
+        memberModel = createMemberModel(parentWidget(), members);
+        memberProxyModel->setSourceModel(memberModel);
+        stackedMemberFilter->setSourceModel(memberProxyModel);
+        ui->MemberTableView->setModel(stackedMemberFilter);
     }
 }
 
@@ -224,11 +231,9 @@ void MainWindow::on_cancelAddMemButton_released()
 void MainWindow::on_confirmAddMemButton_released()
 {
     /// @brief Check if all fields have info entered
-    if (ui->firstNameLineEdit->hasAcceptableInput() &&
-        ui->lastNameLineEdit->hasAcceptableInput() &&
+    if (ui->firstNameLineEdit->hasAcceptableInput() && ui->lastNameLineEdit->hasAcceptableInput() &&
         ui->memberIDLineEdit->hasAcceptableInput())
     {
-
         Member newMember;
 
         /// @brief Determines from the combo box if the member is Executive
@@ -257,13 +262,14 @@ void MainWindow::on_confirmAddMemButton_released()
         on_clearAddMemFormButton_released();
 
         /// @brief Add the member retreived from the form to the member vector
-        addMember(memberModel, newMember);
+        members.push_back(newMember);
+        memberModel = createMemberModel(parentWidget(), members);
+        memberProxyModel->setSourceModel(memberModel);
+        stackedMemberFilter->setSourceModel(memberProxyModel);
+        ui->MemberTableView->setModel(stackedMemberFilter);
 
         /// @brief Next add the optional sale to the sale vector
-        if (ui->addSaleRadioButton->isChecked())
-        {
 
-        }
 
         ui->stackedWidget->setCurrentIndex(0);
 
@@ -304,5 +310,4 @@ void MainWindow::on_clearAddMemFormButton_released()
     ui->startMemDateEdit->setDate(QDate(2020, 1, 1));
     ui->memberIDLineEdit->setText("");
     ui->memberTypeComboBox->setCurrentIndex(0);
-    ui->addSaleRadioButton->setChecked(false);
 }
