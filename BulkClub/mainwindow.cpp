@@ -22,10 +22,9 @@ MainWindow::MainWindow(QWidget *parent)
     members = connection.popMemVec();   //populate members vector
     salesToMembers(members, sales);     //assign sales to each member by ID
 
-
     this->setWindowTitle("Not Logged In");
 
-    // memberModel = connection.createMemberTable();
+    /// @brief Creates the models for the member table
     memberModel = createMemberModel(parent, members);
     memberProxyModel = new QSortFilterProxyModel(this);
     memberProxyModel->setSourceModel(memberModel);
@@ -41,7 +40,7 @@ MainWindow::MainWindow(QWidget *parent)
     /// @brief Formats the column sizes by allowing them to stretch
     memberView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
-    // salesModel = connection.createSalesTable();
+    /// @brief Creates the models for the sales table
     salesModel = createSalesModel(parent, sales);
     salesProxyModel = new QSortFilterProxyModel(this);
     salesProxyModel->setSourceModel(salesModel);
@@ -62,6 +61,18 @@ MainWindow::MainWindow(QWidget *parent)
 
     /// @brief Formats the column sizes by allowing them to stretch
     inventoryView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+    /// @brief Creating an auto completer for the items in the inventory
+    QStringList products;
+    for (int row = 0; row < inventoryModel->rowCount(); row++)
+    {
+        products << inventoryModel->data(inventoryModel->index(row, 0)).value<QString>();
+    }
+
+    QCompleter *productCompleter = new QCompleter(products, this);
+    productCompleter->setCaseSensitivity(Qt::CaseInsensitive);
+    productCompleter->setCompletionMode(QCompleter::InlineCompletion);
+    ui->productLineEdit->setCompleter(productCompleter);
 
     this->setVisible(false);
 }
@@ -268,13 +279,20 @@ void MainWindow::on_confirmAddMemButton_released()
         stackedMemberFilter->setSourceModel(memberProxyModel);
         ui->MemberTableView->setModel(stackedMemberFilter);
 
+
+
         /// @brief Next add the optional sale to the sale vector
+        if (true) // would you like to add a sale for this member? popup
+        {
 
-
-        ui->stackedWidget->setCurrentIndex(0);
+        }
+        else
+        {
+            ui->stackedWidget->setCurrentIndex(0);
+        }
 
         /// @brief Then refresh the inventory according to the optional added sale(s)
-     }
+    }
     else
     {
         QMessageBox error;
@@ -310,4 +328,16 @@ void MainWindow::on_clearAddMemFormButton_released()
     ui->startMemDateEdit->setDate(QDate(2020, 1, 1));
     ui->memberIDLineEdit->setText("");
     ui->memberTypeComboBox->setCurrentIndex(0);
+}
+
+/// @brief Return the user to the main view of the app
+void MainWindow::on_cancelAddSaleButton_released()
+{
+    ui->stackedWidget->setCurrentIndex(0);
+}
+
+/// @brief Clear all fields of the add sale page
+void MainWindow::on_clearSaleButton_released()
+{
+
 }
