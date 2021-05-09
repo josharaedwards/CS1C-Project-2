@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>644</width>
-    <height>170</height>
+    <height>202</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,48 +20,42 @@
    <bool>true</bool>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="3" column="2">
+   <item row="5" column="3">
     <widget class="QPushButton" name="addSaleButton">
      <property name="text">
       <string>Add Sale</string>
      </property>
     </widget>
    </item>
-   <item row="3" column="4">
+   <item row="1" column="0" colspan="6">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Pressing &quot;Confirm&quot; will register this member without any sales.</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="5">
     <widget class="QPushButton" name="cancelAddButton">
      <property name="text">
       <string>Cancel</string>
      </property>
     </widget>
    </item>
-   <item row="0" column="0" colspan="5">
+   <item row="0" column="0" colspan="6">
     <widget class="QLabel" name="label">
      <property name="text">
       <string>The following member will be registered as a member of the Bulk Club. Would you like to add any purchases for this member?</string>
      </property>
     </widget>
    </item>
-   <item row="3" column="3">
+   <item row="5" column="4">
     <widget class="QPushButton" name="confirmAddButton">
      <property name="text">
       <string>Confirm</string>
      </property>
     </widget>
    </item>
-   <item row="3" column="1">
-    <spacer name="horizontalSpacer">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>40</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="2" column="0" colspan="5">
+   <item row="2" column="0" colspan="6">
     <widget class="QTableView" name="addMemView">
      <property name="frameShape">
       <enum>QFrame::NoFrame</enum>
@@ -83,10 +77,49 @@
      </attribute>
     </widget>
    </item>
-   <item row="1" column="0" colspan="5">
-    <widget class="QLabel" name="label_2">
+   <item row="5" column="0" colspan="3">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>300</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="label_3">
      <property name="text">
-      <string>Pressing &quot;Confirm&quot; will register this member without any sales.</string>
+      <string>Annual Membership Due</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1" colspan="4">
+    <spacer name="horizontalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="4" column="5">
+    <widget class="QLabel" name="dueLabel">
+     <property name="text">
+      <string>$0.00</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
    </item>

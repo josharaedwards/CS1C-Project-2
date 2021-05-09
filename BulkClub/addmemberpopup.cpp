@@ -1,6 +1,7 @@
 #include "addmemberpopup.h"
 #include "ui_addmemberpopup.h"
 
+/// @brief AddMemberPopup Constructor
 AddMemberPopup::AddMemberPopup(vector<Member> member, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AddMemberPopup)
@@ -12,8 +13,10 @@ AddMemberPopup::AddMemberPopup(vector<Member> member, QWidget *parent) :
     QAbstractItemModel *memberModel = createMemberModel(parent, member);
     ui->addMemView->setModel(memberModel);
     ui->addMemView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->dueLabel->setText("$" + QString::number(member[0].getDueAmnt(), 'f', 2));
 }
 
+/// @brief AddMemberPopup Destructor
 AddMemberPopup::~AddMemberPopup()
 {
     delete ui;

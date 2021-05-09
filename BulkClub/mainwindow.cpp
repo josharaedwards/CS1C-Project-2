@@ -1,5 +1,5 @@
 /**
-  *
+  * @file mainwindow.cpp
   *
   */
 
@@ -11,6 +11,7 @@
 //global member variable
 vector<Member> members;
 vector<Sale> sales;
+vector<Inventory> inventory;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -62,20 +63,15 @@ MainWindow::MainWindow(QWidget *parent)
     /// @brief Formats the column sizes by allowing them to stretch
     inventoryView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
-    // setting up page to add a sale
-    refreshProductCompleter(); // creating a product completer for adding a new sale
-    ui->quantityLineEdit->setValidator(new QIntValidator(0, 100, parentWidget()));
+    /// @brief Creates a validator for the member ID of a new member, only integers accepted
+    ui->memberIDLineEdit->setValidator(new QIntValidator(10000, 99999, parent));
 
-    // function to refresh the subtotal, tax, and total from the product name
-    // if all input is valid, initialize a new sale object, add to the global sale vector,
-    // and repopulate the sale models and view from the global sale vector
-    //  called anytime the text of product or quantity are changed
+    /// @brief Creating an auto completer for adding a product to a new sale
+    loadProductCompleter();
+    ui->productLineEdit->setValidator(new QRegularExpressionValidator(QRegularExpression("")));
 
-    // if the user enters a product name found in the auto completer list of QStrings
-    // (case insensitive match), then priceLineEdit,  is read only. must be refreshed when
-    // text of productLineEdit or quantityLineEdit , but if the
-    // user does not enter a name found on the list, then the
-    // then the pr
+    /// @brief Creates a validator for the Quantity of a new sale, only integers accepted
+    ui->quantityLineEdit->setValidator(new QIntValidator(0, 999, parent));
 
     this->setVisible(false);
 }
@@ -85,10 +81,10 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::refreshProductCompleter()
+/// @brief Initializes the unique list of products from the current state of the inventory model
+void MainWindow::loadProductCompleter()
 {
-    /// @brief Creating a list of all products listed in the inventory vector
-    QStringList products;
+    /// @brief Creating a list of all products listed in the inventory model
     for (int row = 0; row < inventoryModel->rowCount(); row++)
     {
         products << inventoryModel->data(inventoryModel->index(row, 0)).value<QString>();
@@ -97,28 +93,54 @@ void MainWindow::refreshProductCompleter()
     /// @brief Using the list of all products as an auto completer for adding a sale
     QCompleter *productCompleter = new QCompleter(products, this);
     productCompleter->setCaseSensitivity(Qt::CaseInsensitive);
-    productCompleter->setCompletionMode(QCompleter::InlineCompletion);
+    productCompleter->setCompletionMode(QCompleter::PopupCompletion);
+    productCompleter->setFilterMode(Qt::MatchContains);
     ui->productLineEdit->setCompleter(productCompleter);
 }
 
+/// @brief Refreshes the unit price, subtotal, tax, and total from the quantity and product name
+void MainWindow::refreshSalePage()
+{
+    // iterating through the inventory model, retrieving the unit price
+    for (int row = 0; row < inventoryModel->rowCount(); row++)
+    {
+        QString saleProduct = inventoryModel->data(inventoryModel->index(row, 0)).value<QString>();
+
+        if (ui->productLineEdit->text() == saleProduct)
+        {
+            double unitPrice = inventoryModel->data(inventoryModel->index(row, 1)).value<double>();
+            double quantity = ui->quantityLineEdit->text().toDouble();
+            double subtotal = unitPrice * quantity;
+            double tax = subtotal * 0.0775;
+            double total = subtotal + tax;
+
+            ui->unitPriceLineEdit->setText(QString::number(unitPrice, 'f', 2));
+            ui->subtotalLineEdit->setText(QString::number(subtotal, 'f', 2));
+            ui->taxLineEdit->setText(QString::number(tax, 'f', 2));
+            ui->totalLineEdit->setText(QString::number(total, 'f', 2));
+        }
+    }
+}
+
+/// @brief Hiding or revealing features based on log in status
 void MainWindow::on_logInPushButton_released()
 {
-    logInput.attempt(this->ui->lineEditUserID->text(), this->ui->lineEditPassword->text());
+    logInput.attempt(ui->lineEditUserID->text(), ui->lineEditPassword->text());
     switch(logInput.getState())
     {
         case FAILED:
             break;
         case MANAGER:
-            this->ui->stackedWidget->setCurrentIndex(0);
-            this->ui->addMemButton->setHidden(true);
-            this->ui->deleteMemButton->setHidden(true);
-            this->setWindowTitle("Manager");
+            ui->stackedWidget->setCurrentIndex(0);
+            ui->addMemButton->setHidden(true);
+            ui->deleteMemButton->setHidden(true);
+            setWindowTitle("Manager");
             break;
         case ADMIN:
-            this->ui->stackedWidget->setCurrentIndex(0);
-            this->ui->addMemButton->setHidden(false);
-            this->ui->deleteMemButton->setHidden(false);
-            this->setWindowTitle("Administrator");
+            ui->stackedWidget->setCurrentIndex(0);
+            ui->addMemButton->setHidden(false);
+            ui->deleteMemButton->setHidden(false);
+            setWindowTitle("Administrator");
             break;
     }
 }
@@ -226,7 +248,10 @@ void MainWindow::on_deleteMemButton_released()
     /// @brief Checking if the user wants to delete the member
     if (confirmWindow.getConfirmDelete())
     {
+        // removing the member from the global member vector
         deleteMember(members, memNumIn);
+
+        // reloading the models and view with the updated member vector
         memberModel = createMemberModel(parentWidget(), members);
         memberProxyModel->setSourceModel(memberModel);
         stackedMemberFilter->setSourceModel(memberProxyModel);
@@ -264,7 +289,7 @@ void MainWindow::on_confirmAddMemButton_released()
     if (ui->firstNameLineEdit->hasAcceptableInput() && ui->lastNameLineEdit->hasAcceptableInput() &&
         ui->memberIDLineEdit->hasAcceptableInput())
     {
-        Member newMember;
+        Member newMember;     // a new Member object to be added to the global member vector
 
         /// @brief Determines from the combo box if the member to add is Executive
         if (ui->memberTypeComboBox->currentIndex() == 0)
@@ -282,13 +307,12 @@ void MainWindow::on_confirmAddMemButton_released()
                                true);
         }
 
-        vector<Member> addMem;          // adding member to a vector
+        vector<Member> addMem;          // adding the member to a vector for display purposes
         addMem.push_back(newMember);
 
         /// @brief Creating a confirmation popup, retreiving whether to add sale or not
-        AddMemberPopup addWindow = AddMemberPopup(addMem);  // passing vector to createMemberModel()
+        AddMemberPopup addWindow = AddMemberPopup(addMem);  // passing vector of member to createMemberModel()
         addWindow.exec();
-        on_clearAddMemFormButton_released();
 
         if (addWindow.getConfirmAdd()) // if user presses "confirm" button (do not add sale)
         {
@@ -302,25 +326,23 @@ void MainWindow::on_confirmAddMemButton_released()
             ui->MemberTableView->setModel(stackedMemberFilter);
 
             // either confirmAdd and addSale are both true or only confirmAdd is true
+
             /// @brief Next add the optional sale to the sale vector
             if (addWindow.getAddSale())  // if user preses "add sale" button
             {
-                // switch to the form to add a sale page of stackedWidget
+                // switch to the page of stackedWidget with the form to add a sale
                 ui->stackedWidget->setCurrentIndex(2);
+                ui->nameLineEdit->setText(newMember.getName());
+                ui->memIDLineEdit->setText(QString::number(newMember.getMemNum()));
+            }
+            else
+            {
+                // return to the main page of the application
+                ui->stackedWidget->setCurrentIndex(0);
             }
         }
 
-        // return to the main page of the application
-        ui->stackedWidget->setCurrentIndex(0);
-
-        /// @brief Next add the optional sale to the sale vector
-        if (addWindow.getAddSale())  // if user preses "add sale" button
-        {
-            ui->stackedWidget->setCurrentIndex(2);
-        }
-
-        /// @brief Then refresh the inventory according to the optional added sale(s)
-
+        on_clearAddMemFormButton_released(); // clear the form
     }
     else  // the user did not fill in all fields of the add member page with valid input
     {
@@ -363,12 +385,70 @@ void MainWindow::on_clearAddMemFormButton_released()
 void MainWindow::on_cancelAddSaleButton_released()
 {
     ui->stackedWidget->setCurrentIndex(0);
+    on_clearSaleButton_released();
 }
 
 /// @brief Clear all fields of the add sale page
 void MainWindow::on_clearSaleButton_released()
 {
-    ui->dateOfPurchaseDateEdit->setDate(QDate(4, 1, 2021));
+    ui->dateOfPurchaseDateEdit->setDate(QDate(2021, 4, 1));
     ui->productLineEdit->setText("");
     ui->quantityLineEdit->setText("");
+    ui->unitPriceLineEdit->setText("");
+    ui->subtotalLineEdit->setText("");
+    ui->taxLineEdit->setText("");
+    ui->totalLineEdit->setText("");
+}
+
+/// @brief The text of the product name of the new sale has changed
+void MainWindow::on_productLineEdit_textChanged(const QString &arg1)
+{
+    refreshSalePage();
+}
+
+/// @brief The confirm button to add a new sale was pressed
+void MainWindow::on_confirmAddSaleButton_released()
+{
+    // if all input is valid
+    if (ui->productLineEdit->hasAcceptableInput() && ui->quantityLineEdit->hasAcceptableInput())
+    {
+        // initialize a new sale object
+        Sale newSale;
+
+        newSale.setName(ui->productLineEdit->text());
+        newSale.setDate(ui->dateOfPurchaseDateEdit->date());
+        newSale.setMemNum(ui->memIDLineEdit->text().toInt());
+        newSale.setPrice(ui->unitPriceLineEdit->text().toDouble());
+        newSale.setQuantity(ui->quantityLineEdit->text().toInt());
+
+        // add to the global sale vector
+        sales.push_back(newSale);
+
+        // add to the member instance vector
+        salesToMembers(members, sales);
+
+        // repopulate the sale models and view with the updated global sale vector
+        salesModel = createSalesModel(parentWidget(), sales);
+        salesProxyModel->setSourceModel(salesModel);
+        salesView->setModel(salesProxyModel);
+
+        // return to the main page of the application
+        ui->stackedWidget->setCurrentIndex(0);
+    }
+    else
+    {
+        QMessageBox error;
+        error.setWindowTitle("Error");
+        error.setWindowModality(Qt::ApplicationModal);
+        error.setText("The new sale could not be added.");
+        error.setInformativeText("One or more fields are unsatisfactory.");
+        error.exec();
+    }
+}
+
+/// @brief The text for quantity of a new sale was changed
+void MainWindow::on_quantityLineEdit_textChanged(const QString &arg1)
+{
+    // refresh the subtotal from the product name and quantity
+    refreshSalePage();
 }

@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>973</width>
+    <width>1030</width>
     <height>579</height>
    </rect>
   </property>
@@ -27,7 +27,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="mainPage">
        <layout class="QGridLayout" name="gridLayout_4">
@@ -452,9 +452,12 @@
           <property name="minimumDate">
            <date>
             <year>2020</year>
-            <month>1</month>
+            <month>10</month>
             <day>1</day>
            </date>
+          </property>
+          <property name="displayFormat">
+           <string>MM/dd/yyyy</string>
           </property>
           <property name="calendarPopup">
            <bool>true</bool>
@@ -501,7 +504,10 @@
         <item row="4" column="3" colspan="3">
          <widget class="QLineEdit" name="memberIDLineEdit">
           <property name="inputMask">
-           <string>99999</string>
+           <string/>
+          </property>
+          <property name="maxLength">
+           <number>5</number>
           </property>
           <property name="clearButtonEnabled">
            <bool>true</bool>
@@ -626,7 +632,21 @@
       </widget>
       <widget class="QWidget" name="addSalePage">
        <layout class="QGridLayout" name="gridLayout_7">
-        <item row="8" column="6">
+        <item row="9" column="2">
+         <widget class="QLineEdit" name="totalLineEdit">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="1">
+         <widget class="QLabel" name="label_14">
+          <property name="text">
+           <string>Unit Price</string>
+          </property>
+         </widget>
+        </item>
+        <item row="11" column="6">
          <widget class="QPushButton" name="cancelAddSaleButton">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -639,25 +659,8 @@
           </property>
          </widget>
         </item>
-        <item row="6" column="1">
-         <widget class="QLabel" name="label_13">
-          <property name="text">
-           <string>Total</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="2">
-         <widget class="QLineEdit" name="quantityLineEdit"/>
-        </item>
-        <item row="5" column="1">
-         <widget class="QLabel" name="label_12">
-          <property name="text">
-           <string>Tax</string>
-          </property>
-         </widget>
-        </item>
-        <item row="8" column="5">
-         <widget class="QPushButton" name="confirmAddSaleButton">
+        <item row="11" column="4">
+         <widget class="QPushButton" name="clearSaleButton">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -665,18 +668,34 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string>Confirm</string>
+           <string>Clear</string>
           </property>
          </widget>
         </item>
-        <item row="3" column="1">
-         <widget class="QLabel" name="label_9">
-          <property name="text">
-           <string>Quantity</string>
+        <item row="10" column="2">
+         <spacer name="verticalSpacer_7">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>100</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="7" column="2">
+         <widget class="QLineEdit" name="subtotalLineEdit">
+          <property name="readOnly">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
-        <item row="1" column="2">
+        <item row="3" column="2">
          <widget class="QDateEdit" name="dateOfPurchaseDateEdit">
           <property name="maximumDate">
            <date>
@@ -700,92 +719,19 @@
           </property>
          </widget>
         </item>
-        <item row="3" column="0">
-         <spacer name="horizontalSpacer_12">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Fixed</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>200</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="1" column="1">
-         <widget class="QLabel" name="label_5">
+        <item row="9" column="1">
+         <widget class="QLabel" name="label_13">
           <property name="text">
-           <string>Date of Purchase</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="2">
-         <widget class="QLineEdit" name="subtotalLineEdit">
-          <property name="readOnly">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="2">
-         <widget class="QLineEdit" name="taxLineEdit">
-          <property name="readOnly">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="8" column="4">
-         <widget class="QPushButton" name="clearSaleButton">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Clear</string>
+           <string>Total</string>
           </property>
          </widget>
         </item>
         <item row="6" column="2">
-         <widget class="QLineEdit" name="totalLineEdit">
+         <widget class="QLineEdit" name="unitPriceLineEdit">
           <property name="readOnly">
            <bool>true</bool>
           </property>
          </widget>
-        </item>
-        <item row="4" column="1">
-         <widget class="QLabel" name="label_11">
-          <property name="text">
-           <string>Subtotal</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="1">
-         <widget class="QLabel" name="label_8">
-          <property name="text">
-           <string>Product</string>
-          </property>
-         </widget>
-        </item>
-        <item row="7" column="2">
-         <spacer name="verticalSpacer_7">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Fixed</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>100</height>
-           </size>
-          </property>
-         </spacer>
         </item>
         <item row="0" column="2">
          <spacer name="verticalSpacer_8">
@@ -803,8 +749,110 @@
           </property>
          </spacer>
         </item>
-        <item row="2" column="2">
+        <item row="4" column="1">
+         <widget class="QLabel" name="label_8">
+          <property name="text">
+           <string>Product</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="1">
+         <widget class="QLabel" name="label_9">
+          <property name="text">
+           <string>Quantity</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="2">
+         <widget class="QLineEdit" name="quantityLineEdit"/>
+        </item>
+        <item row="3" column="1">
+         <widget class="QLabel" name="label_5">
+          <property name="text">
+           <string>Date of Purchase</string>
+          </property>
+         </widget>
+        </item>
+        <item row="11" column="5">
+         <widget class="QPushButton" name="confirmAddSaleButton">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Confirm</string>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="2">
+         <widget class="QLineEdit" name="taxLineEdit">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="1">
+         <widget class="QLabel" name="label_11">
+          <property name="text">
+           <string>Subtotal</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="2">
          <widget class="QLineEdit" name="productLineEdit"/>
+        </item>
+        <item row="5" column="0">
+         <spacer name="horizontalSpacer_12">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>200</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLabel" name="label_15">
+          <property name="text">
+           <string>Name</string>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="1">
+         <widget class="QLabel" name="label_12">
+          <property name="text">
+           <string>Tax</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QLineEdit" name="nameLineEdit">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLabel" name="label_16">
+          <property name="text">
+           <string>Member ID</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2">
+         <widget class="QLineEdit" name="memIDLineEdit">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
