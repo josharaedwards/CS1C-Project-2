@@ -11,7 +11,6 @@
 //global member variable
 vector<Member> members;
 vector<Sale> sales;
-vector<Inventory> inventory;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -68,7 +67,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     /// @brief Creating an auto completer for adding a product to a new sale
     loadProductCompleter();
-    ui->productLineEdit->setValidator(new QRegularExpressionValidator(QRegularExpression("")));
+    ui->productLineEdit->setValidator(new QRegularExpressionValidator(QRegularExpression("[a-z-A-Z ]+")));
 
     /// @brief Creates a validator for the Quantity of a new sale, only integers accepted
     ui->quantityLineEdit->setValidator(new QIntValidator(0, 999, parent));
@@ -101,6 +100,12 @@ void MainWindow::loadProductCompleter()
 /// @brief Refreshes the unit price, subtotal, tax, and total from the quantity and product name
 void MainWindow::refreshSalePage()
 {
+    double unitPrice = 0.00;
+    double quantity = 0.00;
+    double subtotal = 0.00;
+    double tax = 0.00;
+    double total = 0.00;
+
     // iterating through the inventory model, retrieving the unit price
     for (int row = 0; row < inventoryModel->rowCount(); row++)
     {
@@ -108,17 +113,17 @@ void MainWindow::refreshSalePage()
 
         if (ui->productLineEdit->text() == saleProduct)
         {
-            double unitPrice = inventoryModel->data(inventoryModel->index(row, 1)).value<double>();
-            double quantity = ui->quantityLineEdit->text().toDouble();
-            double subtotal = unitPrice * quantity;
-            double tax = subtotal * 0.0775;
-            double total = subtotal + tax;
-
-            ui->unitPriceLineEdit->setText(QString::number(unitPrice, 'f', 2));
-            ui->subtotalLineEdit->setText(QString::number(subtotal, 'f', 2));
-            ui->taxLineEdit->setText(QString::number(tax, 'f', 2));
-            ui->totalLineEdit->setText(QString::number(total, 'f', 2));
+            unitPrice = inventoryModel->data(inventoryModel->index(row, 1)).value<double>();
+            quantity = ui->quantityLineEdit->text().toDouble();
+            subtotal = unitPrice * quantity;
+            tax = subtotal * 0.0775;
+            total = subtotal + tax;
         }
+
+        ui->unitPriceLineEdit->setText(QString::number(unitPrice, 'f', 2));
+        ui->subtotalLineEdit->setText(QString::number(subtotal, 'f', 2));
+        ui->taxLineEdit->setText(QString::number(tax, 'f', 2));
+        ui->totalLineEdit->setText(QString::number(total, 'f', 2));
     }
 }
 
@@ -409,8 +414,9 @@ void MainWindow::on_productLineEdit_textChanged(const QString &arg1)
 /// @brief The confirm button to add a new sale was pressed
 void MainWindow::on_confirmAddSaleButton_released()
 {
-    // if all input is valid
-    if (ui->productLineEdit->hasAcceptableInput() && ui->quantityLineEdit->hasAcceptableInput())
+    // if all user input is valid
+    if (ui->productLineEdit->hasAcceptableInput() && ui->quantityLineEdit->hasAcceptableInput() &&
+        ui->unitPriceLineEdit->text().toDouble() != 0)
     {
         // initialize a new sale object
         Sale newSale;
@@ -421,19 +427,32 @@ void MainWindow::on_confirmAddSaleButton_released()
         newSale.setPrice(ui->unitPriceLineEdit->text().toDouble());
         newSale.setQuantity(ui->quantityLineEdit->text().toInt());
 
-        // add to the global sale vector
-        sales.push_back(newSale);
+        // initializing a popup to confirm the sales to be added
+        AddSalePopup addSaleWindow(newSale);
+        addSaleWindow.exec();
 
-        // add to the member instance vector
-        salesToMembers(members, sales);
+        // user confirms they want to add all of the purchases in the addSales vector
+        if (addSaleWindow.getConfirmSales())
+        {
+            // add to the global sale vector
+            sales.insert(sales.end(), AddSalePopup::addSales.begin(), AddSalePopup::addSales.end());
 
-        // repopulate the sale models and view with the updated global sale vector
-        salesModel = createSalesModel(parentWidget(), sales);
-        salesProxyModel->setSourceModel(salesModel);
-        salesView->setModel(salesProxyModel);
+            // add to the member instance vector
+            salesToMembers(members, sales);
 
-        // return to the main page of the application
-        ui->stackedWidget->setCurrentIndex(0);
+            // repopulate the sale models and view with the updated global sale vector
+            salesModel = createSalesModel(parentWidget(), sales);
+            salesProxyModel->setSourceModel(salesModel);
+            salesView->setModel(salesProxyModel);
+
+            AddSalePopup::addSales.clear();
+
+            // return to the main page of the application
+            ui->stackedWidget->setCurrentIndex(0);
+        }
+
+        // clear the add sale page
+        on_clearSaleButton_released();
     }
     else
     {

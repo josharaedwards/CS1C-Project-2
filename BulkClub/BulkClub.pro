@@ -10,6 +10,7 @@ CONFIG += c++11
 
 SOURCES += \
     addmemberpopup.cpp \
+    addsalepopup.cpp \
     authenticate.cpp \
     dbmanager.cpp \
     deletememberpopup.cpp \
@@ -24,6 +25,7 @@ SOURCES += \
 
 HEADERS += \
     addmemberpopup.h \
+    addsalepopup.h \
     authenticate.h \
     dbmanager.h \
     deletememberpopup.h \
@@ -37,6 +39,7 @@ HEADERS += \
 
 FORMS += \
     addmemberpopup.ui \
+    addsalepopup.ui \
     deletememberpopup.ui \
     mainwindow.ui \
     memberpopup.ui \

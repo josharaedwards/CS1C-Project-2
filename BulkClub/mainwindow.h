@@ -16,6 +16,7 @@
 #include "salespopup.h"
 #include "deletememberpopup.h"
 #include "addmemberpopup.h"
+#include "addsalepopup.h"
 
 #include <QMainWindow>
 #include <QTableView>
