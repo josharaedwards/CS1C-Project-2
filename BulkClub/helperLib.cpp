@@ -319,7 +319,7 @@ void addMember(QAbstractItemModel* model, Member memIn)
         model->setData(model->index(0, 2), QObject::tr("Regular"));
     }
 
-    model->setData(model->index(0, 3), memIn.getExpDate());
+    model->setData(model->index(0, 3), memIn.getExpDate().toString("MM/dd/yyyy"));
 }
 
 QAbstractItemModel* createSalesModel(QWidget* parent, vector<Sale> sales)
@@ -347,9 +347,22 @@ void addSale(QAbstractItemModel* model, Sale saleIn)
     model->insertRow(0);
 
     /// @brief Adds the data for a sale into the model, similar to a two dimensional array.
-    model->setData(model->index(0, 0), saleIn.getDate());
+    model->setData(model->index(0, 0), saleIn.getDate().toString("MM/dd/yyyy"));
     model->setData(model->index(0, 1), saleIn.getMemNum());
     model->setData(model->index(0, 2), saleIn.getName());
     model->setData(model->index(0, 3), saleIn.getPrice());
     model->setData(model->index(0, 4), saleIn.getQuantity());
+}
+
+void deleteMember(vector<Member>& members, int memNumIn)
+{
+    int size = members.size();
+
+    for(int i = 0; i < size; i++)
+    {
+        if(members[i].getMemNum() == memNumIn)
+        {
+            members.erase(members.begin() + i);
+        }
+    }
 }

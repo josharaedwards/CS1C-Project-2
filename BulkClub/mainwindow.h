@@ -14,10 +14,15 @@
 #include "inventory.h"
 #include "memberpopup.h"
 #include "salespopup.h"
+#include "deletememberpopup.h"
+#include "addmemberpopup.h"
+#include "addsalepopup.h"
 
 #include <QMainWindow>
 #include <QTableView>
 #include <QMessageBox>
+#include <QCompleter>
+#include <QIntValidator>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -35,6 +40,8 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void loadProductCompleter();
+    void refreshSalePage();
 
 private slots:
     void on_logInPushButton_released();
@@ -71,8 +78,17 @@ private slots:
 
     void on_salesTableView_doubleClicked(const QModelIndex &index);
 
-
     void on_clearAddMemFormButton_released();
+
+    void on_cancelAddSaleButton_released();
+
+    void on_clearSaleButton_released();
+
+    void on_productLineEdit_textChanged(const QString &arg1);
+
+    void on_confirmAddSaleButton_released();
+
+    void on_quantityLineEdit_textChanged(const QString &arg1);
 
 private:
     Ui::MainWindow *ui;
@@ -90,5 +106,6 @@ private:
 
     DbManager connection;  /// @var connection DbManager object to retreive data from the database
     Authenticate logInput; /// @var logInput Authenticate object to keep track of user's login status
+    QStringList products; /// @var products A QStringList of all the products offered by the Bulk Club
 };
 #endif // MAINWINDOW_H
