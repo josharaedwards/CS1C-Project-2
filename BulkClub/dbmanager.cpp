@@ -5,6 +5,9 @@
 
 #include "dbmanager.h"
 
+extern vector<Sale> sales;
+extern vector<Inventory> inventory;
+
 DbManager::DbManager()
 {
     db = QSqlDatabase::addDatabase("QSQLITE");
@@ -75,6 +78,42 @@ QSqlTableModel* DbManager::createInventoryTable()
     model->setHeaderData(0, Qt::Horizontal, QObject::tr("Product"));
     model->setHeaderData(1, Qt::Horizontal, QObject::tr("Price"));
     model->setHeaderData(2, Qt::Horizontal, QObject::tr("Quantity"));
+    model->setHeaderData(3, Qt::Horizontal, QObject::tr("Total Revenue"));
+
+    model->setSort(0, Qt::AscendingOrder);
+
+    /// @brief adds remaining data to inventory model
+    //may need to clear information from inventory table then build model from vector>Inventory>
+    //model->clear();
+    int vecSize = inventory.size();
+    QSqlRecord record = model->record();
+    QVariant name, price, quantity, total;
+    for(int i = 0; i < vecSize; i++)
+    {
+        name.setValue(inventory[i].getName());
+        price.setValue(inventory[i].getPrice());
+        quantity.setValue(inventory[i].getQuantity());
+        total.setValue(inventory[i].getTotal());
+
+        record.clearValues();
+        record.setValue(0, name);
+        record.setValue(1, price);
+        record.setValue(2, quantity);
+        record.setValue(3, total);
+        if(model->setRecord(i, record))
+        {
+            qDebug()<<"Successfully inserted record!";
+            model->submitAll();
+        }
+        else
+        {
+            qDebug()<<"Error inserting record!";
+            db.rollback();
+        }
+    }
+    model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+
+
 
     return model;
 }
@@ -126,4 +165,65 @@ vector<Sale> DbManager::popSaleVec()
 
     }
     return salesOut;
+}
+
+void DbManager::popInvVec()
+{
+    int saleSize = sales.size();
+
+    for(int i = 0; i < saleSize; i++)
+    {
+        // if current sale.name is in inventory vec, sum existing quantity with sale quantity
+        int quantityIndex = findInvIndex(sales[i].getName());
+        if(isInInventory(sales[i].getName()) && quantityIndex > -1)
+        {
+            int tempQuantity = inventory[quantityIndex].getQuantity() + sales[i].getQuantity();
+            inventory[quantityIndex].setQuantity(tempQuantity);
+        }
+        else // adds first instance of sale to inventory vec
+        {
+            Inventory temp_item;
+
+            temp_item.setName(sales[i].getName());
+            temp_item.setPrice(sales[i].getPrice());
+            temp_item.setQuantity((sales[i].getQuantity()));
+            inventory.push_back(temp_item);
+        }
+    }
+}
+
+bool DbManager::isInInventory(QString searchName)
+{
+    bool found = false;
+    int vecSize = inventory.size();
+
+    for(int i = 0; i < vecSize; i++)
+    {
+        if(inventory[i].getName() == searchName)
+        {
+            found = true;
+            return found;
+        }
+    }
+    return found;
+}
+
+int DbManager::findInvIndex(QString itemName)
+{
+    int foundIndex;
+    int vecSize = inventory.size();
+
+    for(int i = 0; i < vecSize; i++)
+    {
+        if(inventory[i].getName() == itemName)
+        {
+            foundIndex = i;
+            return foundIndex;
+        }
+        else
+        {
+            foundIndex = -1;
+        }
+    }
+    return foundIndex;
 }
