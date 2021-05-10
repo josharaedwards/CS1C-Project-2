@@ -87,7 +87,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     /// @brief Creating an auto completer for adding a product to a new sale
     loadProductCompleter();
-    ui->productLineEdit->setValidator(new QRegularExpressionValidator(QRegularExpression("[a-z-A-Z-0-9-. ]+")));
+    ui->productLineEdit->setValidator(new QRegularExpressionValidator(QRegularExpression("[a-z-A-Z-0-9-.-/ ]+")));
 
     /// @brief Creates a validator for the Quantity of a new sale, only integers accepted
     ui->quantityLineEdit->setValidator(new QIntValidator(0, 999, parent));
