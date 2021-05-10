@@ -336,7 +336,8 @@ void MainWindow::on_confirmAddMemButton_released()
         addMem.push_back(newMember);
 
         /// @brief Creating a confirmation popup, retreiving whether to add sale or not
-        AddMemberPopup addWindow = AddMemberPopup(addMem);  // passing vector of member to createMemberModel()
+        AddMemberPopup addWindow(addMem);  // passing vector of member to createMemberModel()
+
         addWindow.exec();
 
         if (addWindow.getConfirmAdd()) // if user presses "confirm" button (do not add sale)
