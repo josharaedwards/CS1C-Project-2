@@ -27,17 +27,10 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="mainPage">
        <layout class="QGridLayout" name="gridLayout_4">
-        <item row="0" column="1">
-         <widget class="QPushButton" name="pushButton">
-          <property name="text">
-           <string>Logout</string>
-          </property>
-         </widget>
-        </item>
         <item row="0" column="0">
          <spacer name="horizontalSpacer_5">
           <property name="orientation">
@@ -51,10 +44,24 @@
           </property>
          </spacer>
         </item>
-        <item row="1" column="0" colspan="2">
+        <item row="0" column="2">
+         <widget class="QPushButton" name="pushButton">
+          <property name="text">
+           <string>Logout</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2">
+         <widget class="QLabel" name="labelCalculatedGrandTotal">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="3">
          <widget class="QTabWidget" name="tabWidget">
           <property name="currentIndex">
-           <number>0</number>
+           <number>2</number>
           </property>
           <widget class="QWidget" name="membersTab">
            <attribute name="title">
@@ -413,6 +420,26 @@
             </item>
            </layout>
           </widget>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <spacer name="horizontalSpacer_13">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLabel" name="labelInvGrandTotal">
+          <property name="text">
+           <string>Grand Total: </string>
+          </property>
          </widget>
         </item>
        </layout>

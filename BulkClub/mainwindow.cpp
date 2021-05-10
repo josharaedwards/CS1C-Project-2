@@ -11,6 +11,7 @@
 //global member variable
 vector<Member> members;
 vector<Sale> sales;
+vector<Inventory> inventory;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -21,6 +22,15 @@ MainWindow::MainWindow(QWidget *parent)
     sales = connection.popSaleVec();    //populate sales vector
     members = connection.popMemVec();   //populate members vector
     salesToMembers(members, sales);     //assign sales to each member by ID
+    connection.popInvVec();
+
+    // for testing purposes
+    int vecSize = inventory.size();
+    for(int i = 0; i < vecSize; i++)
+    {
+        cout << "inventory[" << i << "]: " << inventory[i].getName().toStdString() << " " << inventory[i].getPrice()
+             << " " << inventory[i].getQuantity() << " " << inventory[i].getTotal() << endl;
+    }
 
     this->setWindowTitle("Not Logged In");
 
@@ -58,6 +68,16 @@ MainWindow::MainWindow(QWidget *parent)
     inventoryProxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
     inventoryView = this->ui->inventoryTableView;
     inventoryView->setModel(inventoryProxyModel);
+
+    ///@brief calculates the total spent from the inventory vector and updates the appropriate label
+    int invVecSize = inventory.size();
+    double invGrandTotal = 0;
+    for(int i = 0; i < invVecSize; i++)
+    {
+        invGrandTotal += inventory[i].getTotal();
+    }
+    invGrandTotal += invGrandTotal * 0.0775;
+    this->ui->labelCalculatedGrandTotal->setText("$" + QString::number(invGrandTotal));
 
     /// @brief Formats the column sizes by allowing them to stretch
     inventoryView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
