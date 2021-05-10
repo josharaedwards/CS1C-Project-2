@@ -80,8 +80,40 @@ QSqlTableModel* DbManager::createInventoryTable()
     model->setHeaderData(2, Qt::Horizontal, QObject::tr("Quantity"));
     model->setHeaderData(3, Qt::Horizontal, QObject::tr("Total Revenue"));
 
+    model->setSort(0, Qt::AscendingOrder);
+
     /// @brief adds remaining data to inventory model
     //may need to clear information from inventory table then build model from vector>Inventory>
+    //model->clear();
+    int vecSize = inventory.size();
+    QSqlRecord record = model->record();
+    QVariant name, price, quantity, total;
+    for(int i = 0; i < vecSize; i++)
+    {
+        name.setValue(inventory[i].getName());
+        price.setValue(inventory[i].getPrice());
+        quantity.setValue(inventory[i].getQuantity());
+        total.setValue(inventory[i].getTotal());
+
+        record.clearValues();
+        record.setValue(0, name);
+        record.setValue(1, price);
+        record.setValue(2, quantity);
+        record.setValue(3, total);
+        if(model->setRecord(i, record))
+        {
+            qDebug()<<"Successfully inserted record!";
+            model->submitAll();
+        }
+        else
+        {
+            qDebug()<<"Error inserting record!";
+            db.rollback();
+        }
+    }
+    model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+
+
 
     return model;
 }

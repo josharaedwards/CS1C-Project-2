@@ -68,6 +68,16 @@ MainWindow::MainWindow(QWidget *parent)
     inventoryView = this->ui->inventoryTableView;
     inventoryView->setModel(inventoryProxyModel);
 
+    ///@brief calculates the total spent from the inventory vector and updates the appropriate label
+    int invVecSize = inventory.size();
+    double invGrandTotal = 0;
+    for(int i = 0; i < invVecSize; i++)
+    {
+        invGrandTotal += inventory[i].getTotal();
+    }
+    invGrandTotal += invGrandTotal * 0.0775;
+    this->ui->labelCalculatedGrandTotal->setText("$" + QString::number(invGrandTotal));
+
     /// @brief Formats the column sizes by allowing them to stretch
     inventoryView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
