@@ -66,7 +66,7 @@ QSqlTableModel* DbManager::createSalesTable()
 
 
 QSqlTableModel* DbManager::createInventoryTable()
-{ // update this to take information from Inventory vector
+{
     /// @brief Creates a new QSqlTableModel for the Inventory table
     QSqlTableModel *model = new QSqlTableModel;
 
