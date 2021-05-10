@@ -12,7 +12,8 @@ Authenticate::Authenticate()
     login_db.open();
 }
 
-Authenticate::~Authenticate(){
+Authenticate::~Authenticate()
+{
     if (login_db.isOpen())
     {
         login_db.close();

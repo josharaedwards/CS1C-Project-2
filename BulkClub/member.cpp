@@ -140,7 +140,8 @@ double Member::getSpentAmnt()
     return spentAmnt;
 }
 
-double Member::getTaxAmnt(){
+double Member::getTaxAmnt()
+{
     return spentAmnt*0.0775;
 }
 
@@ -165,8 +166,9 @@ void Member::refreshSpentAmnt()
     int size = sales.size();
 
     spentAmnt = 00.00;
-    if(sales.size() > 0){
-    for(int i = 0; i < size; ++i)
+    if(sales.size() > 0)
+    {
+        for(int i = 0; i < size; ++i)
         {
             spentAmnt += sales[i].getPrice() * sales[i].getQuantity();
         }
@@ -219,5 +221,19 @@ bool Member::hasSale(Sale saleIn)
    }
 
    return isHere;
+}
+
+MemberStatus Member::checkMemberStatus()
+{
+    if(IsExec() && rebateAmnt < dueAmnt)
+    {
+        return DEMOTED;
+    }
+    else if(!IsExec() && rebateAmnt > dueAmnt)
+    {
+        return PROMOTED;
+    }
+
+    return NEUTRAL;
 }
 

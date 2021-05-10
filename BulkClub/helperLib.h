@@ -1,8 +1,11 @@
 #ifndef HELPERLIB_H
 #define HELPERLIB_H
 
+#include <iostream>
 #include <vector>
+#include <QStandardItemModel>
 #include "member.h"
+#include "inventory.h"
 #include "dbmanager.h"
 using namespace std;
 
@@ -42,5 +45,16 @@ bool isGreaterThan(int first, int second);
 
 void saleToMembers(vector<Member>& members, Sale sale);
 void salesToMembers(vector<Member>& members, vector<Sale> sales);
+
+QAbstractItemModel* createMemberModel(QWidget* parent, vector<Member> members);
+void addMember(QAbstractItemModel* model, Member memIn);
+
+QAbstractItemModel* createSalesModel(QWidget* parent, vector<Sale> sales);
+void addSale(QAbstractItemModel* model, Sale saleIn);
+
+QAbstractItemModel* createInventoryModel(QWidget* parent, vector<Inventory> inventory);
+void addInventory(QAbstractItemModel* model, Inventory invIn);
+
+void deleteMember(vector<Member>& members, int memNumIn);
 
 #endif // HELPERLIB_H

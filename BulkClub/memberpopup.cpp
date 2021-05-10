@@ -66,10 +66,7 @@ void memberPopup::createMemTable(int index){
         }
         memT->setItem(0, j, memItem);
     }
-    memT->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Stretch);
-    memT->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
-    memT->horizontalHeader()->setSectionResizeMode(2, QHeaderView::Stretch);
-    memT->horizontalHeader()->setSectionResizeMode(3, QHeaderView::Stretch);
+    memT->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
 
 void memberPopup::createSaleTable(int index){
@@ -113,9 +110,5 @@ void memberPopup::createSaleTable(int index){
         }
     }
 
-    saleT->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Stretch);
-    saleT->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
-    saleT->horizontalHeader()->setSectionResizeMode(2, QHeaderView::Stretch);
-    saleT->horizontalHeader()->setSectionResizeMode(3, QHeaderView::Stretch);
-    saleT->horizontalHeader()->setSectionResizeMode(4, QHeaderView::Stretch);
+    saleT->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
