@@ -62,10 +62,14 @@ MainWindow::MainWindow(QWidget *parent)
     /// @brief Formats the column sizes by allowing them to stretch
     salesView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
+    /// @brief creates the models for the inventory table
     inventoryModel = connection.createInventoryTable();
     inventoryProxyModel = new QSortFilterProxyModel(this);
     inventoryProxyModel->setSourceModel(inventoryModel);
     inventoryProxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
+    inventoryProxyModel->setFilterKeyColumn(0);
+    inventoryProxyModel->setSortCaseSensitivity(Qt::CaseInsensitive);
+    inventoryProxyModel->sort(0, Qt::AscendingOrder);
     inventoryView = this->ui->inventoryTableView;
     inventoryView->setModel(inventoryProxyModel);
 
