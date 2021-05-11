@@ -430,7 +430,7 @@
               </property>
              </widget>
             </item>
-            <item row="3" column="12">
+            <item row="3" column="12" alignment="Qt::AlignRight">
              <widget class="QLabel" name="labelGrandTotal">
               <property name="text">
                <string>Grand Total: </string>

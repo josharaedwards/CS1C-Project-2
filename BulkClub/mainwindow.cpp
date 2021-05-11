@@ -67,6 +67,8 @@ MainWindow::MainWindow(QWidget *parent)
     inventoryProxyModel->setSourceModel(inventoryModel);
     inventoryProxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
     inventoryProxyModel->setFilterKeyColumn(0);
+    inventoryProxyModel->setSortCaseSensitivity(Qt::CaseInsensitive);
+    inventoryProxyModel->sort(0, Qt::AscendingOrder);
     inventoryView = this->ui->inventoryTableView;
     inventoryView->setModel(inventoryProxyModel);
 
