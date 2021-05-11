@@ -20,6 +20,7 @@ SOURCES += \
     member.cpp \
     memberpopup.cpp \
     inventory.cpp \
+    membertypepopup.cpp \
     sale.cpp \
     salespopup.cpp
 
@@ -34,6 +35,7 @@ HEADERS += \
     member.h \
     memberpopup.h \
     inventory.h \
+    membertypepopup.h \
     sale.h \
     salespopup.h
 
@@ -43,6 +45,7 @@ FORMS += \
     deletememberpopup.ui \
     mainwindow.ui \
     memberpopup.ui \
+    membertypepopup.ui \
     salespopup.ui
 
 # Default rules for deployment.
