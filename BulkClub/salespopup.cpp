@@ -178,18 +178,23 @@ QString SalesPopup::indexToText(Member curMember, int columnIndex)
 void SalesPopup::updateTotal(vector<Member> saleMembers)
 {
     int numOfEntries = saleMembers.size();
-    double total = 0.00;
+    double subTotal = 0.00;
+    double tax = 0.00;
+    double taxTotal = 0.00;
 
     for(int i = 0; i < numOfEntries; ++i)
     {
-        total += saleMembers[i].getSpentAmnt();
+        subTotal += saleMembers[i].getSpentAmnt();
     }
+
+    tax = subTotal * 0.0775;
+    taxTotal = subTotal + tax;
 
     QTableWidgetItem *item;
     QString itemText;
 
     item = new QTableWidgetItem;
-    itemText = QString{"$%1"}.arg(total, 4, 'f', 2, '0');
+    itemText = QString{"$%1"}.arg(taxTotal, 4, 'f', 2, '0');
     item->setText(itemText);
     this->ui->salesTotalInfo->setItem(0, 0, item);
 }

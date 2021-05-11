@@ -30,7 +30,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Sales Details</string>
+    <string>Sales Report</string>
    </property>
   </widget>
   <widget class="QLabel" name="salesDate">
