@@ -43,6 +43,7 @@ public:
     ~MainWindow();
     void loadProductCompleter();
     void refreshSalePage();
+    void refreshGrandTotal();
 
 private slots:
     void on_logInPushButton_released();

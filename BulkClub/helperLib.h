@@ -52,8 +52,8 @@ void addMember(QAbstractItemModel* model, Member memIn);
 QAbstractItemModel* createSalesModel(QWidget* parent, vector<Sale> sales);
 void addSale(QAbstractItemModel* model, Sale saleIn);
 
-QAbstractItemModel* createInventoryModel(QWidget* parent, vector<Inventory> inventory);
 void addInventory(QAbstractItemModel* model, Inventory invIn);
+void addInventory(QAbstractItemModel* model, vector<Inventory> invIn);
 
 void deleteMember(vector<Member>& members, int memNumIn);
 

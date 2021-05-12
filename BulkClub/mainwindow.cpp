@@ -74,14 +74,7 @@ MainWindow::MainWindow(QWidget *parent)
     inventoryView->setModel(inventoryProxyModel);
 
     ///@brief calculates the total spent from the inventory vector and updates the appropriate label
-    int invVecSize = inventory.size();
-    double invGrandTotal = 0;
-    for(int i = 0; i < invVecSize; i++)
-    {
-        invGrandTotal += inventory[i].getTotal();
-    }
-    invGrandTotal += invGrandTotal * 0.0775;
-    this->ui->labelCalculatedGrandTotal->setText("$" + QString::number(invGrandTotal));
+    refreshGrandTotal();
 
     /// @brief Formats the column sizes by allowing them to stretch
     inventoryView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
@@ -91,7 +84,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     /// @brief Creating an auto completer for adding a product to a new sale
     loadProductCompleter();
-    ui->productLineEdit->setValidator(new QRegularExpressionValidator(QRegularExpression("[a-z-A-Z ]+")));
+    ui->productLineEdit->setValidator(new QRegularExpressionValidator(QRegularExpression("[a-z-A-Z-0-9-.-/ ]+")));
 
     /// @brief Creates a validator for the Quantity of a new sale, only integers accepted
     ui->quantityLineEdit->setValidator(new QIntValidator(0, 999, parent));
@@ -102,6 +95,8 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+
+
 }
 
 /// @brief Initializes the unique list of products from the current state of the inventory model
@@ -149,6 +144,19 @@ void MainWindow::refreshSalePage()
         ui->taxLineEdit->setText(QString::number(tax, 'f', 2));
         ui->totalLineEdit->setText(QString::number(total, 'f', 2));
     }
+}
+
+void MainWindow::refreshGrandTotal()
+{
+    ///@brief calculates the total spent from the inventory vector and updates the appropriate label
+    int invVecSize = inventory.size();
+    double invGrandTotal = 0;
+    for(int i = 0; i < invVecSize; i++)
+    {
+        invGrandTotal += inventory[i].getTotal();
+    }
+    invGrandTotal += invGrandTotal * 0.0775;
+    ui->labelCalculatedGrandTotal->setText("$" + QString::number(invGrandTotal));
 }
 
 /// @brief Hiding or revealing features based on log in status
@@ -470,10 +478,24 @@ void MainWindow::on_confirmAddSaleButton_released()
             salesProxyModel->setSourceModel(salesModel);
             salesView->setModel(salesProxyModel);
 
+            // update the global inventory vector
+            inventory.clear();
+            connection.popInvVec();
+            inventoryModel = connection.createInventoryTable();
+            inventoryProxyModel->setSourceModel(inventoryModel);
+            inventoryView->setModel(inventoryProxyModel);
+
+            // update the grand total
+            refreshGrandTotal();
+
             AddSalePopup::addSales.clear();
 
             // return to the main page of the application
             ui->stackedWidget->setCurrentIndex(0);
+        }
+        else if (!addSaleWindow.getAnotherSale())
+        {
+            AddSalePopup::addSales.pop_back();
         }
 
         // clear the add sale page

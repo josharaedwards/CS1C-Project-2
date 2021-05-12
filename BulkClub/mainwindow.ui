@@ -156,7 +156,7 @@
                 <minute>0</minute>
                 <second>0</second>
                 <year>2021</year>
-                <month>10</month>
+                <month>1</month>
                 <day>1</day>
                </datetime>
               </property>
@@ -170,7 +170,7 @@
               <property name="minimumDate">
                <date>
                 <year>2021</year>
-                <month>10</month>
+                <month>1</month>
                 <day>1</day>
                </date>
               </property>
@@ -505,7 +505,7 @@
           <property name="minimumDate">
            <date>
             <year>2020</year>
-            <month>10</month>
+            <month>1</month>
             <day>1</day>
            </date>
           </property>
@@ -514,6 +514,13 @@
           </property>
           <property name="calendarPopup">
            <bool>true</bool>
+          </property>
+          <property name="date">
+           <date>
+            <year>2020</year>
+            <month>8</month>
+            <day>1</day>
+           </date>
           </property>
          </widget>
         </item>
