@@ -477,6 +477,7 @@ void MainWindow::on_confirmAddSaleButton_released()
             salesView->setModel(salesProxyModel);
 
             // update the global inventory vector
+            inventory.clear();
             connection.popInvVec();
             inventoryModel = connection.createInventoryTable();
             inventoryProxyModel->setSourceModel(inventoryModel);
