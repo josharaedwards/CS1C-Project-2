@@ -47,6 +47,10 @@ MainWindow::MainWindow(QWidget *parent)
     memberView = this->ui->MemberTableView;
     memberView->setModel(stackedMemberFilter);
 
+    /// @brief Hide the cost to renew column at first
+    memberView->setColumnHidden(4, true);
+
+
     /// @brief Formats the column sizes by allowing them to stretch
     memberView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
@@ -524,4 +528,19 @@ void MainWindow::on_memStatusButton_released()
     MemberTypePopup openMember(logInput.getState());
     openMember.setModal(true);
     openMember.exec();
+}
+
+/// @brief When the hide/unhide cost to renew button is pressed
+void MainWindow::on_costColButton_released()
+{
+    if (memberView->isColumnHidden(4))
+    {
+        memberView->setColumnHidden(4, false);
+        ui->costColButton->setText("Hide Cost");
+    }
+    else
+    {
+        memberView->setColumnHidden(4, true);
+        ui->costColButton->setText("Show Cost");
+    }
 }
