@@ -496,3 +496,10 @@ void MainWindow::on_quantityLineEdit_textChanged(const QString &arg1)
     // refresh the subtotal from the product name and quantity
     refreshSalePage();
 }
+
+void MainWindow::on_memStatusButton_released()
+{
+    MemberTypePopup openMember(logInput.getState());
+    openMember.setModal(true);
+    openMember.exec();
+}

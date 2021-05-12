@@ -2,6 +2,7 @@
 #define MEMBERTYPEPOPUP_H
 
 #include <QDialog>
+#include "authenticate.h"
 
 namespace Ui {
 class MemberTypePopup;
@@ -12,7 +13,7 @@ class MemberTypePopup : public QDialog
     Q_OBJECT
 
 public:
-    explicit MemberTypePopup(QWidget *parent = nullptr);
+    explicit MemberTypePopup(loginStatus status, QWidget *parent = nullptr);
     ~MemberTypePopup();
 
 private:

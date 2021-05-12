@@ -1,7 +1,7 @@
 #include "membertypepopup.h"
 #include "ui_membertypepopup.h"
 
-MemberTypePopup::MemberTypePopup(QWidget *parent) :
+MemberTypePopup::MemberTypePopup(loginStatus status, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::MemberTypePopup)
 {
