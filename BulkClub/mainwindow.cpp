@@ -62,10 +62,14 @@ MainWindow::MainWindow(QWidget *parent)
     /// @brief Formats the column sizes by allowing them to stretch
     salesView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
+    /// @brief creates the models for the inventory table
     inventoryModel = connection.createInventoryTable();
     inventoryProxyModel = new QSortFilterProxyModel(this);
     inventoryProxyModel->setSourceModel(inventoryModel);
     inventoryProxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
+    inventoryProxyModel->setFilterKeyColumn(0);
+    inventoryProxyModel->setSortCaseSensitivity(Qt::CaseInsensitive);
+    inventoryProxyModel->sort(0, Qt::AscendingOrder);
     inventoryView = this->ui->inventoryTableView;
     inventoryView->setModel(inventoryProxyModel);
 
@@ -336,7 +340,8 @@ void MainWindow::on_confirmAddMemButton_released()
         addMem.push_back(newMember);
 
         /// @brief Creating a confirmation popup, retreiving whether to add sale or not
-        AddMemberPopup addWindow = AddMemberPopup(addMem);  // passing vector of member to createMemberModel()
+        AddMemberPopup addWindow(addMem);  // passing vector of member to createMemberModel()
+
         addWindow.exec();
 
         if (addWindow.getConfirmAdd()) // if user presses "confirm" button (do not add sale)
@@ -494,4 +499,11 @@ void MainWindow::on_quantityLineEdit_textChanged(const QString &arg1)
 {
     // refresh the subtotal from the product name and quantity
     refreshSalePage();
+}
+
+void MainWindow::on_memStatusButton_released()
+{
+    MemberTypePopup openMember(logInput.getState());
+    openMember.setModal(true);
+    openMember.exec();
 }
