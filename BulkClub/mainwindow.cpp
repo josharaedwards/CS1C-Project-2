@@ -74,14 +74,7 @@ MainWindow::MainWindow(QWidget *parent)
     inventoryView->setModel(inventoryProxyModel);
 
     ///@brief calculates the total spent from the inventory vector and updates the appropriate label
-    int invVecSize = inventory.size();
-    double invGrandTotal = 0;
-    for(int i = 0; i < invVecSize; i++)
-    {
-        invGrandTotal += inventory[i].getTotal();
-    }
-    invGrandTotal += invGrandTotal * 0.0775;
-    this->ui->labelCalculatedGrandTotal->setText("$" + QString::number(invGrandTotal));
+    refreshGrandTotal();
 
     /// @brief Formats the column sizes by allowing them to stretch
     inventoryView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
@@ -149,6 +142,19 @@ void MainWindow::refreshSalePage()
         ui->taxLineEdit->setText(QString::number(tax, 'f', 2));
         ui->totalLineEdit->setText(QString::number(total, 'f', 2));
     }
+}
+
+void MainWindow::refreshGrandTotal()
+{
+    ///@brief calculates the total spent from the inventory vector and updates the appropriate label
+    int invVecSize = inventory.size();
+    double invGrandTotal = 0;
+    for(int i = 0; i < invVecSize; i++)
+    {
+        invGrandTotal += inventory[i].getTotal();
+    }
+    invGrandTotal += invGrandTotal * 0.0775;
+    ui->labelCalculatedGrandTotal->setText("$" + QString::number(invGrandTotal));
 }
 
 /// @brief Hiding or revealing features based on log in status
@@ -469,6 +475,15 @@ void MainWindow::on_confirmAddSaleButton_released()
             salesModel = createSalesModel(parentWidget(), sales);
             salesProxyModel->setSourceModel(salesModel);
             salesView->setModel(salesProxyModel);
+
+            // update the global inventory vector
+            connection.popInvVec();
+            inventoryModel = connection.createInventoryTable();
+            inventoryProxyModel->setSourceModel(inventoryModel);
+            inventoryView->setModel(inventoryProxyModel);
+
+            // update the grand total
+            refreshGrandTotal();
 
             AddSalePopup::addSales.clear();
 

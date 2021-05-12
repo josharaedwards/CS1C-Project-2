@@ -354,6 +354,26 @@ void addSale(QAbstractItemModel* model, Sale saleIn)
     model->setData(model->index(0, 4), saleIn.getQuantity());
 }
 
+void addInventory(QAbstractItemModel* model, Inventory invIn)
+{
+    /// @brief Adds a row to the model from the top.
+    model->insertRow(0);
+
+    /// @brief Adds the data for a sale into the model, similar to a two dimensional array.
+    model->setData(model->index(0, 0), invIn.getName());
+    model->setData(model->index(0, 1), invIn.getPrice());
+    model->setData(model->index(0, 2), invIn.getQuantity());
+    model->setData(model->index(0, 3), invIn.getTotal());
+}
+
+void addInventory(QAbstractItemModel* model, vector<Inventory> invIn)
+{
+    for (unsigned int i = 0; i < invIn.size(); i++)
+    {
+        addInventory(model, invIn[i]);
+    }
+}
+
 void deleteMember(vector<Member>& members, int memNumIn)
 {
     int size = members.size();
