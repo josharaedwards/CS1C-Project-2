@@ -94,6 +94,8 @@ private slots:
 
     void on_memStatusButton_released();
 
+    void on_costColButton_released();
+
 private:
     Ui::MainWindow *ui;
 
