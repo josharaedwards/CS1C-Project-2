@@ -34,7 +34,7 @@
         <item row="1" column="0" colspan="2">
          <widget class="QTabWidget" name="tabWidget">
           <property name="currentIndex">
-           <number>2</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="membersTab">
            <attribute name="title">
@@ -223,6 +223,13 @@
              <widget class="QPushButton" name="deleteMemButton">
               <property name="text">
                <string>Delete Member</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="2">
+             <widget class="QPushButton" name="memStatusButton">
+              <property name="text">
+               <string>Membership Statuses</string>
               </property>
              </widget>
             </item>

@@ -82,6 +82,21 @@
      <height>231</height>
     </rect>
    </property>
+   <column>
+    <property name="text">
+     <string>Member Name</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Member Number</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Member Type</string>
+    </property>
+   </column>
   </widget>
   <widget class="QTableWidget" name="execMemTable">
    <property name="geometry">
@@ -92,6 +107,21 @@
      <height>231</height>
     </rect>
    </property>
+   <column>
+    <property name="text">
+     <string>Member Name</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Member Number</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Member Type</string>
+    </property>
+   </column>
   </widget>
  </widget>
  <resources/>
