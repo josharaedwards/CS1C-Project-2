@@ -544,3 +544,13 @@ void MainWindow::on_costColButton_released()
         ui->costColButton->setText("Show Cost");
     }
 }
+
+void MainWindow::on_buttonAddInvItem_released()
+{
+
+}
+
+void MainWindow::on_buttonDelInvItem_released()
+{
+
+}
