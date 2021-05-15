@@ -12,6 +12,9 @@ Member::Member()
     bIsExecutive = false;
 
     dueAmnt = REG_ANNUAL_DUE;
+
+    refreshSpentAmnt();
+    refreshRebateAmnt();
 }
 
 Member::Member(const Member& other)
@@ -29,6 +32,7 @@ Member::Member(const Member& other)
     sales = other.sales;
 
     refreshSpentAmnt();
+    refreshRebateAmnt();
 }
 
 void Member::copy(Member other)
@@ -44,6 +48,7 @@ void Member::copy(Member other)
     bIsExecutive = other.bIsExecutive;
 
     refreshSpentAmnt();
+    refreshRebateAmnt();
 }
 
 Member::Member(QString nameIn, QDate expDateIn, int memNumIn, bool execIn)
@@ -64,6 +69,7 @@ Member::Member(QString nameIn, QDate expDateIn, int memNumIn, bool execIn)
     }
 
     refreshSpentAmnt();
+    refreshRebateAmnt();
 }
 
 Member::Member(QString nameIn, QDate expDateIn, int memNumIn, bool execIn, vector<Sale> salesIn)
@@ -86,6 +92,7 @@ Member::Member(QString nameIn, QDate expDateIn, int memNumIn, bool execIn, vecto
     sales = salesIn;
 
     refreshSpentAmnt();
+    refreshRebateAmnt();
 }
 
 Member::~Member()
@@ -185,6 +192,8 @@ void Member::refreshRebateAmnt()
 void Member::addSale(Sale sale)
 {
     sales.push_back(sale);
+
+    refreshSpentAmnt();
 }
 
 void Member::addSales(vector<Sale> salesIn)
@@ -195,6 +204,8 @@ void Member::addSales(vector<Sale> salesIn)
     {
         sales.push_back(salesIn[i]);
     }
+
+    refreshSpentAmnt();
 }
 
 Sale Member::getSale(int index)
@@ -225,11 +236,11 @@ bool Member::hasSale(Sale saleIn)
 
 MemberStatus Member::checkMemberStatus()
 {
-    if(IsExec() && rebateAmnt < dueAmnt)
+    if((IsExec() && rebateAmnt < dueAmnt) || (IsExec() && spentAmnt <= 0.0))
     {
         return DEMOTED;
     }
-    else if(!IsExec() && rebateAmnt > dueAmnt)
+    else if(!IsExec() && rebateAmnt > dueAmnt && spentAmnt > 0.0)
     {
         return PROMOTED;
     }

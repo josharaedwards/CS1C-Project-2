@@ -285,13 +285,14 @@ void salesToMembers(vector<Member>& members, vector<Sale> sales)
 
 QAbstractItemModel* createMemberModel(QWidget* parent, vector<Member> members)
 {
-    QStandardItemModel *model = new QStandardItemModel(0, 4, parent);
+    QStandardItemModel *model = new QStandardItemModel(0, 5, parent);
 
     /// @brief Creating an object for every header and labelling them appropriately.
     model->setHeaderData(0, Qt::Horizontal, QObject::tr("Name"));
     model->setHeaderData(1, Qt::Horizontal, QObject::tr("Member ID"));
     model->setHeaderData(2, Qt::Horizontal, QObject::tr("Membership"));
     model->setHeaderData(3, Qt::Horizontal, QObject::tr("Date"));
+    model->setHeaderData(4, Qt::Horizontal, QObject::tr("Renewal Cost"));
 
     for(unsigned int i = 0; i < members.size(); i++)
     {
@@ -313,10 +314,12 @@ void addMember(QAbstractItemModel* model, Member memIn)
     if (memIn.IsExec())
     {
         model->setData(model->index(0, 2), QObject::tr("Executive"));
+        model->setData(model->index(0, 4), QString::number(120.00, 'f', 2));
     }
     else
     {
         model->setData(model->index(0, 2), QObject::tr("Regular"));
+        model->setData(model->index(0, 4), QString::number(65.00, 'f', 2));
     }
 
     model->setData(model->index(0, 3), memIn.getExpDate().toString("MM/dd/yyyy"));
@@ -352,6 +355,26 @@ void addSale(QAbstractItemModel* model, Sale saleIn)
     model->setData(model->index(0, 2), saleIn.getName());
     model->setData(model->index(0, 3), saleIn.getPrice());
     model->setData(model->index(0, 4), saleIn.getQuantity());
+}
+
+void addInventory(QAbstractItemModel* model, Inventory invIn)
+{
+    /// @brief Adds a row to the model from the top.
+    model->insertRow(0);
+
+    /// @brief Adds the data for a sale into the model, similar to a two dimensional array.
+    model->setData(model->index(0, 0), invIn.getName());
+    model->setData(model->index(0, 1), invIn.getPrice());
+    model->setData(model->index(0, 2), invIn.getQuantity());
+    model->setData(model->index(0, 3), invIn.getTotal());
+}
+
+void addInventory(QAbstractItemModel* model, vector<Inventory> invIn)
+{
+    for (unsigned int i = 0; i < invIn.size(); i++)
+    {
+        addInventory(model, invIn[i]);
+    }
 }
 
 void deleteMember(vector<Member>& members, int memNumIn)

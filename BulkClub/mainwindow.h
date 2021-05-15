@@ -17,6 +17,7 @@
 #include "deletememberpopup.h"
 #include "addmemberpopup.h"
 #include "addsalepopup.h"
+#include "membertypepopup.h"
 
 #include <QMainWindow>
 #include <QTableView>
@@ -42,6 +43,7 @@ public:
     ~MainWindow();
     void loadProductCompleter();
     void refreshSalePage();
+    void refreshGrandTotal();
 
 private slots:
     void on_logInPushButton_released();
@@ -89,6 +91,10 @@ private slots:
     void on_confirmAddSaleButton_released();
 
     void on_quantityLineEdit_textChanged(const QString &arg1);
+
+    void on_memStatusButton_released();
+
+    void on_costColButton_released();
 
 private:
     Ui::MainWindow *ui;
