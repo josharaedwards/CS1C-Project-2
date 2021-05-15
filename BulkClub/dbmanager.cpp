@@ -22,62 +22,50 @@ DbManager::~DbManager()
 {
     QSqlQuery query(db);
 
+    qDebug() << query.driver()->hasFeature(QSqlDriver::NamedPlaceholders);
+
     /// @brief Deleting all contents from the Members table in the databse
-    query.prepare("DELETE FROM Members");
-    query.exec();
+    query.exec("DELETE FROM Members");
 
     /// @brief Inserting all contents from the global members vector into the database
     QVariant name, memNum, memType, expDate;
     for (unsigned int i = 0; i < members.size(); i++)
     {
-        QSqlQuery newQuery(db);
-        newQuery.prepare("INSERT INTO Members(Name, Member ID, Membership, Date) VALUES(?, ?, ?, ?)");
-
-        name = members[i].getName(); // << QVariant(QVariant::String);
+        name = members[i].getName();
         memNum = members[i].getMemNum();
         if (members[i].IsExec())
         {
-            memType = "Executive"; // << QVariant(QVariant::String);
+            memType = "Executive";
         }
         else
         {
-            memType = "Regular"; // << QVariant(QVariant::String);
+            memType = "Regular";
         }
         expDate = members[i].getExpDate().toString("M/d/yyyy");
 
-        newQuery.bindValue(0, name);
-        newQuery.bindValue(1, memNum);
-        newQuery.bindValue(2, memType);
-        newQuery.bindValue(3, expDate);
+        qDebug() << name << " " << memNum << " " << memType << " " << expDate;
 
-        newQuery.exec();
+        query.prepare("INSERT INTO Members (Name, Member ID, Membership, Date) VALUES (?, ?, ?, ?)");
+
+        query.addBindValue(name);
+        query.addBindValue(memNum);
+        query.addBindValue(memType);
+        query.addBindValue(expDate);
+
+        query.exec();
     }
 
     qDebug() << query.lastError();
     qDebug() << query.executedQuery();
 
-    /*
-    names << QVariant(QVariant::String);
-    memType << QVariant(QVariant::String);
-    expDate << QVariant(QVariant::String);
-
-    query.addBindValue(names);
-    query.addBindValue(memNums);
-    query.addBindValue(memType);
-    query.addBindValue(expDate);
-    query.execBatch();
-    */
-
     /// @brief Deleting all contents from the Members table in the databse
-    // query.prepare("DELETE FROM Sales");
-    // query.exec();
+    // query.exec("DELETE FROM Sales");
 
     /// @brief Inserting all contents from the global members vector into the database
 
 
     /// @brief Deleting all contents from the Members table in the databse
-    // query.prepare("DELETE FROM Inventory");
-    // query.exec();
+    // query.exec("DELETE FROM Inventory");
 
     /// @brief Inserting all contents from the global members vector into the database
 
