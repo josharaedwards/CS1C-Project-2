@@ -5,6 +5,7 @@
 
 #include "dbmanager.h"
 
+extern vector<Member> members;
 extern vector<Sale> sales;
 extern vector<Inventory> inventory;
 
@@ -19,6 +20,68 @@ DbManager::DbManager()
 
 DbManager::~DbManager()
 {
+    QSqlQuery query(db);
+
+    /// @brief Deleting all contents from the Members table in the databse
+    query.prepare("DELETE FROM Members");
+    query.exec();
+
+    /// @brief Inserting all contents from the global members vector into the database
+    QVariant name, memNum, memType, expDate;
+    for (unsigned int i = 0; i < members.size(); i++)
+    {
+        QSqlQuery newQuery(db);
+        newQuery.prepare("INSERT INTO Members(Name, Member ID, Membership, Date) VALUES(?, ?, ?, ?)");
+
+        name = members[i].getName(); // << QVariant(QVariant::String);
+        memNum = members[i].getMemNum();
+        if (members[i].IsExec())
+        {
+            memType = "Executive"; // << QVariant(QVariant::String);
+        }
+        else
+        {
+            memType = "Regular"; // << QVariant(QVariant::String);
+        }
+        expDate = members[i].getExpDate().toString("M/d/yyyy");
+
+        newQuery.bindValue(0, name);
+        newQuery.bindValue(1, memNum);
+        newQuery.bindValue(2, memType);
+        newQuery.bindValue(3, expDate);
+
+        newQuery.exec();
+    }
+
+    qDebug() << query.lastError();
+    qDebug() << query.executedQuery();
+
+    /*
+    names << QVariant(QVariant::String);
+    memType << QVariant(QVariant::String);
+    expDate << QVariant(QVariant::String);
+
+    query.addBindValue(names);
+    query.addBindValue(memNums);
+    query.addBindValue(memType);
+    query.addBindValue(expDate);
+    query.execBatch();
+    */
+
+    /// @brief Deleting all contents from the Members table in the databse
+    // query.prepare("DELETE FROM Sales");
+    // query.exec();
+
+    /// @brief Inserting all contents from the global members vector into the database
+
+
+    /// @brief Deleting all contents from the Members table in the databse
+    // query.prepare("DELETE FROM Inventory");
+    // query.exec();
+
+    /// @brief Inserting all contents from the global members vector into the database
+
+
     /// @brief If the database connection is open, then it is closed
     if (db.isOpen())
     {
