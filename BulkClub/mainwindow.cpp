@@ -99,8 +99,6 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
-
-
 }
 
 /// @brief Initializes the unique list of products from the current state of the inventory model
@@ -543,4 +541,14 @@ void MainWindow::on_costColButton_released()
         memberView->setColumnHidden(4, true);
         ui->costColButton->setText("Show Cost");
     }
+}
+
+void MainWindow::on_buttonAddInvItem_released()
+{
+
+}
+
+void MainWindow::on_buttonDelInvItem_released()
+{
+
 }

@@ -155,7 +155,7 @@
     </widget>
    </item>
    <item row="4" column="0">
-    <widget class="QLabel" name="label_8">
+    <widget class="QLabel" name="rebateTitleLabel">
      <property name="text">
       <string>REBATE.................</string>
      </property>
