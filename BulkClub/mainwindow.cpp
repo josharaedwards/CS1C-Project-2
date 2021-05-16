@@ -309,6 +309,23 @@ void MainWindow::on_resetInvFilterButton_released()
 void MainWindow::on_invSearchLineEdit_textChanged(const QString &arg1)
 {
     this->inventoryProxyModel->setFilterRegularExpression(arg1);
+
+    QString tempQString;
+    string tempString;
+    double tempDouble;
+    int rowCount = inventoryProxyModel->rowCount();
+    double newTotal = 0;
+
+    for(int i = 0; i < rowCount; i++)
+    {
+        // retrieves data from current row, last column
+        tempQString = inventoryProxyModel->data(inventoryProxyModel->index(i, 3)).toString();
+        tempDouble = tempQString.toDouble();
+        newTotal += tempDouble;
+    }
+    // applies sales tax to the total
+    newTotal += newTotal * 0.0775;
+    this->ui->labelCalculatedGrandTotal->setText("$" + QString::number(newTotal, 'f', 2));
 }
 
 /// @brief Cancel button to add a member, returns to tab view
