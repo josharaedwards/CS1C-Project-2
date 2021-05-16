@@ -96,6 +96,10 @@ private slots:
 
     void on_costColButton_released();
 
+    void on_buttonAddInvItem_released();
+
+    void on_buttonDelInvItem_released();
+
 private:
     Ui::MainWindow *ui;
 

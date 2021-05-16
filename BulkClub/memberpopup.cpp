@@ -26,6 +26,17 @@ memberPopup::memberPopup(QString memberID, QWidget *parent) :
     this->ui->totalLabel->setText("$" + QString::number(members[index].getSpentAmnt() + members[index].getTaxAmnt(), 'f', 2));
     this->ui->rebateLabel->setText("$" + QString::number(members[index].getRebateAmnt(), 'f', 2));
 
+    if(members[index].IsExec())
+    {
+        this->ui->rebateTitleLabel->setHidden(false);
+        this->ui->rebateLabel->setHidden(false);
+    }
+    else
+    {
+        this->ui->rebateTitleLabel->setHidden(true);
+        this->ui->rebateLabel->setHidden(true);
+    }
+
     createMemTable(index);
     createSaleTable(index);
     this->setVisible(false);
