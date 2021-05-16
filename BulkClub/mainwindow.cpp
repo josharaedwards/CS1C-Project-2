@@ -569,3 +569,8 @@ void MainWindow::on_buttonDelInvItem_released()
 {
 
 }
+
+void MainWindow::on_buttonAddInvItem_clicked()
+{
+    AddInvPopup newItem;
+}
