@@ -99,8 +99,6 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
-
-
 }
 
 /// @brief Initializes the unique list of products from the current state of the inventory model

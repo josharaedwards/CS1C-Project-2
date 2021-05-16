@@ -5,6 +5,7 @@
 
 #include "dbmanager.h"
 
+extern vector<Member> members;
 extern vector<Sale> sales;
 extern vector<Inventory> inventory;
 
@@ -19,6 +20,10 @@ DbManager::DbManager()
 
 DbManager::~DbManager()
 {
+    saveMemberTable();
+    saveSalesTable();
+    saveInventoryTable();
+
     /// @brief If the database connection is open, then it is closed
     if (db.isOpen())
     {
@@ -226,4 +231,99 @@ int DbManager::findInvIndex(QString itemName)
         }
     }
     return foundIndex;
+}
+
+
+void DbManager::saveMemberTable()
+{
+    QSqlQuery query(db);
+
+    /// @brief Deleting all contents from the Members table in the databse
+    query.exec("DELETE FROM Members");
+
+    /// @brief Inserting all contents from the global members vector into the database
+    QVariant name, memNum, memType, expDate;
+    for (unsigned int i = 0; i < members.size(); i++)
+    {
+        name = members[i].getName();
+        memNum = members[i].getMemNum();
+        if (members[i].IsExec())
+        {
+            memType = "Executive";
+        }
+        else
+        {
+            memType = "Regular";
+        }
+        expDate = members[i].getExpDate().toString("M/d/yyyy");
+
+        qDebug() << members[i].getName() << " " << members[i].getMemNum() << " " << members[i].getExpDate().toString("M/d/yyyy");
+
+        query.prepare("INSERT INTO Members (Name, Member_ID, Membership, Date) VALUES (?, ?, ?, ?)");
+
+        query.addBindValue(name);
+        query.addBindValue(memNum);
+        query.addBindValue(memType);
+        query.addBindValue(expDate);
+
+        query.exec();
+    }
+}
+
+
+void DbManager::saveSalesTable()
+{
+    QSqlQuery query(db);
+
+    /// @brief Deleting all contents from the Members table in the databse
+    query.exec("DELETE FROM Sales");
+
+    /// @brief Inserting all contents from the global members vector into the database
+    QVariant date, memNum, name, price, quantity;
+    for (unsigned int i = 0; i < sales.size(); i++)
+    {
+        date = sales[i].getDate().toString("M/d/yyyy");
+        memNum = sales[i].getMemNum();
+        name = sales[i].getName();
+        price = sales[i].getPrice();
+        quantity = sales[i].getQuantity();
+
+        query.prepare("INSERT INTO Sales (Date, Member_ID, Product, Price, Quantity) VALUES (?, ?, ?, ?, ?)");
+
+        query.addBindValue(date);
+        query.addBindValue(memNum);
+        query.addBindValue(name);
+        query.addBindValue(price);
+        query.addBindValue(quantity);
+
+        query.exec();
+    }
+}
+
+
+void DbManager::saveInventoryTable()
+{
+    QSqlQuery query(db);
+
+    /// @brief Deleting all contents from the Members table in the databse
+    query.exec("DELETE FROM Inventory");
+
+    /// @brief Inserting all contents from the global members vector into the database
+    QVariant name, price, quantity, total;
+    for (unsigned int i = 0; i < inventory.size(); i++)
+    {
+        name = inventory[i].getName();
+        price = inventory[i].getPrice();
+        quantity = inventory[i].getQuantity();
+        total = inventory[i].getTotal();
+
+        query.prepare("INSERT INTO Inventory (Product, Price, Quantity_Sold, Total_Revenue) VALUES (?, ?, ?, ?)");
+
+        query.addBindValue(name);
+        query.addBindValue(price);
+        query.addBindValue(quantity);
+        query.addBindValue(total);
+
+        query.exec();
+    }
 }

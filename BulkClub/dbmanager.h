@@ -12,6 +12,7 @@
 #include <QSqlQuery>
 
 #include "member.h"
+#include "sale.h"
 #include "inventory.h"
 
 /**
@@ -62,53 +63,12 @@ public:
     QSqlTableModel* createInventoryTable();
 
     /**
-     * @brief addMember
-     *
-     * Adds a member to the member table of the database
-     */
-    void addMember(Member newMember);
-
-    /**
-     * @brief removeMember
-     *
-     * Removes a member from the member table of the database
-     */
-    void removeMember();
-
-    /**
-     * @brief addSale
-     *
-     * Adds a sale to the sales table of the database
-     */
-    void addSale();
-
-    /**
-     * @brief removeSale
-     *
-     * Removes a sale from the sales table of the database
-     */
-    void removeSale();
-
-    /**
-     * @brief addInventory
-     *
-     * Adds an item to the inventory table
-     */
-    void addInventory();
-
-    /**
-     * @brief removeInventory
-     *
-     * Removes an item from the inventory table
-     */
-    void removeInventory();
-
-    /**
      * @brief isInInventory
      *
      * returns true if passed QString is in inventory vec
      */
     bool isInInventory(QString);
+
     /**
      * @brief findInvIndex
      *
@@ -139,6 +99,30 @@ public:
      *
      */
     void popInvVec();
+
+    /**
+     * @brief saveMemberTable
+     *
+     * Deletes all existing data in the member table of the database and inserts the member
+     * records held within the global member vector
+     */
+    void saveMemberTable();
+
+    /**
+     * @brief saveSalesTable
+     *
+     * Deletes all existing data in the sales table of the database and inserts the sales
+     * records held within the global sales vector
+     */
+    void saveSalesTable();
+
+    /**
+     * @brief saveInventoryTable
+     *
+     * Deletes all existing data in the inventory table of the database and inserts the
+     * inventory records held within the global inventory vector
+     */
+    void saveInventoryTable();
 
 private:
     /**
