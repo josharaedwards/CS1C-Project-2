@@ -66,7 +66,7 @@ MainWindow::MainWindow(QWidget *parent)
     /// @brief Formats the column sizes by allowing them to stretch
     salesView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
-    /// @brief creates the models for the inventory table
+    /// @brief creates the models for the inventory table from the .sqlite
     inventoryModel = connection.createInventoryTable();
     inventoryProxyModel = new QSortFilterProxyModel(this);
     inventoryProxyModel->setSourceModel(inventoryModel);
@@ -566,25 +566,30 @@ void MainWindow::on_buttonAddInvItem_released()
     AddInvPopup newPopup(newItem);
     newPopup.setModal(true);
     newPopup.exec();
+
+    if(newPopup.Accepted)
+    {
+        inventoryModel = connection.createInventoryTable();
+        inventoryProxyModel->setSourceModel(inventoryModel);
+        inventoryView->setModel(inventoryProxyModel);
+
+        refreshGrandTotal();
+    }
 }
 
 void MainWindow::on_buttonDelInvItem_released()
 {
-    QString tempName, deleteName;
-    //QSqlQuery query(getConnection());
+    QString tempName/*, deleteName*/;
     DbManager d;
     int tempIndex;
     tempName = ui->lineEditDel->text();
     if(tempName != "")
     {
         tempIndex = d.findInvIndex(tempName);
-        deleteName = inventory[tempIndex].getName();
-
-        //d.deleteFromInventory(deleteName);
+        //deleteName = inventory[tempIndex].getName();
 
         inventory.erase(inventory.begin() + tempIndex);
-        //inventoryView->
-        //d.saveInventoryTable();
+        d.saveInventoryTable();
 
        /* QString tempData;
         for(int i = 0; i < inventoryProxyModel->rowCount() - 1; i++)
