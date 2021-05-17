@@ -10,11 +10,17 @@
 #include <iostream>
 #include <QMovie>
 
-//global member variable
+// global variables
 vector<Member> members;
 vector<Sale> sales;
 vector<Inventory> inventory;
 
+/**
+ * @brief MainWindow::MainWindow
+ *
+ * Default construstor of the MainWindow class
+ * @param parent The parent widget
+ */
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -24,6 +30,7 @@ MainWindow::MainWindow(QWidget *parent)
     splash.exec();
 
     ui->setupUi(this);
+
     //--logos-and-gifs------------------------------------------------------------------------------------------------
     this->ui->BulkClubLogo->setPixmap(QPixmap("icons//BulkClub Pro™.png").scaled(QSize(300, 60), Qt::KeepAspectRatio));
     this->ui->BulkClubProLabel->setPixmap(QPixmap("icons//BulkClub Pro™.png").scaled(QSize(300, 60), Qt::KeepAspectRatio));
@@ -35,6 +42,7 @@ MainWindow::MainWindow(QWidget *parent)
     this->ui->logoLabel->setMovie(movie);
     movie->start();
 
+    /// @brief Creating icons for the tabs
     QIcon memIcon("icons//user.png");       //CREATE TAB ICONS
     QIcon salesIcon("icons//money.png");
     QIcon invIcon("icons//boxes.png");
@@ -60,6 +68,7 @@ MainWindow::MainWindow(QWidget *parent)
              << " " << inventory[i].getQuantity() << " " << inventory[i].getTotal() << endl;
     }
 
+    /// @brief Defaults the winodw title to Not Logged In
     this->setWindowTitle("Not Logged In");
 
     /// @brief Creates the models for the member table
@@ -124,9 +133,14 @@ MainWindow::MainWindow(QWidget *parent)
     this->setVisible(false);
 }
 
+/// @brief Destructor of the MainWindow Class
 MainWindow::~MainWindow()
 {
     delete ui;
+
+    connection.saveMemberTable();
+    connection.saveSalesTable();
+    connection.saveInventoryTable();
 }
 
 /// @brief Initializes the unique list of products from the current state of the inventory model
@@ -144,6 +158,7 @@ void MainWindow::loadProductCompleter()
     productCompleter->setCompletionMode(QCompleter::PopupCompletion);
     productCompleter->setFilterMode(Qt::MatchContains);
     ui->productLineEdit->setCompleter(productCompleter);
+    ui->lineEditDel->setCompleter(productCompleter);
 }
 
 /// @brief Refreshes the unit price, subtotal, tax, and total from the quantity and product name
@@ -176,6 +191,7 @@ void MainWindow::refreshSalePage()
     }
 }
 
+/// @brief Calculates the grand total (including tax) of every item sold
 void MainWindow::refreshGrandTotal()
 {
     ///@brief calculates the total spent from the inventory vector and updates the appropriate label
@@ -441,6 +457,7 @@ void MainWindow::on_confirmAddMemButton_released()
     }
 }
 
+/// @brief Triggered when the sales table is double clicked, opens a detailed sales report
 void MainWindow::on_salesTableView_doubleClicked(const QModelIndex &index)
 {
     QModelIndex indexID = index.model()->index(index.row(), 0, QModelIndex());
@@ -590,6 +607,7 @@ void MainWindow::on_costColButton_released()
     }
 }
 
+/// @brief Triggered when user presses the button to add an inventory item
 void MainWindow::on_buttonAddInvItem_released()
 {
     Inventory newItem;
@@ -605,8 +623,10 @@ void MainWindow::on_buttonAddInvItem_released()
 
         refreshGrandTotal();
     }
+    loadProductCompleter();
 }
 
+/// @brief Triggered when the user presses the button to delete an inventory item
 void MainWindow::on_buttonDelInvItem_released()
 {
     QString tempName;
@@ -627,14 +647,5 @@ void MainWindow::on_buttonDelInvItem_released()
         refreshGrandTotal();
         ui->lineEditDel->setText("");
     }
-}
-
-void MainWindow::on_buttonAddInvItem_clicked()
-{
-
-}
-
-void MainWindow::on_inventoryTableView_clicked(const QModelIndex &index)
-{
-    //inventoryView->setCurrentIndex(index);
+    loadProductCompleter();
 }
