@@ -201,28 +201,50 @@ private slots:
 
     /**
      * @brief on_productLineEdit_textChanged
+     * @details The line edit for the product of the new sale to be added to a new member was edited
      * @param arg1 The product being added for a new sale
      */
     void on_productLineEdit_textChanged(const QString &arg1);
 
     /**
      * @brief on_confirmAddSaleButton_released
-     * @details
+     * @details User confirmed they would like to add the sale, a new popup shows all purchases to confirm
      */
     void on_confirmAddSaleButton_released();
 
+    /**
+     * @brief on_quantityLineEdit_textChanged
+     * @details The line edit for the quantity of a product for a new sale was changed
+     * @param arg1 The quantity of the product for a new sale was changed
+     */
     void on_quantityLineEdit_textChanged(const QString &arg1);
 
+    /**
+     * @brief on_memStatusButton_released
+     * @details The button to check how many members should demote/promote their status was pressed
+     */
     void on_memStatusButton_released();
 
+    /**
+     * @brief on_costColButton_released
+     * @details The button to hide/show the cost of a member to renew was pressed
+     */
     void on_costColButton_released();
 
+    /**
+     * @brief on_buttonAddInvItem_released
+     * @details The Admin button to add an item to inventory was pressed
+     */
     void on_buttonAddInvItem_released();
 
+    /**
+     * @brief on_buttonDelInvItem_released
+     * @details The Admin button to delete an item from inventory was pressed
+     */
     void on_buttonDelInvItem_released();
 
 private:
-    Ui::MainWindow *ui;
+    Ui::MainWindow *ui; /// @var ui The user interface with the app
     QAbstractItemModel *memberModel; /// @var memberModel the source model for the member table
     QAbstractItemModel *salesModel;  /// @var salesModel the source model for the sales table
     QAbstractItemModel *inventoryModel;  /// @var inventoryModel the source model for the inventory table
