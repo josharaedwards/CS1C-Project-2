@@ -177,6 +177,7 @@ void MainWindow::refreshSalePage()
     }
 }
 
+/// @brief Calculates the grand total (including tax) of every item sold
 void MainWindow::refreshGrandTotal()
 {
     ///@brief calculates the total spent from the inventory vector and updates the appropriate label
