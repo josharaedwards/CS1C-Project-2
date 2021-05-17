@@ -103,6 +103,7 @@ public:
      */
     vector<Inventory> popInvVec();
 
+    void addSalesToInv(vector<Sale>);
     /**
      * @brief saveMemberTable
      *

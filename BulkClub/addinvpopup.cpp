@@ -1,6 +1,7 @@
 #include "addinvpopup.h"
 #include "ui_addinvpopup.h"
 #include "dbmanager.h"
+#include "helperLib.h"
 
 extern vector<Inventory> inventory;
 
@@ -22,14 +23,30 @@ AddInvPopup::~AddInvPopup()
 
 void AddInvPopup::on_buttonSubmit_released()
 {
+    DbManager d;
     Inventory newItem;
+    int quantityIndex;
+    int tempQuantity;
     newItem.setName(ui->lineEditName->text());
     newItem.setPrice(ui->lineEditPrice->text().toDouble());
     newItem.setQuantity(ui->lineEditQuantity->text().toInt());
     newItem.refreshTotal();
-    inventory.push_back(newItem);
 
-    DbManager d;
+
+    if(d.isInInventory(newItem.getName()))
+    {
+        quantityIndex = d.findInvIndex(newItem.getName());
+        tempQuantity = inventory[quantityIndex].getQuantity() + newItem.getQuantity();
+        inventory[quantityIndex].setQuantity(tempQuantity);
+        inventory[quantityIndex].refreshTotal();
+        newItem.setPrice(inventory[quantityIndex].getPrice());
+    }
+    else
+    {
+        inventory.push_back(newItem);
+    }
+
+
     d.saveInventoryTable();
     this->accept();
 
