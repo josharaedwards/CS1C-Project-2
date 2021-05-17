@@ -497,13 +497,10 @@ void MainWindow::on_confirmAddSaleButton_released()
             salesProxyModel->setSourceModel(salesModel);
             salesView->setModel(salesProxyModel);
 
-            // fix this to append addSales info to inventory vec
             // update the global inventory vector
-            //inventory.clear();
             DbManager d;
             d.addSalesToInv(AddSalePopup::addSales);
             d.saveInventoryTable();
-            //inventory = connection.popInvVec();
             inventoryModel = connection.createInventoryTable();
             inventoryProxyModel->setSourceModel(inventoryModel);
             inventoryView->setModel(inventoryProxyModel);
