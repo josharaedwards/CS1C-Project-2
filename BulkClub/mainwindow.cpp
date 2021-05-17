@@ -142,6 +142,9 @@ MainWindow::~MainWindow()
 /// @brief Initializes the unique list of products from the current state of the inventory model
 void MainWindow::loadProductCompleter()
 {
+    // clear the list before adding again
+    products.clear();
+
     /// @brief Creating a list of all products listed in the inventory model
     for (int row = 0; row < inventoryModel->rowCount(); row++)
     {
