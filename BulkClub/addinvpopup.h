@@ -16,6 +16,9 @@ public:
     explicit AddInvPopup(Inventory newItem, QWidget *parent = nullptr);
     ~AddInvPopup();
 
+private slots:
+    void on_buttonSubmit_released();
+
 private:
     Ui::AddInvPopup *ui;
 };

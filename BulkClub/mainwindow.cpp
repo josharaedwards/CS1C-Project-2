@@ -498,8 +498,8 @@ void MainWindow::on_confirmAddSaleButton_released()
             salesView->setModel(salesProxyModel);
 
             // update the global inventory vector
-            inventory.clear();
-            connection.popInvVec();
+            //inventory.clear();
+            inventory = connection.popInvVec();
             inventoryModel = connection.createInventoryTable();
             inventoryProxyModel->setSourceModel(inventoryModel);
             inventoryView->setModel(inventoryProxyModel);
@@ -570,14 +570,31 @@ void MainWindow::on_buttonAddInvItem_released()
 
 void MainWindow::on_buttonDelInvItem_released()
 {
-    QString tempName;
+    QString tempName, deleteName;
+    //QSqlQuery query(getConnection());
     DbManager d;
     int tempIndex;
     tempName = ui->lineEditDel->text();
     if(tempName != "")
     {
         tempIndex = d.findInvIndex(tempName);
+        deleteName = inventory[tempIndex].getName();
+
+        //d.deleteFromInventory(deleteName);
+
         inventory.erase(inventory.begin() + tempIndex);
+        //inventoryView->
+        //d.saveInventoryTable();
+
+       /* QString tempData;
+        for(int i = 0; i < inventoryProxyModel->rowCount() - 1; i++)
+        {
+            tempData = inventoryProxyModel->data(inventoryProxyModel->index(i, 0)).toString();
+            if(tempData == tempName)
+            {
+                inventoryProxyModel->removeRow(i);
+            }
+        }*/
 
         inventoryModel = connection.createInventoryTable();
         inventoryProxyModel->setSourceModel(inventoryModel);

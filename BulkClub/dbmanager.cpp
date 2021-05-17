@@ -70,6 +70,18 @@ QSqlTableModel* DbManager::createSalesTable()
 }
 
 
+void DbManager::deleteFromInventory(QString deleteName)
+{
+    QSqlQuery query(db);
+    QString sQuery;
+    sQuery = "DELETE FROM Inventory WHERE Product = " + deleteName;
+    query.prepare(sQuery);
+    query.exec();
+    //DELETE FROM Inventory WHERE Product = deleteName.ToStdString()
+    //query.exec(above stuff);
+    //remember to call createInventoryTable() from code that called this function
+}
+
 QSqlTableModel* DbManager::createInventoryTable()
 {
     /// @brief Creates a new QSqlTableModel for the Inventory table
@@ -87,9 +99,24 @@ QSqlTableModel* DbManager::createInventoryTable()
 
     model->setSort(0, Qt::AscendingOrder);
 
-    QSqlQuery query(db);
+    /*for(int i = 0; i < model->rowCount(); i++)
+    {
+        for(int j = 0; j < inventory.size(); j++)
+        {
+            if(inventory[j].getName() == model->data(model->index(i, 0)).toString())
+            {
+                model->removeRow(i);
+            }
+        }
+    }*/
+
+    /*QSqlQuery query(db);
     /// @brief Deleting all contents from the inventory table in the databse
-    query.exec("DELETE FROM Inventory");
+    if(delSwitch)
+    {
+        //query.exec("DELETE FROM Inventory");
+    }
+
 
     int vecSize = inventory.size();
 
@@ -112,8 +139,8 @@ QSqlTableModel* DbManager::createInventoryTable()
         // needed to do this in order to correctly update inventoryProxyModel
         model->setTable("Inventory");
         model->select();
-    }
-    model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    }*/
+    model->setEditStrategy(QSqlTableModel::OnRowChange);
 
     return model;
 }
@@ -294,10 +321,10 @@ void DbManager::saveInventoryTable()
 {
     QSqlQuery query(db);
 
-    /// @brief Deleting all contents from the Members table in the databse
+    /// @brief Deleting all contents from the Inventory table in the databse
     query.exec("DELETE FROM Inventory");
 
-    /// @brief Inserting all contents from the global members vector into the database
+    /// @brief Inserting all contents from the global Inventory vector into the database
     QVariant name, price, quantity, total;
     for (unsigned int i = 0; i < inventory.size(); i++)
     {

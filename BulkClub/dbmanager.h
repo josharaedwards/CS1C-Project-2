@@ -56,6 +56,7 @@ public:
      */
     QSqlTableModel* createSalesTable();
 
+    void deleteFromInventory(QString);
     /**
      * @brief createInventoryTable
      *
