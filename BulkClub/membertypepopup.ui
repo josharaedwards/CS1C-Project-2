@@ -18,7 +18,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Membership Details</string>
   </property>
   <widget class="QLabel" name="label">
    <property name="geometry">
@@ -96,6 +96,9 @@
      <bold>false</bold>
     </font>
    </property>
+   <property name="editTriggers">
+    <set>QAbstractItemView::NoEditTriggers</set>
+   </property>
    <column>
     <property name="text">
      <string>Member Name</string>
@@ -156,6 +159,9 @@
      <weight>50</weight>
      <bold>false</bold>
     </font>
+   </property>
+   <property name="editTriggers">
+    <set>QAbstractItemView::NoEditTriggers</set>
    </property>
    <column>
     <property name="text">

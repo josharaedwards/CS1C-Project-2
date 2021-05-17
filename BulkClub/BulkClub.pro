@@ -23,7 +23,8 @@ SOURCES += \
     inventory.cpp \
     membertypepopup.cpp \
     sale.cpp \
-    salespopup.cpp
+    salespopup.cpp \
+    splashscreen.cpp
 
 HEADERS += \
     addinvpopup.h \
@@ -39,7 +40,8 @@ HEADERS += \
     inventory.h \
     membertypepopup.h \
     sale.h \
-    salespopup.h
+    salespopup.h \
+    splashscreen.h
 
 FORMS += \
     addinvpopup.ui \
@@ -49,7 +51,8 @@ FORMS += \
     mainwindow.ui \
     memberpopup.ui \
     membertypepopup.ui \
-    salespopup.ui
+    salespopup.ui \
+    splashscreen.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
