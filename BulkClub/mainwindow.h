@@ -18,6 +18,8 @@
 #include "addmemberpopup.h"
 #include "addsalepopup.h"
 #include "membertypepopup.h"
+#include "addinvpopup.h"
+#include <vector>
 
 #include <QMainWindow>
 #include <QTableView>
@@ -99,6 +101,10 @@ private slots:
     void on_buttonAddInvItem_released();
 
     void on_buttonDelInvItem_released();
+
+    void on_buttonAddInvItem_clicked();
+
+    void on_inventoryTableView_clicked(const QModelIndex &index);
 
 private:
     Ui::MainWindow *ui;
