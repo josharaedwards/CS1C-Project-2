@@ -172,6 +172,31 @@ vector<Inventory> DbManager::popInvVec()
     return invOut;
 }
 
+void DbManager::addSalesToInv(vector<Sale> newSales)
+{
+    int saleSize = newSales.size();
+
+    for(int i = 0; i < saleSize; i++)
+    {
+        // if current sale.name is in inventory vec, sum existing quantity with sale quantity
+        int quantityIndex = findInvIndex(newSales[i].getName());
+        if(isInInventory(newSales[i].getName()) && quantityIndex > -1)
+        {
+            int tempQuantity = inventory[quantityIndex].getQuantity() + newSales[i].getQuantity();
+            inventory[quantityIndex].setQuantity(tempQuantity);
+        }
+        else // adds first instance of new sale to inventory vec
+        {
+            Inventory temp_item;
+
+            temp_item.setName(newSales[i].getName());
+            temp_item.setPrice(newSales[i].getPrice());
+            temp_item.setQuantity((newSales[i].getQuantity()));
+            inventory.push_back(temp_item);
+        }
+    }
+}
+
 bool DbManager::isInInventory(QString searchName)
 {
     bool found = false;
