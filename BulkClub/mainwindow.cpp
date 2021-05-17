@@ -29,8 +29,8 @@ MainWindow::MainWindow(QWidget *parent)
     this->ui->BulkClubProLabel->setPixmap(QPixmap("icons//BulkClub Pro™.png").scaled(QSize(300, 60), Qt::KeepAspectRatio));
 
     QLabel label;
-    QMovie *movie = new QMovie("icons//VillainconValley_Loading.gif");
-    movie->setScaledSize(QSize(240, 135));
+    QMovie *movie = new QMovie("icons//VillainconValley_LoadingT.gif");
+    movie->setScaledSize(QSize(220, 135));
 
     this->ui->logoLabel->setMovie(movie);
     movie->start();
@@ -45,7 +45,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->tabWidget->setIconSize(QSize(20, 20));
     ui->pushButton_2->setIcon(villIcon);
     ui->pushButton_2->setIconSize(QSize(30, 30));
-
+    //----------------------------------------------------------------------------------------------------------------
 
     sales = connection.popSaleVec();    //populate sales vector
     members = connection.popMemVec();   //populate members vector
