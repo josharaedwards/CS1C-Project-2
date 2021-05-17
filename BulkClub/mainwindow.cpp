@@ -221,12 +221,16 @@ void MainWindow::on_logInPushButton_released()
             ui->stackedWidget->setCurrentIndex(0);
             ui->addMemButton->setHidden(true);
             ui->deleteMemButton->setHidden(true);
+            ui->buttonAddInvItem->setHidden(true);
+            ui->buttonDelInvItem->setHidden(true);
             setWindowTitle("Manager");
             break;
         case ADMIN:
             ui->stackedWidget->setCurrentIndex(0);
             ui->addMemButton->setHidden(false);
             ui->deleteMemButton->setHidden(false);
+            ui->buttonAddInvItem->setHidden(false);
+            ui->buttonDelInvItem->setHidden(false);
             setWindowTitle("Administrator");
             break;
     }
