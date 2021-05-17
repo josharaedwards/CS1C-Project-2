@@ -10,10 +10,6 @@ AddInvPopup::AddInvPopup(Inventory newItem, QWidget *parent) :
     ui(new Ui::AddInvPopup)
 {
     ui->setupUi(this);
-
-
-
-    //inventory.push_back(newItem);
 }
 
 AddInvPopup::~AddInvPopup()
