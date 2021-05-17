@@ -116,6 +116,7 @@ QSqlTableModel* DbManager::createInventoryTable()
 
         query.exec();
 
+        // needed to do this in order to correctly update inventoryProxyModel
         model->setTable("Inventory");
         model->select();
     }
@@ -173,9 +174,24 @@ vector<Sale> DbManager::popSaleVec()
     return salesOut;
 }
 
-void DbManager::popInvVec()
+vector<Inventory> DbManager::popInvVec()
 {
-    int saleSize = sales.size();
+    Inventory newInventory;
+    vector<Inventory> invOut;
+
+    QSqlQuery queryInventory("SELECT * FROM Inventory", db);
+
+    while(queryInventory.next())
+    {
+        newInventory.setName(queryInventory.value(0).toString());
+        newInventory.setPrice(queryInventory.value(1).toDouble());
+        newInventory.setQuantity(queryInventory.value(2).toInt());
+        newInventory.refreshTotal();
+
+        invOut.push_back(newInventory);
+    }
+    return invOut;
+    /*int saleSize = sales.size();
 
     for(int i = 0; i < saleSize; i++)
     {
@@ -195,7 +211,7 @@ void DbManager::popInvVec()
             temp_item.setQuantity((sales[i].getQuantity()));
             inventory.push_back(temp_item);
         }
-    }
+    }*/
 }
 
 bool DbManager::isInInventory(QString searchName)

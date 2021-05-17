@@ -100,7 +100,7 @@ public:
      * Populates the global vector of Inventory items from the sales vector
      *
      */
-    void popInvVec();
+    vector<Inventory> popInvVec();
 
     /**
      * @brief saveMemberTable
