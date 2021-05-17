@@ -99,47 +99,6 @@ QSqlTableModel* DbManager::createInventoryTable()
 
     model->setSort(0, Qt::AscendingOrder);
 
-    /*for(int i = 0; i < model->rowCount(); i++)
-    {
-        for(int j = 0; j < inventory.size(); j++)
-        {
-            if(inventory[j].getName() == model->data(model->index(i, 0)).toString())
-            {
-                model->removeRow(i);
-            }
-        }
-    }*/
-
-    /*QSqlQuery query(db);
-    /// @brief Deleting all contents from the inventory table in the databse
-    if(delSwitch)
-    {
-        //query.exec("DELETE FROM Inventory");
-    }
-
-
-    int vecSize = inventory.size();
-
-    QVariant name, price, quantity, total;
-    for(int i = 0; i < vecSize; i++)
-    {
-        name = inventory[i].getName();
-        price = inventory[i].getPrice();
-        quantity = inventory[i].getQuantity();
-        total = inventory[i].getTotal();
-
-        query.prepare("INSERT INTO Inventory (Product, Price, Quantity_Sold, Total_Revenue) VALUES (?, ?, ?, ?)");
-        query.addBindValue(name);
-        query.addBindValue(price);
-        query.addBindValue(quantity);
-        query.addBindValue(total);
-
-        query.exec();
-
-        // needed to do this in order to correctly update inventoryProxyModel
-        model->setTable("Inventory");
-        model->select();
-    }*/
     model->setEditStrategy(QSqlTableModel::OnRowChange);
 
     return model;

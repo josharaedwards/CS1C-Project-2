@@ -579,27 +579,16 @@ void MainWindow::on_buttonAddInvItem_released()
 
 void MainWindow::on_buttonDelInvItem_released()
 {
-    QString tempName/*, deleteName*/;
+    QString tempName;
     DbManager d;
     int tempIndex;
     tempName = ui->lineEditDel->text();
     if(tempName != "")
     {
         tempIndex = d.findInvIndex(tempName);
-        //deleteName = inventory[tempIndex].getName();
 
         inventory.erase(inventory.begin() + tempIndex);
         d.saveInventoryTable();
-
-       /* QString tempData;
-        for(int i = 0; i < inventoryProxyModel->rowCount() - 1; i++)
-        {
-            tempData = inventoryProxyModel->data(inventoryProxyModel->index(i, 0)).toString();
-            if(tempData == tempName)
-            {
-                inventoryProxyModel->removeRow(i);
-            }
-        }*/
 
         inventoryModel = connection.createInventoryTable();
         inventoryProxyModel->setSourceModel(inventoryModel);
