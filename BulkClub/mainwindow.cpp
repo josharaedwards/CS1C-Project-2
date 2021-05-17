@@ -116,6 +116,7 @@ void MainWindow::loadProductCompleter()
     productCompleter->setCompletionMode(QCompleter::PopupCompletion);
     productCompleter->setFilterMode(Qt::MatchContains);
     ui->productLineEdit->setCompleter(productCompleter);
+    ui->lineEditDel->setCompleter(productCompleter);
 }
 
 /// @brief Refreshes the unit price, subtotal, tax, and total from the quantity and product name
@@ -575,6 +576,7 @@ void MainWindow::on_buttonAddInvItem_released()
 
         refreshGrandTotal();
     }
+    loadProductCompleter();
 }
 
 void MainWindow::on_buttonDelInvItem_released()
@@ -597,14 +599,5 @@ void MainWindow::on_buttonDelInvItem_released()
         refreshGrandTotal();
         ui->lineEditDel->setText("");
     }
-}
-
-void MainWindow::on_buttonAddInvItem_clicked()
-{
-
-}
-
-void MainWindow::on_inventoryTableView_clicked(const QModelIndex &index)
-{
-    //inventoryView->setCurrentIndex(index);
+    loadProductCompleter();
 }

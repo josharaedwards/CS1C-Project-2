@@ -102,10 +102,6 @@ private slots:
 
     void on_buttonDelInvItem_released();
 
-    void on_buttonAddInvItem_clicked();
-
-    void on_inventoryTableView_clicked(const QModelIndex &index);
-
 private:
     Ui::MainWindow *ui;
 
