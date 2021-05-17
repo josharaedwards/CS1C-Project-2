@@ -11,6 +11,8 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 
+#include <iostream>
+
 #include "member.h"
 #include "sale.h"
 #include "inventory.h"

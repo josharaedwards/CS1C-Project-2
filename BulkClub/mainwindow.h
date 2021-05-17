@@ -19,6 +19,7 @@
 #include "addsalepopup.h"
 #include "membertypepopup.h"
 #include "addinvpopup.h"
+#include "delinvpopup.h"
 #include <vector>
 
 #include <QMainWindow>

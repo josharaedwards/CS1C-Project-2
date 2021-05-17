@@ -570,7 +570,43 @@ void MainWindow::on_buttonAddInvItem_released()
 
 void MainWindow::on_buttonDelInvItem_released()
 {
+    /*DelInvPopup newPopup;
+    newPopup.setModal(true);
+    newPopup.exec();*/
     QString tempName;
+    DbManager d;
+    int tempIndex;
+    tempName = ui->lineEditDel->text();
+    if(tempName != "")
+    {
+        tempIndex = d.findInvIndex(tempName);
+        inventory.erase(inventory.begin() + tempIndex);
+
+        // for testing purposes
+        int vecSize = inventory.size();
+        cout << "inventory<vector> after deletion:" << endl;
+        for(int i = 0; i < vecSize; i++)
+        {
+            cout << "inventory[" << i << "]: " << inventory[i].getName().toStdString() << " " << inventory[i].getPrice()
+                 << " " << inventory[i].getQuantity() << " " << inventory[i].getTotal() << endl;
+        }
+
+        inventoryModel = connection.createInventoryTable();
+        inventoryProxyModel->setSourceModel(inventoryModel);
+        inventoryView->setModel(inventoryProxyModel);
+
+        /*for(int i = 0; i < inventoryProxyModel->rowCount(); i++)
+        {
+            if(inventoryProxyModel->data(inventoryProxyModel->index(i, 0)) == tempName)
+            {
+                inventoryProxyModel->removeRow(i);
+            }
+        }*/
+
+        refreshGrandTotal();
+        ui->lineEditDel->setText("");
+    }
+    /*QString tempName;
     DbManager d;
     int tempIndex;
     tempName = inventoryView->currentIndex().data().toString();
@@ -582,7 +618,7 @@ void MainWindow::on_buttonDelInvItem_released()
     inventoryProxyModel->setSourceModel(inventoryModel);
     inventoryView->setModel(inventoryProxyModel);
 
-    refreshGrandTotal();
+    refreshGrandTotal();*/
 }
 
 void MainWindow::on_buttonAddInvItem_clicked()
@@ -592,5 +628,5 @@ void MainWindow::on_buttonAddInvItem_clicked()
 
 void MainWindow::on_inventoryTableView_clicked(const QModelIndex &index)
 {
-    inventoryView->setCurrentIndex(index);
+    //inventoryView->setCurrentIndex(index);
 }
