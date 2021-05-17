@@ -40,7 +40,7 @@ MainWindow::MainWindow(QWidget *parent)
     sales = connection.popSaleVec();    //populate sales vector
     members = connection.popMemVec();   //populate members vector
     salesToMembers(members, sales);     //assign sales to each member by ID
-    connection.popInvVec();
+    inventory = connection.popInvVec(); //populate inventory vector
 
     // for testing purposes
     int vecSize = inventory.size();
@@ -84,7 +84,7 @@ MainWindow::MainWindow(QWidget *parent)
     /// @brief Formats the column sizes by allowing them to stretch
     salesView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
-    /// @brief creates the models for the inventory table
+    /// @brief creates the models for the inventory table from the .sqlite
     inventoryModel = connection.createInventoryTable();
     inventoryProxyModel = new QSortFilterProxyModel(this);
     inventoryProxyModel->setSourceModel(inventoryModel);
@@ -328,6 +328,23 @@ void MainWindow::on_resetInvFilterButton_released()
 void MainWindow::on_invSearchLineEdit_textChanged(const QString &arg1)
 {
     this->inventoryProxyModel->setFilterRegularExpression(arg1);
+
+    QString tempQString;
+    string tempString;
+    double tempDouble;
+    int rowCount = inventoryProxyModel->rowCount();
+    double newTotal = 0;
+
+    for(int i = 0; i < rowCount; i++)
+    {
+        // retrieves data from current row, last column
+        tempQString = inventoryProxyModel->data(inventoryProxyModel->index(i, 3)).toString();
+        tempDouble = tempQString.toDouble();
+        newTotal += tempDouble;
+    }
+    // applies sales tax to the total
+    newTotal += newTotal * 0.0775;
+    this->ui->labelCalculatedGrandTotal->setText("$" + QString::number(newTotal, 'f', 2));
 }
 
 /// @brief Cancel button to add a member, returns to tab view
@@ -500,8 +517,8 @@ void MainWindow::on_confirmAddSaleButton_released()
             salesView->setModel(salesProxyModel);
 
             // update the global inventory vector
-            inventory.clear();
-            connection.popInvVec();
+            //inventory.clear();
+            inventory = connection.popInvVec();
             inventoryModel = connection.createInventoryTable();
             inventoryProxyModel->setSourceModel(inventoryModel);
             inventoryView->setModel(inventoryProxyModel);
@@ -564,10 +581,49 @@ void MainWindow::on_costColButton_released()
 
 void MainWindow::on_buttonAddInvItem_released()
 {
+    Inventory newItem;
+    AddInvPopup newPopup(newItem);
+    newPopup.setModal(true);
+    newPopup.exec();
 
+    if(newPopup.Accepted)
+    {
+        inventoryModel = connection.createInventoryTable();
+        inventoryProxyModel->setSourceModel(inventoryModel);
+        inventoryView->setModel(inventoryProxyModel);
+
+        refreshGrandTotal();
+    }
 }
 
 void MainWindow::on_buttonDelInvItem_released()
 {
+    QString tempName;
+    DbManager d;
+    int tempIndex;
+    tempName = ui->lineEditDel->text();
+    if(tempName != "")
+    {
+        tempIndex = d.findInvIndex(tempName);
 
+        inventory.erase(inventory.begin() + tempIndex);
+        d.saveInventoryTable();
+
+        inventoryModel = connection.createInventoryTable();
+        inventoryProxyModel->setSourceModel(inventoryModel);
+        inventoryView->setModel(inventoryProxyModel);
+
+        refreshGrandTotal();
+        ui->lineEditDel->setText("");
+    }
+}
+
+void MainWindow::on_buttonAddInvItem_clicked()
+{
+
+}
+
+void MainWindow::on_inventoryTableView_clicked(const QModelIndex &index)
+{
+    //inventoryView->setCurrentIndex(index);
 }

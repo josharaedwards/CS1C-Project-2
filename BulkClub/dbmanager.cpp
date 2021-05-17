@@ -70,6 +70,18 @@ QSqlTableModel* DbManager::createSalesTable()
 }
 
 
+void DbManager::deleteFromInventory(QString deleteName)
+{
+    QSqlQuery query(db);
+    QString sQuery;
+    sQuery = "DELETE FROM Inventory WHERE Product = " + deleteName;
+    query.prepare(sQuery);
+    query.exec();
+    //DELETE FROM Inventory WHERE Product = deleteName.ToStdString()
+    //query.exec(above stuff);
+    //remember to call createInventoryTable() from code that called this function
+}
+
 QSqlTableModel* DbManager::createInventoryTable()
 {
     /// @brief Creates a new QSqlTableModel for the Inventory table
@@ -87,38 +99,7 @@ QSqlTableModel* DbManager::createInventoryTable()
 
     model->setSort(0, Qt::AscendingOrder);
 
-    /// @brief adds remaining data to inventory model
-    //may need to clear information from inventory table then build model from vector>Inventory>
-    //model->clear();
-    int vecSize = inventory.size();
-    QSqlRecord record = model->record();
-    QVariant name, price, quantity, total;
-    for(int i = 0; i < vecSize; i++)
-    {
-        name.setValue(inventory[i].getName());
-        price.setValue(inventory[i].getPrice());
-        quantity.setValue(inventory[i].getQuantity());
-        total.setValue(inventory[i].getTotal());
-
-        record.clearValues();
-        record.setValue(0, name);
-        record.setValue(1, price);
-        record.setValue(2, quantity);
-        record.setValue(3, total);
-        if(model->setRecord(i, record))
-        {
-            qDebug()<<"Successfully inserted record!";
-            model->submitAll();
-        }
-        else
-        {
-            qDebug()<<"Error inserting record!";
-            db.rollback();
-        }
-    }
-    model->setEditStrategy(QSqlTableModel::OnManualSubmit);
-
-
+    model->setEditStrategy(QSqlTableModel::OnRowChange);
 
     return model;
 }
@@ -172,29 +153,23 @@ vector<Sale> DbManager::popSaleVec()
     return salesOut;
 }
 
-void DbManager::popInvVec()
+vector<Inventory> DbManager::popInvVec()
 {
-    int saleSize = sales.size();
+    Inventory newInventory;
+    vector<Inventory> invOut;
 
-    for(int i = 0; i < saleSize; i++)
+    QSqlQuery queryInventory("SELECT * FROM Inventory", db);
+
+    while(queryInventory.next())
     {
-        // if current sale.name is in inventory vec, sum existing quantity with sale quantity
-        int quantityIndex = findInvIndex(sales[i].getName());
-        if(isInInventory(sales[i].getName()) && quantityIndex > -1)
-        {
-            int tempQuantity = inventory[quantityIndex].getQuantity() + sales[i].getQuantity();
-            inventory[quantityIndex].setQuantity(tempQuantity);
-        }
-        else // adds first instance of sale to inventory vec
-        {
-            Inventory temp_item;
+        newInventory.setName(queryInventory.value(0).toString());
+        newInventory.setPrice(queryInventory.value(1).toDouble());
+        newInventory.setQuantity(queryInventory.value(2).toInt());
+        newInventory.refreshTotal();
 
-            temp_item.setName(sales[i].getName());
-            temp_item.setPrice(sales[i].getPrice());
-            temp_item.setQuantity((sales[i].getQuantity()));
-            inventory.push_back(temp_item);
-        }
+        invOut.push_back(newInventory);
     }
+    return invOut;
 }
 
 bool DbManager::isInInventory(QString searchName)
@@ -305,10 +280,10 @@ void DbManager::saveInventoryTable()
 {
     QSqlQuery query(db);
 
-    /// @brief Deleting all contents from the Members table in the databse
+    /// @brief Deleting all contents from the Inventory table in the databse
     query.exec("DELETE FROM Inventory");
 
-    /// @brief Inserting all contents from the global members vector into the database
+    /// @brief Inserting all contents from the global Inventory vector into the database
     QVariant name, price, quantity, total;
     for (unsigned int i = 0; i < inventory.size(); i++)
     {

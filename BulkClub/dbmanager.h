@@ -11,6 +11,8 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 
+#include <iostream>
+
 #include "member.h"
 #include "sale.h"
 #include "inventory.h"
@@ -53,6 +55,7 @@ public:
      */
     QSqlTableModel* createSalesTable();
 
+    void deleteFromInventory(QString);
     /**
      * @brief createInventoryTable
      *
@@ -97,7 +100,7 @@ public:
      * Populates the global vector of Inventory items from the sales vector
      *
      */
-    void popInvVec();
+    vector<Inventory> popInvVec();
 
     /**
      * @brief saveMemberTable

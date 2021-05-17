@@ -9,6 +9,7 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    addinvpopup.cpp \
     addmemberpopup.cpp \
     addsalepopup.cpp \
     authenticate.cpp \
@@ -26,6 +27,7 @@ SOURCES += \
     splashscreen.cpp
 
 HEADERS += \
+    addinvpopup.h \
     addmemberpopup.h \
     addsalepopup.h \
     authenticate.h \
@@ -42,6 +44,7 @@ HEADERS += \
     splashscreen.h
 
 FORMS += \
+    addinvpopup.ui \
     addmemberpopup.ui \
     addsalepopup.ui \
     deletememberpopup.ui \
