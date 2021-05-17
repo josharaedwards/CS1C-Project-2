@@ -27,7 +27,7 @@ public:
     /**
      * @brief AddMemberPopup Constructor
      * @param member Vector containing the member the Admin just entered the information for
-     * @param parent Parent widget
+     * @param QWidget* Parent widget
      */
     explicit AddMemberPopup(vector<Member> member, QWidget *parent = nullptr);
 

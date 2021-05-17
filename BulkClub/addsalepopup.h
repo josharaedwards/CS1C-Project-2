@@ -23,53 +23,54 @@ class AddSalePopup : public QDialog
 
 public:
     /**
-     * @brief
-     * @details
-     * @param
+     * @brief addSalePopup constructor
+     * @details constructs the
+     * @param Sale -object representing sale to be added
+     * @param QWidget* -address of QItem passed in
      */
     explicit AddSalePopup(Sale newSale, QWidget *parent = nullptr);
     /**
-     * @brief
-     * @details
+     * @brief AddSalePopup destructor
+     * @details destroys the AddSalePopup window
      */
     ~AddSalePopup();
     /**
-     * @brief
-     * @details
+     * @brief getAnotherSale function
+     * @details returns true if the user wants to add another sale
      */
     bool getAnotherSale();
     /**
-     * @brief
-     * @details
+     * @brief getConfirmSales
+     * @details returns true if sales are confirmed
      */
     bool getConfirmSales();
     /**
-     * @brief
-     * @details
+     * @brief addSales vector
+     * @details contains a vector of the sales added
      */
     static vector<Sale> addSales;
 
 private slots:
     /**
-     * @brief
-     * @details
+     * @brief addSaleButton clicked event
+     * @details opens the "add sales" tab when clicked
      */
     void on_addSaleButton_released();
     /**
-     * @brief
-     * @details
+     * @brief confirmButton clicked event
+     * @details closes window and saves the added information
      */
     void on_confirmButton_released();
     /**
-     * @brief
-     * @details
+     * @brief cancelButton click event
+     * @details closes the window without saving the added information
      */
     void on_cancelButton_released();
 
 private:
-    Ui::AddSalePopup *ui; /// @var pointer to window
-    bool anotherSale; /// @var anotherSale Indicates whether to add another sale for the member or not
-    bool confirmSales; /// @var confirmSales Indicates whether to confirm the current sales or not
+    Ui::AddSalePopup *ui;   /// @var pointer to window
+    bool anotherSale;       /// @var anotherSale Indicates whether to add another sale for the member or not
+    bool confirmSales;      /// @var confirmSales Indicates whether to confirm the current sales or not
 };
 
 #endif // ADDSALEPOPUP_H
