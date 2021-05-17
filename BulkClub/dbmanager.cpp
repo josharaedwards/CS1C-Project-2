@@ -87,8 +87,6 @@ QSqlTableModel* DbManager::createInventoryTable()
 
     model->setSort(0, Qt::AscendingOrder);
 
-    /// @brief adds remaining data to inventory model
-    //may need to clear information from inventory table then build model from vector<Inventory>
     QSqlQuery query(db);
     /// @brief Deleting all contents from the inventory table in the databse
     query.exec("DELETE FROM Inventory");
@@ -102,20 +100,13 @@ QSqlTableModel* DbManager::createInventoryTable()
              << " " << inventory[i].getQuantity() << " " << inventory[i].getTotal() << endl;
     }
 
-    //QSqlRecord record = model->record();
     QVariant name, price, quantity, total;
-    //QVariant str_name, str_price, str_quantity, str_total;
     for(int i = 0; i < vecSize; i++)
     {
         name = inventory[i].getName();
         price = inventory[i].getPrice();
         quantity = inventory[i].getQuantity();
         total = inventory[i].getTotal();
-
-        /*str_name = name.toString();
-        str_price = price.toString();
-        str_quantity = quantity.toString();
-        str_total = total.toString();*/
 
         query.prepare("INSERT INTO Inventory (Product, Price, Quantity_Sold, Total_Revenue) VALUES (?, ?, ?, ?)");
         query.addBindValue(name);
@@ -124,34 +115,9 @@ QSqlTableModel* DbManager::createInventoryTable()
         query.addBindValue(total);
 
         query.exec();
-        /*query.prepare("INSERT INTO Members (Name, Member_ID, Membership, Date) VALUES (?, ?, ?, ?)");
 
-        query.addBindValue(name);
-        query.addBindValue(memNum);
-        query.addBindValue(memType);
-        query.addBindValue(expDate);
-
-        query.exec();*/
-        /*record.clearValues();
-        record.setValue(0, str_name);
-        record.setValue(1, str_price);
-        record.setValue(2, str_quantity);
-        record.setValue(3, str_total);
-        model->setRecord(i, record);*/
-        /*if(model->setRecord(i, record))
-        {
-            if(model->submitAll())
-                qDebug()<<"Successfully inserted record!";
-            else
-            {
-                qDebug()<< model->lastError();
-            }
-        }
-        else
-        {
-            qDebug()<<"Error inserting record!";
-            db.rollback();
-        }*/
+        model->setTable("Inventory");
+        model->select();
     }
     model->setEditStrategy(QSqlTableModel::OnManualSubmit);
 

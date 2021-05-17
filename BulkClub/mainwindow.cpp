@@ -570,9 +570,6 @@ void MainWindow::on_buttonAddInvItem_released()
 
 void MainWindow::on_buttonDelInvItem_released()
 {
-    /*DelInvPopup newPopup;
-    newPopup.setModal(true);
-    newPopup.exec();*/
     QString tempName;
     DbManager d;
     int tempIndex;
@@ -595,30 +592,9 @@ void MainWindow::on_buttonDelInvItem_released()
         inventoryProxyModel->setSourceModel(inventoryModel);
         inventoryView->setModel(inventoryProxyModel);
 
-        /*for(int i = 0; i < inventoryProxyModel->rowCount(); i++)
-        {
-            if(inventoryProxyModel->data(inventoryProxyModel->index(i, 0)) == tempName)
-            {
-                inventoryProxyModel->removeRow(i);
-            }
-        }*/
-
         refreshGrandTotal();
         ui->lineEditDel->setText("");
     }
-    /*QString tempName;
-    DbManager d;
-    int tempIndex;
-    tempName = inventoryView->currentIndex().data().toString();
-
-    tempIndex = d.findInvIndex(tempName);
-    inventory.erase(inventory.begin() + tempIndex);
-
-    inventoryModel = connection.createInventoryTable();
-    inventoryProxyModel->setSourceModel(inventoryModel);
-    inventoryView->setModel(inventoryProxyModel);
-
-    refreshGrandTotal();*/
 }
 
 void MainWindow::on_buttonAddInvItem_clicked()
