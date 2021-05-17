@@ -562,15 +562,35 @@ void MainWindow::on_costColButton_released()
 
 void MainWindow::on_buttonAddInvItem_released()
 {
-
+    Inventory newItem;
+    AddInvPopup newPopup(newItem);
+    newPopup.setModal(true);
+    newPopup.exec();
 }
 
 void MainWindow::on_buttonDelInvItem_released()
 {
+    QString tempName;
+    DbManager d;
+    int tempIndex;
+    tempName = inventoryView->currentIndex().data().toString();
 
+    tempIndex = d.findInvIndex(tempName);
+    inventory.erase(inventory.begin() + tempIndex);
+
+    inventoryModel = connection.createInventoryTable();
+    inventoryProxyModel->setSourceModel(inventoryModel);
+    inventoryView->setModel(inventoryProxyModel);
+
+    refreshGrandTotal();
 }
 
 void MainWindow::on_buttonAddInvItem_clicked()
 {
-    AddInvPopup newItem;
+
+}
+
+void MainWindow::on_inventoryTableView_clicked(const QModelIndex &index)
+{
+    inventoryView->setCurrentIndex(index);
 }
