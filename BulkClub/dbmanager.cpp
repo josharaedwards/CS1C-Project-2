@@ -20,9 +20,9 @@ DbManager::DbManager()
 
 DbManager::~DbManager()
 {
-    //saveMemberTable();
-    //saveSalesTable();
-    //saveInventoryTable();
+    saveMemberTable();
+    saveSalesTable();
+    saveInventoryTable();
 
     /// @brief If the database connection is open, then it is closed
     if (db.isOpen())

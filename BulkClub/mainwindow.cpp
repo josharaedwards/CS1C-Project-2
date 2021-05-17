@@ -5,8 +5,10 @@
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "splashscreen.h"
 
 #include <iostream>
+#include <QMovie>
 
 //global member variable
 vector<Member> members;
@@ -17,7 +19,33 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+    splashScreen splash;
+    splash.setModal(true);
+    splash.exec();
+
     ui->setupUi(this);
+    //--logos-and-gifs------------------------------------------------------------------------------------------------
+    this->ui->BulkClubLogo->setPixmap(QPixmap("icons//BulkClub Pro™.png").scaled(QSize(300, 60), Qt::KeepAspectRatio));
+    this->ui->BulkClubProLabel->setPixmap(QPixmap("icons//BulkClub Pro™.png").scaled(QSize(300, 60), Qt::KeepAspectRatio));
+
+    QLabel label;
+    QMovie *movie = new QMovie("icons//VillainconValley_LoadingT.gif");
+    movie->setScaledSize(QSize(220, 135));
+
+    this->ui->logoLabel->setMovie(movie);
+    movie->start();
+
+    QIcon memIcon("icons//user.png");       //CREATE TAB ICONS
+    QIcon salesIcon("icons//money.png");
+    QIcon invIcon("icons//boxes.png");
+    QIcon villIcon("icons//villainIcon.png");
+    ui->tabWidget->setTabIcon(0, memIcon);  //SETTING TAB ICONS
+    ui->tabWidget->setTabIcon(1, salesIcon);
+    ui->tabWidget->setTabIcon(2, invIcon);
+    ui->tabWidget->setIconSize(QSize(20, 20));
+    ui->pushButton_2->setIcon(villIcon);
+    ui->pushButton_2->setIconSize(QSize(30, 30));
+    //----------------------------------------------------------------------------------------------------------------
 
     sales = connection.popSaleVec();    //populate sales vector
     members = connection.popMemVec();   //populate members vector
@@ -160,6 +188,7 @@ void MainWindow::refreshGrandTotal()
     }
     invGrandTotal += invGrandTotal * 0.0775;
     ui->labelCalculatedGrandTotal->setText("$" + QString::number(invGrandTotal));
+    ui->labelCalculatedGrandTotal->setStyleSheet("QLabel { color : black; }");
 }
 
 /// @brief Hiding or revealing features based on log in status

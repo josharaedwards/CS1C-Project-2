@@ -1,3 +1,8 @@
+/**
+ *  @file helperLib.h
+ *  @brief Contains prototypes of various helper functions
+ */
+
 #ifndef HELPERLIB_H
 #define HELPERLIB_H
 
