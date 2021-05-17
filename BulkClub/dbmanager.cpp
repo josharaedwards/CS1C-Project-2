@@ -93,13 +93,6 @@ QSqlTableModel* DbManager::createInventoryTable()
 
     int vecSize = inventory.size();
 
-    cout << "inventory<vector> in createInventoryTable():" << endl;
-    for(int i = 0; i < vecSize; i++)
-    {
-        cout << "inventory[" << i << "]: " << inventory[i].getName().toStdString() << " " << inventory[i].getPrice()
-             << " " << inventory[i].getQuantity() << " " << inventory[i].getTotal() << endl;
-    }
-
     QVariant name, price, quantity, total;
     for(int i = 0; i < vecSize; i++)
     {

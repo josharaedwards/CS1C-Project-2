@@ -579,15 +579,6 @@ void MainWindow::on_buttonDelInvItem_released()
         tempIndex = d.findInvIndex(tempName);
         inventory.erase(inventory.begin() + tempIndex);
 
-        // for testing purposes
-        int vecSize = inventory.size();
-        cout << "inventory<vector> after deletion:" << endl;
-        for(int i = 0; i < vecSize; i++)
-        {
-            cout << "inventory[" << i << "]: " << inventory[i].getName().toStdString() << " " << inventory[i].getPrice()
-                 << " " << inventory[i].getQuantity() << " " << inventory[i].getTotal() << endl;
-        }
-
         inventoryModel = connection.createInventoryTable();
         inventoryProxyModel->setSourceModel(inventoryModel);
         inventoryView->setModel(inventoryProxyModel);
