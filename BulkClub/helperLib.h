@@ -8,12 +8,33 @@
 #include "inventory.h"
 #include "dbmanager.h"
 using namespace std;
-
+/**
+ * @brief enum to facilitate retrieving the appropriate column index
+ * when sorting
+ */
 enum SortType{NAME, EXP, NUM, SPENT_AMNT, REBATE_AMNT};
 
 //Search Functions
-
+/**
+* @brief search function to search a vector of members
+* by member number
+* @param members a vector of type Member
+* @param memNumIn the integer value to search by
+* @param bSucceed a boolean to indicate success/failure
+* @return m the Member object that was copied from the passed vector
+* if the member number was found
+*/
 Member search(vector<Member> members, int memNumIn, bool& bSucceed);
+
+/**
+* @brief search function to search a vector of members
+* by member name
+* @param members a vector of type Member
+* @param nameIn QString value to search by
+* @param bSucceed a boolean to indicate success/failure
+* @return m the Member object that was copied from the passed vector
+* if the member name was found
+*/
 Member search(vector<Member> members, QString nameIn, bool& bSucceed);
 
 vector<Member> searchMult(vector<Member> members, bool execIn);
