@@ -22,18 +22,43 @@ namespace Ui {
 class memberPopup;
 }
 
+/**
+ * @class
+ * @brief
+ * @details
+ */
 class memberPopup : public QDialog
 {
     Q_OBJECT
 
 public:
+    /**
+     * @brief
+     * @details
+     * @param
+     * @param
+     */
     explicit memberPopup(QString memberID, QWidget *parent = nullptr);
+    /**
+     * @brief
+     * @details
+     * @param
+     */
     void createMemTable(int index);
+    /**
+     * @brief
+     * @details
+     * @param
+     */
     void createSaleTable(int index);
+    /**
+     * @brief
+     * @details
+     */
     ~memberPopup();
 
 private:
-    Ui::memberPopup *ui;
+    Ui::memberPopup *ui;    /// @var
 };
 
 #endif // MEMBERPOPUP_H

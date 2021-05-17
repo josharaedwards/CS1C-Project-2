@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1080</width>
-    <height>540</height>
+    <width>915</width>
+    <height>440</height>
    </rect>
   </property>
   <property name="font">
@@ -33,7 +33,7 @@
       </font>
      </property>
      <property name="text">
-      <string>TOTAL...........................................................................</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;TOTAL...........................................................................&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
    </item>
@@ -51,7 +51,7 @@
       </font>
      </property>
      <property name="text">
-      <string>TAX (7.75%)........................................................</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;TAX (7.75%)........................................................&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
    </item>
@@ -90,7 +90,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Customer: </string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Customer: &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
    </item>
@@ -102,7 +102,7 @@
       </font>
      </property>
      <property name="text">
-      <string>SUBTOTAL...........................................................</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;SUBTOTAL...........................................................&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
    </item>
@@ -157,7 +157,7 @@
    <item row="4" column="0">
     <widget class="QLabel" name="rebateTitleLabel">
      <property name="text">
-      <string>REBATE.................</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;REBATE.................&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
    </item>
