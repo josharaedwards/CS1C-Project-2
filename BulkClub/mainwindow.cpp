@@ -137,10 +137,6 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
-
-    connection.saveMemberTable();
-    connection.saveSalesTable();
-    connection.saveInventoryTable();
 }
 
 /// @brief Initializes the unique list of products from the current state of the inventory model
