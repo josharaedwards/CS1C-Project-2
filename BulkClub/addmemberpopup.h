@@ -1,3 +1,8 @@
+/**
+ * @file addmemberpopup.h
+ * @brief contains definition of AddMemberPopup window
+ */
+
 #ifndef ADDMEMBERPOPUP_H
 #define ADDMEMBERPOPUP_H
 
@@ -11,7 +16,6 @@ class AddMemberPopup;
 
 /**
  * @class AddMemberPopup
- *
  * @brief Appears when an Administrator presses Confirm after entering information
  * to add a new member to the Bulk Club
  */

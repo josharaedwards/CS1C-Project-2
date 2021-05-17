@@ -18,8 +18,7 @@
 /**
  * @class DbManager
  * @brief The Database Manager class
- *
- * Handles interfacing with SQL database and performs queries. Requires an existing SQL database.
+ * @details Handles interfacing with SQL database and performs queries. Requires an existing SQL database.
  */
 class DbManager
 {

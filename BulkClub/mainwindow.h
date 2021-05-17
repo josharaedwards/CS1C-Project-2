@@ -31,7 +31,6 @@ QT_END_NAMESPACE
 
 /**
  * @class MainWindow
- *
  * @brief The MainWindow class
  */
 class MainWindow : public QMainWindow
@@ -39,6 +38,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
+
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void loadProductCompleter();
@@ -46,63 +46,144 @@ public:
     void refreshGrandTotal();
 
 private slots:
+    /**
+     * @brief
+     * @details
+     */
     void on_logInPushButton_released();
-
+    /**
+     * @brief
+     * @details
+     */
     void on_pushButton_released();
-
+    /**
+     * @brief
+     * @details
+     */
     void on_clearPushButton_released();
-
+    /**
+     * @brief
+     * @details
+     */
     void on_memTypeComboBox_currentTextChanged(const QString &arg1);
-
+    /**
+     * @brief
+     * @details
+     */
     void on_expDateEdit_dateChanged(const QDate &date);
-
+    /**
+     * @brief
+     * @details
+     */
     void on_resetMemFilterButton_released();
-
+    /**
+     * @brief
+     * @details
+     */
     void on_resetSaleFilterButton_released();
-
+    /**
+     * @brief
+     * @details
+     */
     void on_saleDateEdit_userDateChanged(const QDate &date);
-
+    /**
+     * @brief
+     * @details
+     */
     void on_MemberTableView_doubleClicked(const QModelIndex &index);
-
+    /**
+     * @brief
+     * @details
+     */
     DbManager getConnection();
-
+    /**
+     * @brief
+     * @details
+     */
     void on_addMemButton_released();
-
+    /**
+     * @brief
+     * @details
+     */
     void on_deleteMemButton_released();
-
+    /**
+     * @brief
+     * @details
+     */
     void on_resetInvFilterButton_released();
-
+    /**
+     * @brief
+     * @details
+     */
     void on_invSearchLineEdit_textChanged(const QString &arg1);
-
+    /**
+     * @brief
+     * @details
+     */
     void on_cancelAddMemButton_released();
-
+    /**
+     * @brief
+     * @details
+     */
     void on_confirmAddMemButton_released();
-
+    /**
+     * @brief
+     * @details
+     */
     void on_salesTableView_doubleClicked(const QModelIndex &index);
-
+    /**
+     * @brief
+     * @details
+     */
     void on_clearAddMemFormButton_released();
-
+    /**
+     * @brief
+     * @details
+     */
     void on_cancelAddSaleButton_released();
-
+    /**
+     * @brief
+     * @details
+     */
     void on_clearSaleButton_released();
-
+    /**
+     * @brief
+     * @details
+     */
     void on_productLineEdit_textChanged(const QString &arg1);
-
+    /**
+     * @brief
+     * @details
+     */
     void on_confirmAddSaleButton_released();
-
+    /**
+     * @brief
+     * @details
+     */
     void on_quantityLineEdit_textChanged(const QString &arg1);
-
+    /**
+     * @brief
+     * @details
+     */
     void on_memStatusButton_released();
-
+    /**
+     * @brief
+     * @details
+     */
     void on_costColButton_released();
-
+    /**
+     * @brief
+     * @details
+     */
     void on_buttonAddInvItem_released();
-
+    /**
+     * @brief
+     * @details
+     */
     void on_buttonDelInvItem_released();
 
 private:
     Ui::MainWindow *ui;
-
     QAbstractItemModel *memberModel; /// @var memberModel the source model for the member table
     QAbstractItemModel *salesModel;  /// @var salesModel the source model for the sales table
     QAbstractItemModel *inventoryModel;  /// @var inventoryModel the source model for the inventory table

@@ -13,19 +13,50 @@
 #include <QSqlQuery>
 using namespace std;
 
+/**
+ *  @enum loginStatus
+ *  @brief represents the login state of the user
+ */
 enum loginStatus { FAILED, MANAGER, ADMIN };
 
+/**
+ * @class
+ * @brief
+ * @details
+ */
 class Authenticate
 {
-    QString username;
-    QString password;
-    loginStatus state;
-    QSqlDatabase login_db;
+    QString username;        /// @var
+    QString password;        /// @var
+    loginStatus state;       /// @var
+    QSqlDatabase login_db;   /// @var
 public:
+    /**
+     * @brief
+     * @details
+     */
     Authenticate();
+    /**
+     * @brief
+     * @details
+     */
     ~Authenticate();
+    /**
+     * @brief
+     * @details
+     * @param
+     * @param
+     */
     loginStatus attempt(QString userIn, QString passIn);
+    /**
+     * @brief
+     * @details
+     */
     loginStatus getState();
+    /**
+     * @brief
+     * @details
+     */
     void logout();
 };
 
