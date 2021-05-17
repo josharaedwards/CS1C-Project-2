@@ -8,6 +8,7 @@
 #include "splashscreen.h"
 
 #include <iostream>
+#include <QMovie>
 
 //global member variable
 vector<Member> members;
@@ -23,7 +24,16 @@ MainWindow::MainWindow(QWidget *parent)
     splash.exec();
 
     ui->setupUi(this);
+    //--logos-and-gifs------------------------------------------------------------------------------------------------
     this->ui->BulkClubLogo->setPixmap(QPixmap("icons//BulkClub Pro™.png").scaled(QSize(300, 60), Qt::KeepAspectRatio));
+    this->ui->BulkClubProLabel->setPixmap(QPixmap("icons//BulkClub Pro™.png").scaled(QSize(300, 60), Qt::KeepAspectRatio));
+
+    QLabel label;
+    QMovie *movie = new QMovie("icons//VillainconValley_Loading.gif");
+    movie->setScaledSize(QSize(240, 135));
+
+    this->ui->logoLabel->setMovie(movie);
+    movie->start();
 
     QIcon memIcon("icons//user.png");       //CREATE TAB ICONS
     QIcon salesIcon("icons//money.png");

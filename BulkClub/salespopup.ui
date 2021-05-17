@@ -164,13 +164,16 @@
       <bool>false</bool>
      </attribute>
      <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
-      <bool>false</bool>
+      <bool>true</bool>
      </attribute>
      <attribute name="horizontalHeaderStretchLastSection">
       <bool>false</bool>
      </attribute>
      <attribute name="verticalHeaderVisible">
       <bool>false</bool>
+     </attribute>
+     <attribute name="verticalHeaderShowSortIndicator" stdset="0">
+      <bool>true</bool>
      </attribute>
      <row>
       <property name="text">

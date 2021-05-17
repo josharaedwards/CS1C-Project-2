@@ -27,34 +27,14 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="mainPage">
        <layout class="QGridLayout" name="gridLayout_4">
-        <item row="0" column="0">
-         <spacer name="horizontalSpacer_5">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="0" column="1">
-         <widget class="QPushButton" name="pushButton">
-          <property name="text">
-           <string>Logout</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0" colspan="2">
+        <item row="1" column="0" colspan="5">
          <widget class="QTabWidget" name="tabWidget">
           <property name="currentIndex">
-           <number>2</number>
+           <number>1</number>
           </property>
           <widget class="QWidget" name="membersTab">
            <attribute name="title">
@@ -493,6 +473,40 @@
            </layout>
           </widget>
          </widget>
+        </item>
+        <item row="0" column="3">
+         <widget class="QPushButton" name="pushButton_2">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="4">
+         <widget class="QPushButton" name="pushButton">
+          <property name="text">
+           <string>Logout</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLabel" name="BulkClubLogo">
+          <property name="text">
+           <string>BulkClubLogo</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <spacer name="horizontalSpacer_5">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
         </item>
        </layout>
       </widget>
@@ -944,7 +958,23 @@
       </widget>
       <widget class="QWidget" name="loginPage">
        <layout class="QGridLayout" name="gridLayout_5">
-        <item row="2" column="1">
+        <item row="2" column="2">
+         <spacer name="horizontalSpacer_4">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Maximum</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>120</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="3" column="1">
          <spacer name="verticalSpacer_3">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
@@ -960,23 +990,26 @@
           </property>
          </spacer>
         </item>
-        <item row="1" column="2">
-         <spacer name="horizontalSpacer_4">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
+        <item row="3" column="2">
+         <widget class="QLabel" name="logoLabel">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
           </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Maximum</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
+          <property name="maximumSize">
            <size>
-            <width>100</width>
-            <height>20</height>
+            <width>120</width>
+            <height>16777215</height>
            </size>
           </property>
-         </spacer>
+          <property name="text">
+           <string>[iconLabel]</string>
+          </property>
+         </widget>
         </item>
-        <item row="0" column="1">
+        <item row="1" column="1">
          <spacer name="verticalSpacer_4">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
@@ -987,12 +1020,12 @@
           <property name="sizeHint" stdset="0">
            <size>
             <width>20</width>
-            <height>100</height>
+            <height>50</height>
            </size>
           </property>
          </spacer>
         </item>
-        <item row="1" column="1">
+        <item row="2" column="1">
          <widget class="QGroupBox" name="groupBox">
           <property name="font">
            <font>
@@ -1173,7 +1206,7 @@
           </layout>
          </widget>
         </item>
-        <item row="1" column="0">
+        <item row="2" column="0">
          <spacer name="horizontalSpacer_3">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -1183,11 +1216,24 @@
           </property>
           <property name="sizeHint" stdset="0">
            <size>
-            <width>100</width>
+            <width>120</width>
             <height>20</height>
            </size>
           </property>
          </spacer>
+        </item>
+        <item row="0" column="0" colspan="2">
+         <widget class="QLabel" name="BulkClubProLabel">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>[bulkClubLabel]</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
