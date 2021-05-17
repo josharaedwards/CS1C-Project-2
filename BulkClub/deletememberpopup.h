@@ -1,8 +1,3 @@
-/**
- *  @file deletememberpopup.h
- *  @brief Contains the definition of the DeleteMemberPopup window
- */
-
 #ifndef DELETEMEMBERPOPUP_H
 #define DELETEMEMBERPOPUP_H
 
@@ -16,44 +11,54 @@ namespace Ui {
 class DeleteMemberPopup;
 }
 
+/**
+ * @class DeleteMemberPopup
+ *
+ * @brief A class inheriting from QDialog to facilitate
+ * deleting a member from the database
+ */
 class DeleteMemberPopup : public QDialog
 {
     Q_OBJECT
 
 public:
     /**
-     * @brief
-     * @details
-     * @param
-     * @param
+     * @brief DeleteMemberPopup Constructor
+     * @param member Vector containing the member the Admin just entered the information for
+     * @param parent Parent widget
      */
     explicit DeleteMemberPopup(vector<Member> member, QWidget *parent = nullptr);
     /**
-     * @brief
-     * @details
+     * @brief The DeleteMemberPopup Destructor
      */
     ~DeleteMemberPopup();
     /**
-     * @brief
-     * @details
+     * @brief getConfirmDelete
+     *
+     * Returns true if the Admin pressed either Add Sale or Confirm of the Dialog, otherwise
+     * returns false in the case that Cancel was pressed.
+     * @return confirmDelete, a member variable
      */
     bool getConfirmDelete();
 
 private slots:
     /**
-     * @brief
-     * @details
+     * @brief this slot sets confirmDelete to true and then
+     * calls accept()
      */
     void on_deleteButton_released();
+
     /**
-     * @brief
-     * @details
+     * @brief this slot sets confirmDelete to false and then
+     * calls accept()
      */
     void on_cancelButton_released();
 
 private:
-    Ui::DeleteMemberPopup *ui;  /// @var pointer to DeleteMemberPopup window
-    bool confirmDelete;         /// @var confirmDelete indicates whether to delete the member shown or not
+    ///@var pointer to access this popup's ui
+    Ui::DeleteMemberPopup *ui;
+    ///@var confirmDelete indicates whether to delete the member shown or not
+    bool confirmDelete;
 };
 
 #endif // DELETEMEMBERPOPUP_H
