@@ -104,12 +104,9 @@ void SalesPopup::populateSummaryCells(vector<Member> saleMembers)
     int numOfEntries = saleMembers.size();
     int numfOfExecs = 0;
     int numOfReg = 0;
-    double total = 0.00;
 
     for(int i = 0; i < numOfEntries; ++i)
     {
-        total += saleMembers[i].getSpentAmnt();
-
         if(saleMembers[i].IsExec())
         {
             numfOfExecs++;
@@ -123,10 +120,7 @@ void SalesPopup::populateSummaryCells(vector<Member> saleMembers)
     QTableWidgetItem *item;
     QString itemText;
 
-    item = new QTableWidgetItem;
-    itemText = QString{"$%1"}.arg(total, 4, 'f', 2, '0');
-    item->setText(itemText);
-    this->ui->salesTotalInfo->setItem(0, 0, item);
+    updateTotal(saleMembers);
 
     item = new QTableWidgetItem;
     itemText = QString::number(numfOfExecs);
