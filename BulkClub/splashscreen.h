@@ -13,9 +13,9 @@ class splashScreen;
 }
 
 /**
- * @class
- * @brief
- * @details
+ * @class splashScreen
+ * @brief splashScreen class shows an opening animation before program startup
+ * @details is a frameless window, press esc to exit and start program
  */
 class splashScreen : public QDialog
 {
@@ -23,19 +23,18 @@ class splashScreen : public QDialog
 
 public:
     /**
-     * @brief
-     * @details
-     * @param
+     * @brief splashscreen constructor
+     * @details creates and lays out splashscreen
      */
     explicit splashScreen(QWidget *parent = nullptr);
     /**
-     * @brief
-     * @details
+     * @brief splashScreen destructor
+     * @details exits out of the splashscreen
      */
     ~splashScreen();
 
 private:
-    Ui::splashScreen *ui;   /// @var
+    Ui::splashScreen *ui;   /// @var ui pointer representing splashScreen ui
 };
 
 #endif // SPLASHSCREEN_H
