@@ -34,7 +34,7 @@
         <item row="1" column="0" colspan="5">
          <widget class="QTabWidget" name="tabWidget">
           <property name="currentIndex">
-           <number>0</number>
+           <number>2</number>
           </property>
           <widget class="QWidget" name="membersTab">
            <attribute name="title">
@@ -219,14 +219,14 @@
             <item row="0" column="6">
              <widget class="QLabel" name="labelExpiration">
               <property name="text">
-               <string>Exp. Date</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#000000;&quot;&gt;Exp. Date&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
              </widget>
             </item>
             <item row="0" column="5">
              <widget class="QLabel" name="label">
               <property name="text">
-               <string>Membership</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#000000;&quot;&gt;Membership&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
              </widget>
             </item>
@@ -272,7 +272,7 @@
             <item row="0" column="2">
              <widget class="QLabel" name="label_2">
               <property name="text">
-               <string>Sale Date</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#000000;&quot;&gt;Sale Date&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
              </widget>
             </item>
@@ -408,7 +408,7 @@
             <item row="0" column="11">
              <widget class="QLabel" name="label_3">
               <property name="text">
-               <string>Item Name:</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#000000;&quot;&gt;Item Name:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
              </widget>
             </item>
