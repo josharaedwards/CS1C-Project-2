@@ -243,6 +243,12 @@ private slots:
      */
     void on_buttonDelInvItem_released();
 
+    /**
+     * @brief on_addSaleButton_released
+     * @details An Admin button that allows the user to add a sale to the selected member
+     */
+    void on_addSaleButton_released();
+
 private:
     Ui::MainWindow *ui; /// @var ui The user interface with the app
     QAbstractItemModel *memberModel; /// @var memberModel the source model for the member table

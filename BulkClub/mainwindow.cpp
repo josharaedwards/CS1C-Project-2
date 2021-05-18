@@ -220,6 +220,7 @@ void MainWindow::on_logInPushButton_released()
             ui->buttonAddInvItem->setHidden(true);
             ui->buttonDelInvItem->setHidden(true);
             ui->lineEditDel->setHidden(true);
+            ui->addSaleButton->setHidden(true);
             setWindowTitle("Manager");
             break;
         case ADMIN:
@@ -229,6 +230,7 @@ void MainWindow::on_logInPushButton_released()
             ui->buttonAddInvItem->setHidden(false);
             ui->buttonDelInvItem->setHidden(false);
             ui->lineEditDel->setHidden(false);
+            ui->addSaleButton->setHidden(false);
             setWindowTitle("Administrator");
             break;
     }
@@ -653,4 +655,24 @@ void MainWindow::on_buttonDelInvItem_released()
         ui->lineEditDel->setText("");
     }
     loadProductCompleter();
+}
+
+/// @brief Triggered when the user presses the button to add a sale to a specific user
+void MainWindow::on_addSaleButton_released()
+{
+    // switching over to the page of the widget with the form to add a sale
+    ui->stackedWidget->setCurrentIndex(2);
+
+    /// @brief Getting the memberID of the selected member
+    QModelIndex index = ui->MemberTableView->currentIndex();
+    QModelIndex indexID = index.model()->index(index.row(), 1, QModelIndex());
+    int memNum = index.model()->data(indexID, Qt::DisplayRole).toInt();
+
+    // retrieving the member from the members vector
+    bool found = false;
+    Member addSaleMember = search(members, memNum, found);
+
+    // setting the text of the read only fields
+    ui->nameLineEdit->setText(addSaleMember.getName());
+    ui->memIDLineEdit->setText(QString::number(addSaleMember.getMemNum()));
 }

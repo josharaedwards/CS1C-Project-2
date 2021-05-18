@@ -73,13 +73,10 @@ QSqlTableModel* DbManager::createSalesTable()
 void DbManager::deleteFromInventory(QString deleteName)
 {
     QSqlQuery query(db);
-    QString sQuery;
-    sQuery = "DELETE FROM Inventory WHERE Product = " + deleteName;
-    query.prepare(sQuery);
-    query.exec();
-    //DELETE FROM Inventory WHERE Product = deleteName.ToStdString()
-    //query.exec(above stuff);
-    //remember to call createInventoryTable() from code that called this function
+    //QString sQuery;
+    //sQuery = "DELETE FROM Inventory WHERE Product = " + deleteName;
+    //query.prepare(sQuery);
+    query.exec("DELETE FROM Inventory WHERE Product = " + deleteName);
 }
 
 QSqlTableModel* DbManager::createInventoryTable()
@@ -256,8 +253,6 @@ void DbManager::saveMemberTable()
             memType = "Regular";
         }
         expDate = members[i].getExpDate().toString("M/d/yyyy");
-
-        qDebug() << members[i].getName() << " " << members[i].getMemNum() << " " << members[i].getExpDate().toString("M/d/yyyy");
 
         query.prepare("INSERT INTO Members (Name, Member_ID, Membership, Date) VALUES (?, ?, ?, ?)");
 
