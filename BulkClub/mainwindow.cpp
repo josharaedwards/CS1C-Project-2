@@ -219,6 +219,7 @@ void MainWindow::on_logInPushButton_released()
             ui->deleteMemButton->setHidden(true);
             ui->buttonAddInvItem->setHidden(true);
             ui->buttonDelInvItem->setHidden(true);
+            ui->lineEditDel->setHidden(true);
             setWindowTitle("Manager");
             break;
         case ADMIN:
@@ -227,6 +228,7 @@ void MainWindow::on_logInPushButton_released()
             ui->deleteMemButton->setHidden(false);
             ui->buttonAddInvItem->setHidden(false);
             ui->buttonDelInvItem->setHidden(false);
+            ui->lineEditDel->setHidden(false);
             setWindowTitle("Administrator");
             break;
     }
