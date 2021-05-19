@@ -70,15 +70,6 @@ QSqlTableModel* DbManager::createSalesTable()
 }
 
 
-void DbManager::deleteFromInventory(QString deleteName)
-{
-    QSqlQuery query(db);
-    //QString sQuery;
-    //sQuery = "DELETE FROM Inventory WHERE Product = " + deleteName;
-    //query.prepare(sQuery);
-    query.exec("DELETE FROM Inventory WHERE Product = " + deleteName);
-}
-
 QSqlTableModel* DbManager::createInventoryTable()
 {
     /// @brief Creates a new QSqlTableModel for the Inventory table
