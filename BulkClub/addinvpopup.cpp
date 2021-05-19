@@ -46,11 +46,11 @@ void AddInvPopup::on_buttonSubmit_released()
     d.saveInventoryTable();
     this->accept();
 
-    cout << "Inventory after adding item: " << endl;
-    int vecSize = inventory.size();
-    for(int i = 0; i < vecSize; i++)
-    {
-        cout << "inventory[" << i << "]: " << inventory[i].getName().toStdString() << " " << inventory[i].getPrice()
-             << " " << inventory[i].getQuantity() << " " << inventory[i].getTotal() << endl;
-    }
+    //cout << "Inventory after adding item: " << endl;
+    //int vecSize = inventory.size();
+    //for(int i = 0; i < vecSize; i++)
+    //{
+    //    cout << "inventory[" << i << "]: " << inventory[i].getName().toStdString() << " " << inventory[i].getPrice()
+    //         << " " << inventory[i].getQuantity() << " " << inventory[i].getTotal() << endl;
+    //}
 }

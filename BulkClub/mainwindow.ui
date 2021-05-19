@@ -27,14 +27,14 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="mainPage">
        <layout class="QGridLayout" name="gridLayout_4">
         <item row="1" column="0" colspan="5">
          <widget class="QTabWidget" name="tabWidget">
           <property name="currentIndex">
-           <number>2</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="membersTab">
            <attribute name="title">
@@ -246,6 +246,13 @@
               </property>
              </spacer>
             </item>
+            <item row="3" column="5">
+             <widget class="QPushButton" name="addSaleButton">
+              <property name="text">
+               <string>Add Sale</string>
+              </property>
+             </widget>
+            </item>
            </layout>
           </widget>
           <widget class="QWidget" name="salesTab">
@@ -253,36 +260,6 @@
             <string>Sales</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_3">
-            <item row="1" column="1">
-             <spacer name="horizontalSpacer_6">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeType">
-               <enum>QSizePolicy::Fixed</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>550</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="0" column="2">
-             <widget class="QLabel" name="label_2">
-              <property name="text">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#000000;&quot;&gt;Sale Date&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="0">
-             <widget class="QPushButton" name="resetSaleFilterButton">
-              <property name="text">
-               <string>Reset Filter</string>
-              </property>
-             </widget>
-            </item>
             <item row="2" column="0" colspan="3">
              <widget class="QTableView" name="salesTableView">
               <property name="frameShape">
@@ -315,6 +292,13 @@
               <attribute name="verticalHeaderVisible">
                <bool>false</bool>
               </attribute>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QPushButton" name="resetSaleFilterButton">
+              <property name="text">
+               <string>Reset Filter</string>
+              </property>
              </widget>
             </item>
             <item row="1" column="2">
@@ -361,6 +345,29 @@
               </property>
              </widget>
             </item>
+            <item row="1" column="1">
+             <spacer name="horizontalSpacer_6">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Fixed</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>550</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="0" column="2">
+             <widget class="QLabel" name="label_2">
+              <property name="text">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#000000;&quot;&gt;Sale Date&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+             </widget>
+            </item>
            </layout>
           </widget>
           <widget class="QWidget" name="inventoryTab">
@@ -402,13 +409,6 @@
              <widget class="QPushButton" name="resetInvFilterButton">
               <property name="text">
                <string>Reset Filter</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="11">
-             <widget class="QLabel" name="label_3">
-              <property name="text">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#000000;&quot;&gt;Item Name:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
              </widget>
             </item>
@@ -468,6 +468,13 @@
               <attribute name="verticalHeaderVisible">
                <bool>false</bool>
               </attribute>
+             </widget>
+            </item>
+            <item row="1" column="10">
+             <widget class="QLabel" name="label_3">
+              <property name="text">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#000000;&quot;&gt;Item Name:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
              </widget>
             </item>
            </layout>
