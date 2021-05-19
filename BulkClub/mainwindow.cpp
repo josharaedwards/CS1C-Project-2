@@ -60,6 +60,9 @@ MainWindow::MainWindow(QWidget *parent)
     salesToMembers(members, sales);     //assign sales to each member by ID
     inventory = connection.popInvVec(); //populate inventory vector
 
+    // defaults to the login screen on run
+    ui->stackedWidget->setCurrentIndex(3);
+
     // for testing purposes
     int vecSize = inventory.size();
     for(int i = 0; i < vecSize; i++)
@@ -201,7 +204,7 @@ void MainWindow::refreshGrandTotal()
         invGrandTotal += inventory[i].getTotal();
     }
     invGrandTotal += invGrandTotal * 0.0775;
-    ui->labelCalculatedGrandTotal->setText("$" + QString::number(invGrandTotal));
+    ui->labelCalculatedGrandTotal->setText("$" + QString::number(invGrandTotal, 'f', 2));
     ui->labelCalculatedGrandTotal->setStyleSheet("QLabel { color : black; }");
 }
 
